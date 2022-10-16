@@ -2,11 +2,9 @@
 
 @section('dynamic-content')
     <main id="main" class="main">
-
         <div class="pagetitle">
             <h1>Configuración</h1>
         </div>
-
         <section class="section profile">
             <div class="row">
                 <div class="col-xl-4">
