@@ -119,38 +119,7 @@
                         <div class="card-body pb-0">
                             <h5 class="card-title">Contactos</h5>
                             <div class="news" id="divContactos">
-
-                                {{-- <div class="post-item clearfix">
-                                    <img src="assets/img/news-1.jpg" alt="">
-                                    <h4><a href="#">admin2@admin.com</a></h4> --}}
-                                {{-- <div id="notification" class="alert mx-3 invisible">Test</div> --}}
-                                {{-- <p id="notification" class="invisible">Test</div>    --}}
-                                {{-- <p style="color:green">Conectado</p>
-                                    <p style="color:red">Desconectado</p> --}}
-                                {{-- </div> --}}
-
-                                {{-- 
-                              <div class="post-item clearfix">
-                                    <img src="assets/img/news-2.jpg" alt="">
-                                    <h4><a href="#">Rocoo Verpa</a></h4>
-                                    <p>Ocupado</p>
-                                </div>  --}}
-
-                                {{-- <div class="post-item clearfix">
-                                    <img src="assets/img/news-3.jpg" alt="">
-                                    <h4><a href="#">Alexander Garcia</a></h4>
-                                    <p>No Conectado</p>
-                                </div>
-                                <div class="post-item clearfix">
-                                    <img src="assets/img/news-4.jpg" alt="">
-                                    <h4><a href="#">Jesus Agudo</a></h4>
-                                    <p>Conectado</p>
-                                </div>
-                                <div class="post-item clearfix">
-                                    <img src="assets/img/news-5.jpg" alt="">
-                                    <h4><a href="#">Leicer Garcia</a></h4>
-                                    <p>Ausente</p>
-                                </div>  --}}
+                                {{-- Aqui van los Usuarios desde la Api --}}
                             </div>
                         </div>
                     </div>
