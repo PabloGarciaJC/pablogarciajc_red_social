@@ -132,9 +132,10 @@
                             .then((response) => {
                                 const divContactos = document.getElementById("divContactos");
                                 let users = response.data;
+
                                 users.forEach((user, index) => {
                                     let divUsuarios = document.createElement("div");
-                                    divUsuarios.className = "post-item clearfix";                                    
+                                    divUsuarios.className = "post-item clearfix";
                                     divContactos.appendChild(divUsuarios);
 
                                     let mostrarImagen = document.createElement('img');
@@ -150,7 +151,7 @@
                                     parrafo.innerHTML = "<h4>" + user.conectado + "</h4>"
 
                                     parrafo.setAttribute('id', 'usuarioStatus' + user.id);
-                                    
+
                                     if (user.conectado == 1) {
                                         parrafo.innerText = 'Conectado';
                                         parrafo.style.color = 'green';
@@ -161,6 +162,16 @@
                                     divUsuarios.appendChild(parrafo);
                                 });
                             });
+                    </script>
+
+                    <script>
+                        /* Implementar solo en la entidad Amigos */
+                        // const divPadreContactos = document.getElementById("divContactos");
+
+                        // let divUsuariosCreated = document.createElement("div");
+                        // divUsuariosCreated.innerText = 'Conectado';
+
+                        // divPadreContactos.appendChild(divUsuariosCreated)
                     </script>
                 @endpush
 
