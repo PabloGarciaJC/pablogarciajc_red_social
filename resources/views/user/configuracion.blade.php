@@ -44,6 +44,7 @@
                             {{-- //Menu de Navegacion --}}
 
                             <div class="tab-content pt-2">
+
                                 {{-- Perfil --}}
                                 <div class="tab-pane fade show {{ session('message') || $errors->any() ? '' : 'active' }} profile-overview"
                                     id="perfil">
@@ -94,7 +95,7 @@
 
                                 </div>
 
-                                {{-- Actualizar Perfil --}}
+                                {{-- Editar Perfil --}}
                                 <div class="tab-pane fade show {{ session('message') || $errors->any() ? 'active' : '' }} profile-overview"
                                     id="perfil-edit">
 
@@ -235,6 +236,7 @@
                                         </div>
                                     </form>
                                 </div>
+
                             </div>
 
                         </div>

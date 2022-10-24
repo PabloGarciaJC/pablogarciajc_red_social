@@ -70,6 +70,8 @@ class UserController extends Controller
 
         //Valido si la imagen llega
 
+
+
         if ($fotoPerfile) {
 
             // Nombre de la Imagen Original del Usuario y el Tiempo en que lo Sube

@@ -59,7 +59,14 @@
                                     <div class="d-flex align-items-center">
                                         <div class="news">
                                             <div class="post-item clearfix">
+                                           
+                                                @if (Auth::user()->fotoPerfil)
+                                                    <img src="{{ url('fotoPerfil/' . Auth::user()->fotoPerfil) }}"
+                                                        alt="">
+                                                @else
                                                 <img src="assets/img/news-1.jpg" alt="">
+                                                @endif
+
                                                 <h4><a href="#">Pablo Garcia</a></h4>
                                                 <p>28 - 01 - 2022</p>
                                             </div>
@@ -138,8 +145,8 @@
                                     divUsuarios.className = "post-item clearfix";
                                     divContactos.appendChild(divUsuarios);
 
-                                    let mostrarImagen = document.createElement('img');
-                                    mostrarImagen.src = 'assets/img/news-1.jpg'
+                                    let mostrarImagen = document.createElement('img');                        
+                                    mostrarImagen.src = 'fotoPerfil/' + user.fotoPerfil
                                     divUsuarios.appendChild(mostrarImagen);
 
                                     let a = document.createElement('a');
