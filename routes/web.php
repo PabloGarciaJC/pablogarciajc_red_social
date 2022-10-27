@@ -23,6 +23,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/configuracion', 'UserController@configuracion')->name('configuracion');
 Route::post('/actualizar', 'UserController@actualizar')->name('actualizar');
 Route::get('/fotoPerfil/{filename}', 'UserController@getImage')->name('foto.perfil');
+Route::get('/search', 'UserController@search')->name('search');
 
 // Route::get('test', function () {
 //   event(new App\Events\MyEvent('hello world'));

@@ -36,6 +36,7 @@
     <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
@@ -56,16 +57,16 @@
                         <img src="assets/img/logo.png" alt="">
                         <span class="d-none d-lg-block">PabloSocial</span>
                     </a>
-                    <i class="bi bi-list toggle-sidebar-btn"></i>
                 </div>
 
                 <div class="search-bar">
-                    <form class="search-form d-flex align-items-center" method="POST" action="#">
-                        <input type="text" name="query" placeholder="Buscar en PabloSocial"
+                    <form class="search-form d-flex align-items-center" id='formBuscador' method="POST" action="#">
+                        <input type="text" name="query" id="search" placeholder="Buscar en PabloSocial"
                             title="Enter search keyword">
                         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
+
 
                 <nav class="header-nav ms-auto">
                     <ul class="d-flex align-items-center">
@@ -334,13 +335,15 @@
         <script src="assets/vendor/tinymce/tinymce.min.js"></script>
         <script src="assets/vendor/php-email-form/validate.js"></script>
 
+        <script src="assets/vendor/jquery/jquery-3.6.1.min.js"></script>
+        <script src="assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
 
-        <!-- Cambiar de Imagen en Editar Perfil -->
         <script>
+            /* Cambiar de imagen de configuracion */
             function vista_preliminar(event) {
-                // Visualizo la Imagen Previa 
                 let leer_img = new FileReader();
                 let id_img = document.getElementById('previe');
 
@@ -351,11 +354,8 @@
                 }
                 leer_img.readAsDataURL(event.target.files[0]);
             }
-        </script>
-        <!-- // Cambiar de Imagen en Editar Perfil -->
 
-        <!-- script Mostrar Formulario Comentario -->
-        <script type="text/javascript">
+            /* Mostrar y ocultar Comentarios */
             function mostrarOcultar() {
                 var caja = document.getElementById('formularioComentario');
                 if (caja.style.display == 'none') {
@@ -374,12 +374,41 @@
                 document.getElementById('formularioComentario').style.display = 'none';
                 console.log('none');
             }
+
+            /* Capturo el valor del formulario del buscador */
+            // let formBuscador = document.getElementById('formBuscador');
+
+            // if (formBuscador) {
+            //     search.addEventListener('keyup', (event) => {
+            //         valorBuscador = event.path[0].value;
+            //         console.log(valorBuscador);
+            //     });
+            // }
+
+            /* Autocompletado */
+            let cursos = ['html', 'css', 'javascript', 'laravel']
+
+            $("#search").autocomplete({
+                source: function(request, response) {
+                    /* console.log(request); Capturo lo que llega del imput */
+                    /* console.log(response);Procesar la informacion que me llega de la base de datos */
+                    $.ajax({                       
+                        url: "{{ route('search') }}",
+                        dataType: "json",
+                        data: {
+                            term: request.term /* Es lo que envio al Controlador y es el valor capturado del Input */
+                        },
+                        success: function(data) {
+                            response(data)
+                        }
+                    });
+                }
+            })
         </script>
-        <!-- //Formulario Comentarios -->
 
         <script src="{{ asset('js/app.js') }}"></script>
         @stack('scripts')
-        
+
     @endguest
 </body>
 

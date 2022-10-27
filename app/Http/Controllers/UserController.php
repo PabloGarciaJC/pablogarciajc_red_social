@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -69,9 +70,6 @@ class UserController extends Controller
         $user->sobreMi = $sobreMi;
 
         //Valido si la imagen llega
-
-
-
         if ($fotoPerfile) {
 
             // Nombre de la Imagen Original del Usuario y el Tiempo en que lo Sube
@@ -95,5 +93,25 @@ class UserController extends Controller
     {
         $file = Storage::disk('users')->get($filename);
         return new Response($file, 200);
+    }
+
+    public function search(Request $request)
+    {
+        /*  Es el valor capturado del Input */
+        $term = $request->get('term');
+        /* http://127.0.0.1:8000/search?term=prueba2 */ /* Pruebo lo que me llega en el controlador */
+        /* return $term; */
+
+        $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get();
+
+        $data = [];
+
+        foreach ($querys as $query) {
+
+            $data[] = [
+                'label' => $query->nombre
+            ];
+        } 
+        return $data;
     }
 }
