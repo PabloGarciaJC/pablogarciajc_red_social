@@ -386,25 +386,34 @@
             // }
 
             /* Autocompletado */
-            let cursos = ['html', 'css', 'javascript', 'laravel']
-
             $("#search").autocomplete({
-                source: function(request, response) {
-                    /* console.log(request); Capturo lo que llega del imput */
-                    /* console.log(response);Procesar la informacion que me llega de la base de datos */
-                    $.ajax({                       
-                        url: "{{ route('search') }}",
-                        dataType: "json",
-                        data: {
-                            term: request.term /* Es lo que envio al Controlador y es el valor capturado del Input */
-                        },
-                        success: function(data) {
-                            response(data)
-                        }
-                    });
+                source: "{{ route('search') }}",
+                minLength: 1,
+                select: function(event, ui) {
+                    $("#search").val(ui.item.value);
                 }
-            })
+            }).data('ui-autocomplete')._renderItem = function(ul, item) {
+                return $("<li class='ui-autocomplete-row'></li>")
+                    .data("item.autocomplete", item)
+                    .append(item.label)
+                    .appendTo(ul);
+            };
         </script>
+
+        <style>
+            .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+                /* border-color: #6693bc;
+                    background: #6693bc !important;
+                    font-weight: bold !important;
+                    padding: 0px;
+                    color: #ffffff !important;
+                    transition: transform .2s;  */
+                border-color: #6693bc;
+                background: #6693bc !important;
+                font-weight: bold !important;
+                color: #ffffff !important;
+            }
+        </style>
 
         <script src="{{ asset('js/app.js') }}"></script>
         @stack('scripts')

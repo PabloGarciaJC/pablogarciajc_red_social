@@ -97,21 +97,26 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        /*  Es el valor capturado del Input */
+        // /*  Es el valor capturado del Input */
         $term = $request->get('term');
-        /* http://127.0.0.1:8000/search?term=prueba2 */ /* Pruebo lo que me llega en el controlador */
-        /* return $term; */
+        // /* http://127.0.0.1:8000/search?term=prueba2 */ /* Pruebo lo que me llega en el controlador */
+        // return $term; 
 
         $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get();
 
         $data = [];
 
         foreach ($querys as $query) {
-
-            $data[] = [
-                'label' => $query->nombre
-            ];
-        } 
-        return $data;
+            $termArray = [];
+            $termArray['id'] = $query->id;
+            $termArray['value'] = $query->nombre;
+            $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="70" class="pointer">&nbsp' .  $query->nombre;
+            $data[] = $termArray;
+            // $data[] = [
+            //     'label' => $query->nombre
+            // ];
+        };
+        echo json_encode($data);
+        // return $data;
     }
 }
