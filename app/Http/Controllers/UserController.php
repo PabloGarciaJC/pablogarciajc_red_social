@@ -108,15 +108,16 @@ class UserController extends Controller
 
         foreach ($querys as $query) {
             $termArray = [];
-            $termArray['id'] = $query->id;
             $termArray['value'] = $query->nombre;
-            $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="70" class="pointer">&nbsp' .  $query->nombre;
+            $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->nombre;
             $data[] = $termArray;
-            // $data[] = [
-            //     'label' => $query->nombre
-            // ];
         };
         echo json_encode($data);
-        // return $data;
     }
+
+    public function obtenerUsuario($filename)
+    {
+        return $filename;
+    }
+
 }

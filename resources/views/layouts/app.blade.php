@@ -375,22 +375,16 @@
                 console.log('none');
             }
 
-            /* Capturo el valor del formulario del buscador */
-            // let formBuscador = document.getElementById('formBuscador');
-
-            // if (formBuscador) {
-            //     search.addEventListener('keyup', (event) => {
-            //         valorBuscador = event.path[0].value;
-            //         console.log(valorBuscador);
-            //     });
-            // }
-
             /* Autocompletado */
             $("#search").autocomplete({
                 source: "{{ route('search') }}",
                 minLength: 1,
                 select: function(event, ui) {
-                    $("#search").val(ui.item.value);
+                    // $("#search").val(ui.item.value);
+                    var url = "{{ route('usuario', ['obtenerUsuario' => 'temp']) }}";
+                    url = url.replace('temp', ui.item.value);
+                    location.href = url;
+
                 }
             }).data('ui-autocomplete')._renderItem = function(ul, item) {
                 return $("<li class='ui-autocomplete-row'></li>")
@@ -400,15 +394,12 @@
             };
         </script>
 
+        {{-- Autocompletado CSS --}}
         <style>
             .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
-                /* border-color: #6693bc;
-                    background: #6693bc !important;
-                    font-weight: bold !important;
-                    padding: 0px;
-                    color: #ffffff !important;
-                    transition: transform .2s;  */
-                border-color: #6693bc;
+                padding: 0px;
+                border-radius: 60px;
+                border-color: #ffffff;
                 background: #6693bc !important;
                 font-weight: bold !important;
                 color: #ffffff !important;
