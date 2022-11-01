@@ -79,6 +79,19 @@
                                     @csrf
 
                                     <div class="col-12">
+                                        <label for="alias"
+                                            class="col-md-4 col-form-label text-md-right">{{ __('Alias') }}</label>
+                                        <input id="alias" type="text"
+                                            class="form-control{{ $errors->has('alias') ? ' is-invalid' : '' }}"
+                                            name="alias" value="{{ old('alias') }}" autofocus>
+                                        @if ($errors->has('alias'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('alias') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    
+                                    <div class="col-12">
                                         <label for="name"
                                             class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                                         <input id="name" type="text"

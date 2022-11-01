@@ -232,7 +232,7 @@
                                     <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                                 @endif
 
-                                <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->nombre }}</span>
+                                <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->alias }}</span>
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -379,12 +379,11 @@
             $("#search").autocomplete({
                 source: "{{ route('search') }}",
                 minLength: 1,
-                select: function(event, ui) {
-                    // $("#search").val(ui.item.value);
-                    var url = "{{ route('usuario', ['obtenerUsuario' => 'temp']) }}";
+                select: function(event, ui) {                 
+                    var url = "{{ route('obtenerUsuario', ['obtenerUsuario' => 'temp']) }}";
+                    // temp, es el valor que envio que capturo por la url y envio al controlador
                     url = url.replace('temp', ui.item.value);
                     location.href = url;
-
                 }
             }).data('ui-autocomplete')._renderItem = function(ul, item) {
                 return $("<li class='ui-autocomplete-row'></li>")

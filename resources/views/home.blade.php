@@ -150,7 +150,7 @@
                                     divUsuarios.appendChild(mostrarImagen);
 
                                     let a = document.createElement('a');
-                                    a.innerHTML = "<h4>" + user.nombre + "</h4>"
+                                    a.innerHTML = "<h4>" + user.alias + "</h4>"
                                     a.href = "https://www.google.com/";
                                     divUsuarios.appendChild(a);
 

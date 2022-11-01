@@ -24,7 +24,7 @@ Route::get('/configuracion', 'UserController@configuracion')->name('configuracio
 Route::post('/actualizar', 'UserController@actualizar')->name('actualizar');
 Route::get('/fotoPerfil/{filename}', 'UserController@getImage')->name('foto.perfil');
 Route::get('/search', 'UserController@search')->name('search');
-Route::get('/{obtenerUsuario}', 'UserController@obtenerUsuario')->name('usuario');
+Route::get('/{obtenerUsuario}', 'UserController@obtenerUsuario')->name('obtenerUsuario');
 
 // Route::get('test', function () {
 //   event(new App\Events\MyEvent('hello world'));

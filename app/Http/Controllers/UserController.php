@@ -108,16 +108,17 @@ class UserController extends Controller
 
         foreach ($querys as $query) {
             $termArray = [];
-            $termArray['value'] = $query->nombre;
-            $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->nombre;
+            $termArray['value'] = $query->alias;
+            $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->alias;
             $data[] = $termArray;
         };
         echo json_encode($data);
     }
 
-    public function obtenerUsuario($filename)
+    public function obtenerUsuario($nameUser)
     {
-        return $filename;
+        /* Obtengo el Usuario Selecionado */
+        $usuario = User::where('alias', '=', $nameUser)->get();
+        return view('user.obtenerUsuario', ['usuario' => $usuario]);
     }
-
 }
