@@ -325,6 +325,8 @@
         </footer>
         {{-- /Footer --}}
 
+        <script src="assets/js/config/parameters.js"></script>
+
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
         <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -341,57 +343,9 @@
         <!-- Template Main JS File -->
         <script src="assets/js/main.js"></script>
 
-        <script>
-            /* Cambiar de imagen de configuracion */
-            function vista_preliminar(event) {
-                let leer_img = new FileReader();
-                let id_img = document.getElementById('previe');
-
-                leer_img.onload = () => {
-                    if (leer_img.readyState == 2) {
-                        id_img.src = leer_img.result;
-                    }
-                }
-                leer_img.readAsDataURL(event.target.files[0]);
-            }
-
-            /* Mostrar y ocultar Comentarios */
-            function mostrarOcultar() {
-                var caja = document.getElementById('formularioComentario');
-                if (caja.style.display == 'none') {
-                    mostrarComentarios();
-                } else {
-                    ocultarComentarios();
-                }
-            }
-
-            function mostrarComentarios() {
-                document.getElementById('formularioComentario').style.display = 'block';
-                console.log('block');
-            }
-
-            function ocultarComentarios() {
-                document.getElementById('formularioComentario').style.display = 'none';
-                console.log('none');
-            }
-
-            /* Autocompletado */
-            $("#search").autocomplete({
-                source: "{{ route('search') }}",
-                minLength: 1,
-                select: function(event, ui) {                 
-                    var url = "{{ route('obtenerUsuario', ['obtenerUsuario' => 'temp']) }}";
-                    // temp, es el valor que envio que capturo por la url y envio al controlador
-                    url = url.replace('temp', ui.item.value);
-                    location.href = url;
-                }
-            }).data('ui-autocomplete')._renderItem = function(ul, item) {
-                return $("<li class='ui-autocomplete-row'></li>")
-                    .data("item.autocomplete", item)
-                    .append(item.label)
-                    .appendTo(ul);
-            };
-        </script>
+        <script src="assets/js/user/cambiar-imagen-configuracion.js"></script>
+        <script src="assets/js/user/autocompletado.js"></script>
+        <script src="assets/js/comments/mostrar-ocultar.js"></script>
 
         {{-- Autocompletado CSS --}}
         <style>

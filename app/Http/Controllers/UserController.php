@@ -30,6 +30,7 @@ class UserController extends Controller
         // Validaciones
         $validacion = $this->validate($request, [
             'fotoPerfil' => 'mimes:png,jpg|max:100',
+            'alias'  => ['required', 'string', 'max:255','unique:users'],
             'nombre'  => 'required',
             'apellido' => 'required',
             'empresa' => 'required',
@@ -45,6 +46,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         //Capturo informacion del formulario
+        $alias = $request->input('alias');
         $nombre = $request->input('nombre');
         $apellido = $request->input('apellido');
         $empresa = $request->input('empresa');
@@ -59,6 +61,7 @@ class UserController extends Controller
         $fotoPerfile = $request->file('fotoPerfil');
 
         //Seteo el Objeto
+        $user->alias = $alias;
         $user->nombre = $nombre;
         $user->apellido = $apellido;
         $user->empresa = $empresa;
@@ -109,7 +112,13 @@ class UserController extends Controller
         foreach ($querys as $query) {
             $termArray = [];
             $termArray['value'] = $query->alias;
-            $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->alias;
+
+            if ($query->fotoPerfil != '') {
+                $termArray['label'] = '<img src="fotoPerfil/' . $query->fotoPerfil . '" width="60" class="pointer">&nbsp' .  $query->alias;
+            } else {
+                $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->alias;
+            }
+
             $data[] = $termArray;
         };
         echo json_encode($data);
@@ -117,8 +126,7 @@ class UserController extends Controller
 
     public function obtenerUsuario($nameUser)
     {
-        /* Obtengo el Usuario Selecionado */
         $usuario = User::where('alias', '=', $nameUser)->get();
-        return view('user.obtenerUsuario', ['usuario' => $usuario]);
+        return view('followers.obtenerUsuario', ['usuario' => $usuario]);
     }
 }

@@ -59,12 +59,12 @@
                                     <div class="d-flex align-items-center">
                                         <div class="news">
                                             <div class="post-item clearfix">
-                                           
+
                                                 @if (Auth::user()->fotoPerfil)
                                                     <img src="{{ url('fotoPerfil/' . Auth::user()->fotoPerfil) }}"
                                                         alt="">
                                                 @else
-                                                <img src="assets/img/news-1.jpg" alt="">
+                                                    <img src="assets/img/news-1.jpg" alt="">
                                                 @endif
 
                                                 <h4><a href="#">Pablo Garcia</a></h4>
@@ -135,6 +135,7 @@
 
                 @push('scripts')
                     <script>
+                        /* Obtener Usuarios Seguidos - Conectados */
                         window.axios.get('/api/users')
                             .then((response) => {
                                 const divContactos = document.getElementById("divContactos");
@@ -145,13 +146,23 @@
                                     divUsuarios.className = "post-item clearfix";
                                     divContactos.appendChild(divUsuarios);
 
-                                    let mostrarImagen = document.createElement('img');                        
-                                    mostrarImagen.src = 'fotoPerfil/' + user.fotoPerfil
+                                    let mostrarImagen = document.createElement('img');
+
+                                    if (user.fotoPerfil != null) {
+                                        mostrarImagen.src = 'fotoPerfil/' + user.fotoPerfil
+                                    } else {
+                                        mostrarImagen.src = 'assets/img/profile-img.jpg'
+                                    }
+
                                     divUsuarios.appendChild(mostrarImagen);
 
                                     let a = document.createElement('a');
                                     a.innerHTML = "<h4>" + user.alias + "</h4>"
-                                    a.href = "https://www.google.com/";
+
+                                    var url = "{{ route('obtenerUsuario', ['obtenerUsuario' => 'temp']) }}";
+                                    url = url.replace('temp', user.alias);
+                                    a.href = url;
+
                                     divUsuarios.appendChild(a);
 
                                     let parrafo = document.createElement("p");
