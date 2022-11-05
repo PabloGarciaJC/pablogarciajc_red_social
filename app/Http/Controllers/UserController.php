@@ -18,19 +18,16 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-
-    public function configuracion()
+    public function perfil()
     {
-        return view('user.configuracion');
+        return view('user.perfil');
     }
 
     public function actualizar(Request $request)
     {
-
         // Validaciones
         $validacion = $this->validate($request, [
-            'fotoPerfil' => 'mimes:png,jpg|max:100',
-            'alias'  => ['required', 'string', 'max:255','unique:users'],
+            'fotoPerfil' => 'mimes:png,jpg|max:100',          
             'nombre'  => 'required',
             'apellido' => 'required',
             'empresa' => 'required',
@@ -38,15 +35,13 @@ class UserController extends Controller
             'pais' => 'required',
             'direccion' => 'required',
             'movil' => 'required',
-            'email' => 'required',
             'sobreMi' => 'required',
         ]);
 
         //Instacio Objeto
         $user = Auth::user();
 
-        //Capturo informacion del formulario
-        $alias = $request->input('alias');
+        //Capturo informacion del formulario      
         $nombre = $request->input('nombre');
         $apellido = $request->input('apellido');
         $empresa = $request->input('empresa');
@@ -54,14 +49,12 @@ class UserController extends Controller
         $pais = $request->input('pais');
         $direccion = $request->input('direccion');
         $movil = $request->input('movil');
-        $email = $request->input('email');
         $sobreMi = $request->input('sobreMi');
 
         //Capturo pathName y fileName de la imagen
         $fotoPerfile = $request->file('fotoPerfil');
 
-        //Seteo el Objeto
-        $user->alias = $alias;
+        //Seteo el Objeto      
         $user->nombre = $nombre;
         $user->apellido = $apellido;
         $user->empresa = $empresa;
@@ -69,7 +62,6 @@ class UserController extends Controller
         $user->pais = $pais;
         $user->direccion = $direccion;
         $user->movil = $movil;
-        $user->email = $email;
         $user->sobreMi = $sobreMi;
 
         //Valido si la imagen llega
@@ -88,7 +80,7 @@ class UserController extends Controller
         // Guardo
         $user->save();
 
-        return redirect()->action('UserController@configuracion')
+        return redirect()->action('UserController@perfil')
             ->with(['message' => 'Perfil Actualizado con Exito']);
     }
 
@@ -124,9 +116,13 @@ class UserController extends Controller
         echo json_encode($data);
     }
 
-    public function obtenerUsuario($nameUser)
+    public function usuarioBuscadorPerfil($nameUser)
     {
-        $usuario = User::where('alias', '=', $nameUser)->get();
-        return view('followers.obtenerUsuario', ['usuario' => $usuario]);
+
+
+        // $usuario = User::where('alias', '=', $nameUser)->get();
+        // return view('followers.obtenerUsuario', ['usuario' => $usuario]);
+        return view('user.prueba');
     }
+
 }

@@ -22,10 +22,12 @@
                             <div class="container">
                                 <div class="row justify-content-md-center">
                                     <div class="col-md-auto">
-                                        <button type="button" class="btn btn-success">Agregar Contacto</button>
+                                        <button type="button" id="btnAgregarContacto" class="btn btn-success">Agregar
+                                            Contacto</button>
                                     </div>
                                     <div class="col-md-auto">
-                                        <button type="button" class="btn btn-danger">Borrar Contacto</button>
+                                        <button type="button" id="btnBorrarContacto" class="btn btn-danger">Borrar
+                                            Contacto</button>
                                     </div>
                                 </div>
                             </div>
@@ -63,6 +65,12 @@
                                     <p class="small">{{ Auth::user()->sobreMi }}</p>
 
                                     <h5 class="card-title">Detalles de mi Perfil</h5>
+
+                                    <input type="text" id="usuarioLogin" value="{{ Auth::user()->id }}">
+
+                                    @foreach ($usuario as $user)
+                                        <input type="text" id="usuarioSeguido" value="{{ $user->id }}">
+                                    @endforeach
 
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Nombre</div>
@@ -265,10 +273,8 @@
                                 </div> --}}
 
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>

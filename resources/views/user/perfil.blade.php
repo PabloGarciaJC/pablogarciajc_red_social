@@ -3,7 +3,7 @@
 @section('dynamic-content')
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Configuración</h1>
+            <h1>Perfil</h1>
         </div>
         <section class="section profile">
             <div class="row">
@@ -140,13 +140,9 @@
                                             <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Alias</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="alias" type="text" class="form-control" id="alias"
-                                                    value="{{ Auth::user()->alias }}" disabled>
-                                                @if ($errors->has('alias'))
-                                                    <strong style="color: red">{{ $errors->first('alias') }}</strong>
-                                                @endif
+                                                    value="{{ Auth::user()->alias }}" disabled>                                               
                                             </div>
                                         </div>
-
 
                                         <div class="row mb-3">
                                             <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Nombre</label>
@@ -230,10 +226,7 @@
                                             <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="email" type="text" class="form-control" id="email"
-                                                    value="{{ Auth::user()->email }}" disabled>
-                                                @if ($errors->has('email'))
-                                                    <strong style="color: red">{{ $errors->first('email') }}</strong>
-                                                @endif
+                                                    value="{{ Auth::user()->email }}" disabled>                                               
                                             </div>
                                         </div>
 

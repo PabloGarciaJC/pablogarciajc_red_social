@@ -11,13 +11,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    {{-- <script src="{{ asset('assets/js/main.js') }}" defer></script> --}}
-
-    <!-- Fonts -->
-    {{-- <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> --}}
-
     <!-- Favicons -->
     <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -36,12 +29,12 @@
     <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
     <link href="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     @stack('styles')
-
 </head>
 
 <body>
@@ -244,21 +237,20 @@
                                     <hr class="dropdown-divider">
                                 </li>
 
-                                <li>
+                                {{-- <li>
                                     <a class="dropdown-item d-flex align-items-center" href="{{ route('home') }}">
                                         <i class="bi bi-person"></i>
                                         <span>Mi Perfil</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center"
-                                        href="{{ route('configuracion') }}">
+                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('perfil') }}">
                                         <i class="bi bi-gear"></i>
-                                        <span>Configuración</span>
+                                        <span>Perfil</span>
                                     </a>
                                 </li>
                                 <li>
@@ -296,12 +288,12 @@
                             <span>Inicio</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link collapsed" href="{{ route('home') }}">
                             <i class="bi bi-person"></i>
                             <span>Mi Perfil</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="pages-contact.html">
                             <i class="bi bi-envelope"></i>
@@ -324,45 +316,76 @@
             </div>
         </footer>
         {{-- /Footer --}}
-
-        <script src="assets/js/config/parameters.js"></script>
-
-        <!-- Vendor JS Files -->
-        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/chart.js/chart.min.js"></script>
-        <script src="assets/vendor/echarts/echarts.min.js"></script>
-        <script src="assets/vendor/quill/quill.min.js"></script>
-        <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-        <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-
-        <script src="assets/vendor/jquery/jquery-3.6.1.min.js"></script>
-        <script src="assets/vendor/jquery-ui/jquery-ui.min.js"></script>
-
-        <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
-
-        <script src="assets/js/user/cambiar-imagen-configuracion.js"></script>
-        <script src="assets/js/user/autocompletado.js"></script>
-        <script src="assets/js/comments/mostrar-ocultar.js"></script>
-
-        {{-- Autocompletado CSS --}}
-        <style>
-            .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
-                padding: 0px;
-                border-radius: 60px;
-                border-color: #ffffff;
-                background: #6693bc !important;
-                font-weight: bold !important;
-                color: #ffffff !important;
-            }
-        </style>
-
-        <script src="{{ asset('js/app.js') }}"></script>
-        @stack('scripts')
-
     @endguest
+
+
+
+
+    <!-- Vendor JS Files -->
+    {{-- <script src="assets/vendor/apexcharts/apexcharts.min.js"></script> --}}
+    {{-- <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
+    {{-- <script src="assets/vendor/chart.js/chart.min.js"></script> --}}
+    {{-- <script src="assets/vendor/echarts/echarts.min.js"></script> --}}
+    {{-- <script src="assets/vendor/quill/quill.min.js"></script> --}}
+    {{-- <script src="assets/vendor/simple-datatables/simple-datatables.js"></script> --}}
+    {{-- <script src="assets/vendor/tinymce/tinymce.min.js"></script> --}}
+    {{-- <script src="assets/vendor/php-email-form/validate.js"></script> --}}
+    {{-- <script src="assets/vendor/jquery/jquery-3.6.1.min.js"></script> --}}
+    {{-- <script src="assets/vendor/jquery-ui/jquery-ui.min.js"></script> --}}
+
+    <!-- Template Main JS File -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
+
+    {{-- Anexos de JS --}}
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <script src="{{ asset('assets/vendor/jquery/jquery-3.6.1.min.js') }}"></script>
+
+    <script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
+
+
+
+    @push('scripts')
+        <script>
+            const baseUrl = 'http://127.0.0.1:8000/';
+
+            $("#search").autocomplete({
+                source: baseUrl + "search",
+                minLength: 1,
+                select: function(event, ui) {
+                    var url = "{{ route('usuarioBuscador.perfil', ['perfil' => 'temp']) }}";
+                    url = url.replace('temp', ui.item.value);
+                    location.href = url;
+                }
+            }).data('ui-autocomplete')._renderItem = function(ul, item) {
+                return $("<li class='ui-autocomplete-row'></li>")
+                    .data("item.autocomplete", item)
+                    .append(item.label)
+                    .appendTo(ul);
+            };
+        </script>
+    @endpush
+
+    <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
+
+    {{-- <script src="assets/js/user/cambiar-imagen-configuracion.js"></script> --}}
+    {{-- <script src="assets/js/user/autocompletado.js"></script> --}}
+    {{-- <script src="assets/js/comments/mostrar-ocultar.js"></script>
+        <script src="assets/js/followers/agregar_borrar_contacto.js"></script> --}}
+
+    {{-- Autocompletado CSS --}}
+    <style>
+        .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+            padding: 0px;
+            border-radius: 60px;
+            border-color: #ffffff;
+            background: #6693bc !important;
+            font-weight: bold !important;
+            color: #ffffff !important;
+        }
+    </style>
 </body>
 
 </html>

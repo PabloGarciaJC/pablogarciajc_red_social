@@ -134,7 +134,7 @@
                 </div>
 
                 @push('scripts')
-                    <script>
+                    {{-- <script>
                         /* Obtener Usuarios Seguidos - Conectados */
                         window.axios.get('/api/users')
                             .then((response) => {
@@ -180,7 +180,7 @@
                                     divUsuarios.appendChild(parrafo);
                                 });
                             });
-                    </script>
+                    </script> --}}
 
                     <script>
                         /* Implementar solo en la entidad Amigos */
