@@ -21,6 +21,12 @@
 
                             <div class="container">
                                 <div class="row justify-content-md-center">
+                                    {{-- 
+                                    <form action="" method="POST">
+                                 
+                                    {{ csrf_field() }}
+
+                                    </form> --}}
                                     <div class="col-md-auto">
                                         <button type="button" id="btnAgregarContacto" class="btn btn-success">Agregar
                                             Contacto</button>
@@ -38,6 +44,14 @@
                 <div class="col-xl-8">
                     <div class="card">
                         <div class="card-body pt-3">
+
+                            <div id="mensajeAgregarAmigo" role="alert">
+
+                            </div>
+
+                            {{-- <div class="alert alert-danger text-center" role="alert">
+                                Se ha borrado el contacto
+                            </div> --}}
 
                             {{-- Menu de Navegacion --}}
                             <ul class="nav nav-tabs nav-tabs-bordered">
@@ -66,10 +80,10 @@
 
                                     <h5 class="card-title">Detalles de mi Perfil</h5>
 
-                                    <input type="text" id="usuarioLogin" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" id="usuarioLogin" value="{{ Auth::user()->id }}">
 
                                     @foreach ($usuario as $user)
-                                        <input type="text" id="usuarioSeguido" value="{{ $user->id }}">
+                                        <input type="hidden" id="usuarioSeguido" value="{{ $user->id }}">
                                     @endforeach
 
                                     <div class="row">
@@ -279,4 +293,46 @@
             </div>
         </section>
     </main>
+
+    @push('scripts')
+        <script>
+            let btnAgregarContacto = document.getElementById('btnAgregarContacto');
+            let usuarioLogin = document.getElementById('usuarioLogin');
+            let usuarioSeguido = document.getElementById('usuarioSeguido');
+
+            if (btnAgregarContacto) {
+
+                btnAgregarContacto.addEventListener('click', (event) => {
+
+                    $.ajax({
+                            type: "GET",
+                            url: "{{ route('agregarContacto') }}",
+                            data: {
+                                usuarioLogin: usuarioLogin.value,
+                                usuarioSeguido: usuarioSeguido.value
+                            },
+                        })
+                        .done(function(respuestaPeticion) {
+
+                            $('#mensajeAgregarAmigo').html(respuestaPeticion);
+
+                            $('#mensajeAgregarAmigo').addClass('alert alert-success text-center');
+
+                            if (respuestaPeticion == 1) {
+                                mensajeAgregarAmigo.innerText = 'La solicitud se ha enviado correctamente';
+                            }else{
+                                mensajeAgregarAmigo.innerText = 'Ya se ha enviado la solicitud';
+                            }
+
+                        })
+                        .fail(function() {
+                            console.log('error');
+                        })
+                        .always(function() {
+                            console.log('completo');
+                        });
+                });
+            }
+        </script>
+    @endpush
 @endsection

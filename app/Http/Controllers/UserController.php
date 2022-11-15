@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         // Validaciones
         $validacion = $this->validate($request, [
-            'fotoPerfil' => 'mimes:png,jpg|max:100',          
+            'fotoPerfil' => 'mimes:png,jpg|max:100',
             'nombre'  => 'required',
             'apellido' => 'required',
             'empresa' => 'required',
@@ -104,11 +104,12 @@ class UserController extends Controller
         foreach ($querys as $query) {
             $termArray = [];
             $termArray['value'] = $query->alias;
-
+  
             if ($query->fotoPerfil != '') {
-                $termArray['label'] = '<img src="fotoPerfil/' . $query->fotoPerfil . '" width="60" class="pointer">&nbsp' .  $query->alias;
+                $termArray['label'] = '<img src="http://127.0.0.1:8000/fotoPerfil/' . $query->fotoPerfil . '" width="60" class="pointer">&nbsp' .  $query->alias;
+
             } else {
-                $termArray['label'] = '<img src="assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->alias;
+                $termArray['label'] = '<img src="http://127.0.0.1:8000/assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->alias;
             }
 
             $data[] = $termArray;
@@ -116,13 +117,9 @@ class UserController extends Controller
         echo json_encode($data);
     }
 
-    public function usuarioBuscadorPerfil($nameUser)
+    public function buscadorPerfil($nameUser)
     {
-
-
-        // $usuario = User::where('alias', '=', $nameUser)->get();
-        // return view('followers.obtenerUsuario', ['usuario' => $usuario]);
-        return view('user.prueba');
+        $usuario = User::where('alias', '=', $nameUser)->get();
+        return view('user.buscadorPerfil', ['usuario' => $usuario]);
     }
-
 }

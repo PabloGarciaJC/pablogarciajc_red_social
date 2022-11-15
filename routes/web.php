@@ -23,11 +23,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/perfil', 'UserController@perfil')->name('perfil');
 Route::post('/actualizar', 'UserController@actualizar')->name('actualizar');
 Route::get('/fotoPerfil/{filename}', 'UserController@getImage')->name('foto.perfil');
+Route::get('/usuario/{perfil}', 'UserController@buscadorPerfil')->name('usuarioBuscador.perfil');
 Route::get('/search', 'UserController@search')->name('search');
 
-Route::get('/usuario/{perfil}', 'UserController@usuarioBuscadorPerfil')->name('usuarioBuscador.perfil');
-
-Route::get('/agregarContacto', 'FollowersController@agregarContacto')->name('agregarContacto');;
+// FOLLOWERS
+Route::get('/agregarContacto', 'FollowersController@agregarContacto')->name('agregarContacto');
 
 // Route::get('test', function () {
 //   event(new App\Events\MyEvent('hello world'));

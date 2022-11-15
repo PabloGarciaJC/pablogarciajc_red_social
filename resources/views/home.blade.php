@@ -181,7 +181,6 @@
                                 });
                             });
                     </script> --}}
-
                     <script>
                         /* Implementar solo en la entidad Amigos */
                         // const divPadreContactos = document.getElementById("divContactos");

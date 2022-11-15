@@ -47,19 +47,18 @@
 
                 <div class="d-flex align-items-center justify-content-between">
                     <a href="{{ route('home') }}" class="logo d-flex align-items-center">
-                        <img src="assets/img/logo.png" alt="">
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="">
                         <span class="d-none d-lg-block">PabloSocial</span>
                     </a>
                 </div>
 
                 <div class="search-bar">
                     <form class="search-form d-flex align-items-center" id='formBuscador' method="POST" action="#">
-                        <input type="text" name="query" id="search" placeholder="Buscar en PabloSocial"
+                        <input type="text" name="search" id="search" placeholder="Buscar en PabloSocial"
                             title="Enter search keyword">
                         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
-
 
                 <nav class="header-nav ms-auto">
                     <ul class="d-flex align-items-center">
@@ -69,6 +68,8 @@
                                 <i class="bi bi-search"></i>
                             </a>
                         </li>
+
+                        {{-- Notificaciones --}}
 
                         <li class="nav-item dropdown">
 
@@ -83,10 +84,10 @@
                                     <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
                                             all</span></a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <hr class="dropdown-divider">
-                                </li>
-
+                                </li> --}}
+                                {{-- 
                                 <li class="notification-item">
                                     <i class="bi bi-exclamation-circle text-warning"></i>
                                     <div>
@@ -94,12 +95,12 @@
                                         <p>Quae dolorem earum veritatis oditseno</p>
                                         <p>30 min. ago</p>
                                     </div>
-                                </li>
+                                </li> --}}
 
-                                <li>
+                                {{-- <li>
                                     <hr class="dropdown-divider">
-                                </li>
-
+                                </li> --}}
+                                {{-- 
                                 <li class="notification-item">
                                     <i class="bi bi-x-circle text-danger"></i>
                                     <div>
@@ -107,33 +108,42 @@
                                         <p>Quae dolorem earum veritatis oditseno</p>
                                         <p>1 hr. ago</p>
                                     </div>
-                                </li>
+                                </li> --}}
 
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
 
-                                <li class="notification-item">
-                                    <i class="bi bi-check-circle text-success"></i>
-                                    <div>
-                                        <h4>Sit rerum fuga</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>2 hrs. ago</p>
-                                    </div>
-                                </li>
 
-                                <li>
+
+                                @foreach (auth()->user()->notifications as $notification)
+                                    <li class="notification-item">
+                                        <i class="bi bi-check-circle text-success"></i>
+                                        <div>
+                                            <h4>{{ $notification->data['alias'] }}</h4>
+                                            <p>{{ $notification->data['created_at'] }}</p>
+                                            <p>{{ $notification->data['mensaje'] }}</p>
+                                            {{-- <p>2 hrs. ago</p> --}}
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                @endforeach
+
+
+                                {{-- <li>
                                     <hr class="dropdown-divider">
-                                </li>
+                                </li> --}}
 
-                                <li class="notification-item">
+                                {{-- <li class="notification-item">
                                     <i class="bi bi-info-circle text-primary"></i>
                                     <div>
                                         <h4>Dicta reprehenderit</h4>
                                         <p>Quae dolorem earum veritatis oditseno</p>
                                         <p>4 hrs. ago</p>
                                     </div>
-                                </li>
+                                </li> --}}
 
                                 <li>
                                     <hr class="dropdown-divider">
@@ -141,12 +151,11 @@
                                 <li class="dropdown-footer">
                                     <a href="#">Show all notifications</a>
                                 </li>
-
                             </ul><!-- End Notification Dropdown Items -->
 
                         </li>
 
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
 
                             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i class="bi bi-chat-left-text"></i>
@@ -211,7 +220,9 @@
 
                             </ul>
 
-                        </li>
+                        </li> --}}
+
+                        {{-- Notificaciones --}}
 
                         <li class="nav-item dropdown pe-3">
 
@@ -222,7 +233,8 @@
                                     <img src="{{ route('foto.perfil', ['filename' => Auth::user()->fotoPerfil]) }}"
                                         alt="Profile" class="rounded-circle">
                                 @else
-                                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                                    <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile"
+                                        class="rounded-circle">
                                 @endif
 
                                 <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->alias }}</span>
@@ -236,17 +248,9 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-
-                                {{-- <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('home') }}">
-                                        <i class="bi bi-person"></i>
-                                        <span>Mi Perfil</span>
-                                    </a>
-                                </li> --}}
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center" href="{{ route('perfil') }}">
                                         <i class="bi bi-gear"></i>
@@ -259,13 +263,8 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
-                                        {{-- <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
-                                            <i class="bi bi-box-arrow-right"></i>
-                                            <span>Cerrar Sesión</span>
-                                        </a> --}}
                                         {{ csrf_field() }}
                                         <button type="submit" class="dropdown-item d-flex align-items-center"><i
                                                 class="bi bi-box-arrow-right"></i>Cerrar Sesión</button>
@@ -318,9 +317,6 @@
         {{-- /Footer --}}
     @endguest
 
-
-
-
     <!-- Vendor JS Files -->
     {{-- <script src="assets/vendor/apexcharts/apexcharts.min.js"></script> --}}
     {{-- <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
@@ -336,52 +332,25 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-
     {{-- Anexos de JS --}}
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
     <script src="{{ asset('assets/vendor/jquery/jquery-3.6.1.min.js') }}"></script>
-
     <script src="{{ asset('assets/vendor/jquery-ui/jquery-ui.min.js') }}"></script>
-
-
-
-    @push('scripts')
-        <script>
-            const baseUrl = 'http://127.0.0.1:8000/';
-
-            $("#search").autocomplete({
-                source: baseUrl + "search",
-                minLength: 1,
-                select: function(event, ui) {
-                    var url = "{{ route('usuarioBuscador.perfil', ['perfil' => 'temp']) }}";
-                    url = url.replace('temp', ui.item.value);
-                    location.href = url;
-                }
-            }).data('ui-autocomplete')._renderItem = function(ul, item) {
-                return $("<li class='ui-autocomplete-row'></li>")
-                    .data("item.autocomplete", item)
-                    .append(item.label)
-                    .appendTo(ul);
-            };
-        </script>
-    @endpush
-
+    <script src="{{ asset('assets/js/config/parameters.js') }}"></script>
+    <script src="{{ asset('assets/js/user/autocompletado.js') }}"></script>
+    <script src="{{ asset('assets/js/user/cambiar-imagen-configuracion.js') }}"></script>
+    <script src="{{ asset('assets/js/comments/mostrar-ocultar.js') }}"></script>
+    
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
-
-    {{-- <script src="assets/js/user/cambiar-imagen-configuracion.js"></script> --}}
-    {{-- <script src="assets/js/user/autocompletado.js"></script> --}}
-    {{-- <script src="assets/js/comments/mostrar-ocultar.js"></script>
-        <script src="assets/js/followers/agregar_borrar_contacto.js"></script> --}}
 
     {{-- Autocompletado CSS --}}
     <style>
         .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
             padding: 0px;
-            border-radius: 60px;
+            border-radius: 10px;
             border-color: #ffffff;
-            background: #6693bc !important;
+            background: #3c249c !important;
             font-weight: bold !important;
             color: #ffffff !important;
         }
