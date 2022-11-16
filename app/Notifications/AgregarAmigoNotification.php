@@ -4,15 +4,19 @@ namespace App\Notifications;
 
 use App\Models\Follower;
 use Illuminate\Bus\Queueable;
+// use Illuminate\Contracts\Broadcasting\ShouldBroadcast; /* Clase para Trasmitir en Vivo */
+// use Illuminate\Notifications\Messages\BroadcastMessage; /* Objeto para Trasmitir en Vivo */
+use App\Events\AgregarAmigosNotificacion;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
-class AgregarAmigoNotification extends Notification
+class AgregarAmigoNotification extends Notification 
 {
     use Queueable;
 
-    protected $followers;
+    // protected $followers;
+    public $followers;
 
     /**
      * Create a new notification instance.
@@ -33,6 +37,8 @@ class AgregarAmigoNotification extends Notification
     public function via($notifiable)
     {
         return ['database'];
+        // return ['broadcast'];
+        // return ['database', 'broadcast'];
     }
 
     /**
@@ -44,23 +50,34 @@ class AgregarAmigoNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+    // /**
+    //  * Get the array representation of the notification.
+    //  *
+    //  * @param  mixed  $notifiable
+    //  * @return array
+    //  */
+
     public function toArray($notifiable)
     {
         return [
+            'id' => $this->followers->user->id,
             'alias' => $this->followers->user->alias,
             'created_at' => $this->followers->created_at,
-            'mensaje' => 'Te Envio una Notificacion'
+            'mensaje' => 'Te Envio una Notificacion',
         ];
     }
+
+    // public function toBroadcast($notifiable)
+    // {
+    //     return new BroadcastMessage([
+    //         'alias' => $this->followers->user->alias,
+    //         'created_at' => $this->followers->created_at,
+    //         'mensaje' => 'Te Envio una Notificacion'
+    //     ]);
+    // }
 }

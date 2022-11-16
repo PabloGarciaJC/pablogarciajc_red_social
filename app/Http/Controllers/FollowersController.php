@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Notification;
 use App\Models\User;
-use Auth;
 use App\Models\Follower;
 use Illuminate\Http\Request;
+use App\Events\AgregarAmigosNotificacion;
 use App\Notifications\AgregarAmigoNotification;
 
 class FollowersController extends Controller
@@ -39,23 +40,22 @@ class FollowersController extends Controller
         if ($existeFollower > 0) {
             echo 0;
         } else {
+
             $follower->save();
             // Obtengo Fila de Solicitud en la Tabla Followers
-            $solicitudFollower = $obtenerFollower->get();
-            // Funcion para Notificar
-            $this->notificationAgregarAmigo($solicitudFollower, $usuarioSeguido);
-            // echo 1;
+            $solicitudFollower = $obtenerFollower->get(); 
+
+            $objetoFollower = User::find($usuarioSeguido);
+            $objetoUserLogin = User::find($usuarioLogin);
+
+            foreach ($solicitudFollower as $camposFollower) {
+                $objetoFollower->notify(new AgregarAmigoNotification($camposFollower));
+                // event(new AgregarAmigosNotificacion($camposFollower));
+            }
+            echo 1;
         }
     }
 
-    public function notificationAgregarAmigo($solicitudFollower, $usuarioSeguido)
-    {
-        $objetoFollower = User::find($usuarioSeguido);
-
-        foreach ($solicitudFollower as $camposFollower) {
-              $objetoFollower->notify(new AgregarAmigoNotification($camposFollower));
-        }
-    }
 
     public function borrarContacto()
     {

@@ -75,14 +75,17 @@
 
                             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i class="bi bi-bell"></i>
-                                <span class="badge bg-primary badge-number">4</span>
+                                <span
+                                    class="badge bg-primary badge-number">{{ count(auth()->user()->notifications) }}</span>
                             </a>
 
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+                                id="notificacionesAmistad">
+
                                 <li class="dropdown-header">
-                                    You have 4 new notifications
-                                    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
-                                            all</span></a>
+                                    Tú tienes {{ count(auth()->user()->notifications) }} nuevas notificaciones
+                                    {{-- <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
+                                            all</span></a> --}}
                                 </li>
                                 {{-- <li>
                                     <hr class="dropdown-divider">
@@ -109,12 +112,10 @@
                                         <p>1 hr. ago</p>
                                     </div>
                                 </li> --}}
-
+                                {{-- 
                                 <li>
                                     <hr class="dropdown-divider">
-                                </li>
-
-
+                                </li> --}}
 
                                 @foreach (auth()->user()->notifications as $notification)
                                     <li class="notification-item">
@@ -131,7 +132,6 @@
                                     </li>
                                 @endforeach
 
-
                                 {{-- <li>
                                     <hr class="dropdown-divider">
                                 </li> --}}
@@ -145,12 +145,12 @@
                                     </div>
                                 </li> --}}
 
-                                <li>
+                                {{-- <li>
                                     <hr class="dropdown-divider">
-                                </li>
-                                <li class="dropdown-footer">
+                                </li> --}}
+                                {{-- <li class="dropdown-footer">
                                     <a href="#">Show all notifications</a>
-                                </li>
+                                </li> --}}
                             </ul><!-- End Notification Dropdown Items -->
 
                         </li>
@@ -340,7 +340,7 @@
     <script src="{{ asset('assets/js/user/autocompletado.js') }}"></script>
     <script src="{{ asset('assets/js/user/cambiar-imagen-configuracion.js') }}"></script>
     <script src="{{ asset('assets/js/comments/mostrar-ocultar.js') }}"></script>
-    
+
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
 

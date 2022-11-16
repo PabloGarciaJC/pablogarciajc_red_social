@@ -181,15 +181,6 @@
                                 });
                             });
                     </script> --}}
-                    <script>
-                        /* Implementar solo en la entidad Amigos */
-                        // const divPadreContactos = document.getElementById("divContactos");
-
-                        // let divUsuariosCreated = document.createElement("div");
-                        // divUsuariosCreated.innerText = 'Conectado';
-
-                        // divPadreContactos.appendChild(divUsuariosCreated)
-                    </script>
                 @endpush
 
             </div>

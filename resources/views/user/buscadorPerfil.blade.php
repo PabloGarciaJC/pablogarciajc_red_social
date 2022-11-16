@@ -320,7 +320,7 @@
 
                             if (respuestaPeticion == 1) {
                                 mensajeAgregarAmigo.innerText = 'La solicitud se ha enviado correctamente';
-                            }else{
+                            } else {
                                 mensajeAgregarAmigo.innerText = 'Ya se ha enviado la solicitud';
                             }
 
