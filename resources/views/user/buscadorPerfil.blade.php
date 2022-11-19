@@ -80,6 +80,10 @@
 
                                     <h5 class="card-title">Detalles de mi Perfil</h5>
 
+                                    <input type="hidden" id="idFollower" value="{{ $idFollower }}">
+
+                                    <input type="hidden" id="solicitudAmistad" value="{{ $solicitudAmistad }}">
+
                                     <input type="hidden" id="usuarioLogin" value="{{ Auth::user()->id }}">
 
                                     @foreach ($usuario as $user)
@@ -299,6 +303,8 @@
             let btnAgregarContacto = document.getElementById('btnAgregarContacto');
             let usuarioLogin = document.getElementById('usuarioLogin');
             let usuarioSeguido = document.getElementById('usuarioSeguido');
+            let solicitudAmistad = document.getElementById('solicitudAmistad');
+            let idFollower = document.getElementById('idFollower');
 
             if (btnAgregarContacto) {
 
@@ -309,20 +315,22 @@
                             url: "{{ route('agregarContacto') }}",
                             data: {
                                 usuarioLogin: usuarioLogin.value,
-                                usuarioSeguido: usuarioSeguido.value
+                                usuarioSeguido: usuarioSeguido.value,
+                                solicitudAmistad: solicitudAmistad.value,
+                                idFollower: idFollower.value
                             },
                         })
                         .done(function(respuestaPeticion) {
 
                             $('#mensajeAgregarAmigo').html(respuestaPeticion);
 
-                            $('#mensajeAgregarAmigo').addClass('alert alert-success text-center');
+                            // $('#mensajeAgregarAmigo').addClass('alert alert-success text-center');
 
-                            if (respuestaPeticion == 1) {
-                                mensajeAgregarAmigo.innerText = 'La solicitud se ha enviado correctamente';
-                            } else {
-                                mensajeAgregarAmigo.innerText = 'Ya se ha enviado la solicitud';
-                            }
+                            // if (respuestaPeticion == 1) {
+                            //     mensajeAgregarAmigo.innerText = 'La solicitud se ha enviado correctamente';
+                            // } else {
+                            //     mensajeAgregarAmigo.innerText = 'Ya se ha enviado la solicitud';
+                            // }
 
                         })
                         .fail(function() {

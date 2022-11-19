@@ -94,20 +94,21 @@ class UserController extends Controller
     {
         // /*  Es el valor capturado del Input */
         $term = $request->get('term');
-        // /* http://127.0.0.1:8000/search?term=prueba2 */ /* Pruebo lo que me llega en el controlador */
-        // return $term; 
+        // Pruebo lo que me llega en el controlador
+        // http://127.0.0.1:8000/search?term=prueba2 
+        // Estando Aqui puedo Probar Consultas
 
-        $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get();
+        $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get()->except(Auth::id());
+        // $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get();
 
         $data = [];
 
         foreach ($querys as $query) {
             $termArray = [];
             $termArray['value'] = $query->alias;
-  
+
             if ($query->fotoPerfil != '') {
                 $termArray['label'] = '<img src="http://127.0.0.1:8000/fotoPerfil/' . $query->fotoPerfil . '" width="60" class="pointer">&nbsp' .  $query->alias;
-
             } else {
                 $termArray['label'] = '<img src="http://127.0.0.1:8000/assets/img/profile-img.jpg" width="60" class="pointer">&nbsp' .  $query->alias;
             }
@@ -117,9 +118,9 @@ class UserController extends Controller
         echo json_encode($data);
     }
 
-    public function buscadorPerfil($nameUser)
+    public function buscadorPerfil($alias, $solicitudAmistad, $idFollower)
     {
-        $usuario = User::where('alias', '=', $nameUser)->get();
-        return view('user.buscadorPerfil', ['usuario' => $usuario]);
+        $usuario = User::where('alias', '=', $alias)->get();
+        return view('user.buscadorPerfil', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower]);
     }
 }

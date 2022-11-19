@@ -17,7 +17,7 @@ class AgregarAmigoNotification extends Notification
 
     // protected $followers;
     public $followers;
-
+    
     /**
      * Create a new notification instance.
      *
@@ -65,10 +65,11 @@ class AgregarAmigoNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->followers->user->id,
+            'idFollower' => $this->followers->id,
             'alias' => $this->followers->user->alias,
+            'fotoPerfil' => $this->followers->user->fotoPerfil,
             'created_at' => $this->followers->created_at,
-            'mensaje' => 'Te Envio una Notificacion',
+            'mensaje' => 'Solicitud de Amistad Enviada',
         ];
     }
 

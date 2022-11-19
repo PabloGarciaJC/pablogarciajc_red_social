@@ -76,14 +76,15 @@
                             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                                 <i class="bi bi-bell"></i>
                                 <span
-                                    class="badge bg-primary badge-number">{{ count(auth()->user()->notifications) }}</span>
+                                    class="badge bg-primary badge-number">{{ count(auth()->user()->unReadNotifications) }}</span>
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
                                 id="notificacionesAmistad">
 
                                 <li class="dropdown-header">
-                                    Tú tienes {{ count(auth()->user()->notifications) }} nuevas notificaciones
+                                    Tú tienes {{ count(auth()->user()->notifications) }} solicitud de amistad
+
                                     {{-- <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
                                             all</span></a> --}}
                                 </li>
@@ -118,15 +119,19 @@
                                 </li> --}}
 
                                 @foreach (auth()->user()->notifications as $notification)
-                                    <li class="notification-item">
-                                        <i class="bi bi-check-circle text-success"></i>
-                                        <div>
-                                            <h4>{{ $notification->data['alias'] }}</h4>
-                                            <p>{{ $notification->data['created_at'] }}</p>
-                                            <p>{{ $notification->data['mensaje'] }}</p>
-                                            {{-- <p>2 hrs. ago</p> --}}
-                                        </div>
-                                    </li>
+                                    <a
+                                        href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 1, 'idFollower' => $notification->data['idFollower']]) }}">
+                                        <li class="notification-item">
+                                            <img src=" {{ route('foto.perfil', ['filename' => $notification->data['fotoPerfil']]) }} "
+                                                width="60"
+                                                style="border-radius: 10px; padding: 0px; margin-right: 10px; margin-top: -10px"
+                                                alt="">
+                                            <div>
+                                                <h4>{{ $notification->data['alias'] }}</h4>
+                                                <p>{{ $notification->data['mensaje'] }}</p>
+                                            </div>
+                                        </li>
+                                    </a>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -148,9 +153,12 @@
                                 {{-- <li>
                                     <hr class="dropdown-divider">
                                 </li> --}}
-                                {{-- <li class="dropdown-footer">
-                                    <a href="#">Show all notifications</a>
-                                </li> --}}
+                                <li class="dropdown-footer">
+                                    <a href="{{ route('markAsRead') }}">Marcar todo como leído</a><br>
+                                    <a href="{{ route('borrarNotificacion', ['id' => auth()->id()]) }}">Borrar todas las
+                                        notificaciones</a>
+                                </li>
+
                             </ul><!-- End Notification Dropdown Items -->
 
                         </li>
@@ -282,7 +290,7 @@
             <aside id="sidebar" class="sidebar">
                 <ul class="sidebar-nav" id="sidebar-nav">
                     <li class="nav-item">
-                        <a class="nav-link " href="index.html">
+                        <a class="nav-link " href="{{ route('home') }}">
                             <i class="bi bi-grid"></i>
                             <span>Inicio</span>
                         </a>

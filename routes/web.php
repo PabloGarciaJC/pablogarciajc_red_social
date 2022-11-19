@@ -22,16 +22,45 @@ Route::get('/', 'HomeController@index')->name('home');
 // USUARIO
 Route::get('/perfil', 'UserController@perfil')->name('perfil');
 Route::post('/actualizar', 'UserController@actualizar')->name('actualizar');
+
 Route::get('/fotoPerfil/{filename}', 'UserController@getImage')->name('foto.perfil');
-Route::get('/usuario/{perfil}', 'UserController@buscadorPerfil')->name('usuarioBuscador.perfil');
+
+Route::get('/usuario/{perfil}/{solicitudAmistad?}/{idFollower?}', 'UserController@buscadorPerfil')->name('usuarioBuscador.perfil');
+
 Route::get('/search', 'UserController@search')->name('search');
 
 // FOLLOWERS
 Route::get('/agregarContacto', 'FollowersController@agregarContacto')->name('agregarContacto');
 
+
+
+// Route::get('/tes/{titulo?}', function ($titulo = 'no hay pelicula selecionada') {
+// echo $titulo;
+// });
+
+
+
+// NOTIFICACIONES
+Route::get('markAsRead', function () {
+  auth()->user()->unreadNotifications->markAsRead();
+  return redirect()->back();
+})->name('markAsRead');
+
+Route::get('borrarNotificacion/{id}', function ($id) {
+  $usuarioLogin = Auth::user()->find($id);
+  $usuarioLogin->notifications()->delete();
+  return redirect()->back();
+})->name('borrarNotificacion');
+
+
+
+// Route::get('markAsReadDelete', function () {
+//   auth()->user()->notifications()->delete();
+//   return redirect()->back();
+// })->name('markAsReadDelete');
+
+
 // Route::get('test', function () {
 //   event(new App\Events\MyEvent('hello world'));
 // return "El evento ha sido enviado";
 // });
-
-
