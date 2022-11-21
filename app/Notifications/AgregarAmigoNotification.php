@@ -69,7 +69,7 @@ class AgregarAmigoNotification extends Notification
             'alias' => $this->followers->user->alias,
             'fotoPerfil' => $this->followers->user->fotoPerfil,
             'created_at' => $this->followers->created_at,
-            'mensaje' => 'Solicitud de Amistad Enviada',
+            'mensaje' => 'Te Envio una Solicitud de Amistad',
         ];
     }
 

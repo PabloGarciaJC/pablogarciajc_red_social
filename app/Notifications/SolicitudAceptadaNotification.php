@@ -13,17 +13,19 @@ class SolicitudAceptadaNotification extends Notification
 {
     use Queueable;
     // public $idFollower;
-    public $objetoUserLogin;
+    public $userLogin;
+    public $idFollower;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Follower $objetoUserLogin)
+    public function __construct(User $userLogin, Follower $idFollower)
     {
         // $this->idFollower = $idFollower;
-        $this->objetoUserLogin = $objetoUserLogin;
+        $this->userLogin = $userLogin;
+        $this->idFollower = $idFollower;
     }
 
     /**
@@ -60,10 +62,9 @@ class SolicitudAceptadaNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'idFollower' => $this->objetoUserLogin->id,
-            'alias' => $this->objetoUserLogin->user->alias,
-            'fotoPerfil' => $this->objetoUserLogin->user->fotoPerfil,
-            'created_at' => $this->objetoUserLogin->created_at,
+            'idFollower' => $this->idFollower->id,
+            'alias' => $this->userLogin->alias,
+            'fotoPerfil' => $this->userLogin->fotoPerfil,
             'mensaje' => 'Solicitud de Amistad Aceptada',
         ];
     }

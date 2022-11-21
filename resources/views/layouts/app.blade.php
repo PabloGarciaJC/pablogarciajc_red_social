@@ -42,7 +42,7 @@
         @yield('content')
     @else
         <main class="py-4">
-            {{-- Menu  --}}
+            {{-- Menu NAV --}}
             <header id="header" class="header fixed-top d-flex align-items-center">
 
                 <div class="d-flex align-items-center justify-content-between">
@@ -83,44 +83,14 @@
                                 id="notificacionesAmistad">
 
                                 <li class="dropdown-header">
-                                    Tú tienes {{ count(auth()->user()->notifications) }} solicitud de amistad
-
-                                    {{-- <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
-                                            all</span></a> --}}
+                                    Tú tienes {{ count(auth()->user()->unReadNotifications) }} solicitud de amistad
+                                    {{-- Tú tienes {{ count(auth()->user()->notifications) }} solicitud de amistad --}}
                                 </li>
-                                {{-- <li>
-                                    <hr class="dropdown-divider">
-                                </li> --}}
-                                {{-- 
-                                <li class="notification-item">
-                                    <i class="bi bi-exclamation-circle text-warning"></i>
-                                    <div>
-                                        <h4>Lorem Ipsum</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>30 min. ago</p>
-                                    </div>
-                                </li> --}}
 
-                                {{-- <li>
-                                    <hr class="dropdown-divider">
-                                </li> --}}
-                                {{-- 
-                                <li class="notification-item">
-                                    <i class="bi bi-x-circle text-danger"></i>
-                                    <div>
-                                        <h4>Atque rerum nesciunt</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>1 hr. ago</p>
-                                    </div>
-                                </li> --}}
-                                {{-- 
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li> --}}
-
-                                @foreach (auth()->user()->notifications as $notification)
+                                @foreach (auth()->user()->unReadNotifications as $notification)
+                                {{-- @foreach (auth()->user()->notifications as $notification) --}}
                                     <a
-                                        href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 1, 'idFollower' => $notification->data['idFollower']]) }}">
+                                        href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 1, 'idFollower' => $notification->data['idFollower'], 'idNotificacion' => $notification->id]) }}">
                                         <li class="notification-item">
                                             <img src=" {{ route('foto.perfil', ['filename' => $notification->data['fotoPerfil']]) }} "
                                                 width="60"
@@ -137,101 +107,15 @@
                                     </li>
                                 @endforeach
 
-                                {{-- <li>
-                                    <hr class="dropdown-divider">
-                                </li> --}}
-
-                                {{-- <li class="notification-item">
-                                    <i class="bi bi-info-circle text-primary"></i>
-                                    <div>
-                                        <h4>Dicta reprehenderit</h4>
-                                        <p>Quae dolorem earum veritatis oditseno</p>
-                                        <p>4 hrs. ago</p>
-                                    </div>
-                                </li> --}}
-
-                                {{-- <li>
-                                    <hr class="dropdown-divider">
-                                </li> --}}
                                 <li class="dropdown-footer">
                                     <a href="{{ route('markAsRead') }}">Marcar todo como leído</a><br>
                                     <a href="{{ route('borrarNotificacion', ['id' => auth()->id()]) }}">Borrar todas las
                                         notificaciones</a>
                                 </li>
-
-                            </ul><!-- End Notification Dropdown Items -->
-
+                            </ul>
                         </li>
 
-                        {{-- <li class="nav-item dropdown">
-
-                            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                                <i class="bi bi-chat-left-text"></i>
-                                <span class="badge bg-success badge-number">3</span>
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                                <li class="dropdown-header">
-                                    You have 3 new messages
-                                    <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View
-                                            all</span></a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li class="message-item">
-                                    <a href="#">
-                                        <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                                        <div>
-                                            <h4>Maria Hudson</h4>
-                                            <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                            <p>4 hrs. ago</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li class="message-item">
-                                    <a href="#">
-                                        <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                        <div>
-                                            <h4>Anna Nelson</h4>
-                                            <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                            <p>6 hrs. ago</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li class="message-item">
-                                    <a href="#">
-                                        <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                                        <div>
-                                            <h4>David Muldon</h4>
-                                            <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                            <p>8 hrs. ago</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li class="dropdown-footer">
-                                    <a href="#">Show all messages</a>
-                                </li>
-
-                            </ul>
-
-                        </li> --}}
-
-                        {{-- Notificaciones --}}
-
+                        {{-- Perfil --}}
                         <li class="nav-item dropdown pe-3">
 
                             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
@@ -280,11 +164,10 @@
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                 </nav>
             </header>
-            {{-- //Menu  --}}
+            {{-- //Menu NAV --}}
 
             {{-- Sidebar --}}
             <aside id="sidebar" class="sidebar">
@@ -295,12 +178,7 @@
                             <span>Inicio</span>
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link collapsed" href="{{ route('home') }}">
-                            <i class="bi bi-person"></i>
-                            <span>Mi Perfil</span>
-                        </a>
-                    </li> --}}
+
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="pages-contact.html">
                             <i class="bi bi-envelope"></i>

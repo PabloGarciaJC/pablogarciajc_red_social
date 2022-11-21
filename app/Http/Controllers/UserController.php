@@ -118,9 +118,11 @@ class UserController extends Controller
         echo json_encode($data);
     }
 
-    public function buscadorPerfil($alias, $solicitudAmistad, $idFollower)
+    public function buscadorPerfil($alias, $solicitudAmistad, $idFollower, $idNotificacion)
     {
+        
         $usuario = User::where('alias', '=', $alias)->get();
-        return view('user.buscadorPerfil', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower]);
+
+        return view('user.buscadorPerfil', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
     }
 }

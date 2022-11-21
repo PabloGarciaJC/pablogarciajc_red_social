@@ -25,20 +25,12 @@ Route::post('/actualizar', 'UserController@actualizar')->name('actualizar');
 
 Route::get('/fotoPerfil/{filename}', 'UserController@getImage')->name('foto.perfil');
 
-Route::get('/usuario/{perfil}/{solicitudAmistad?}/{idFollower?}', 'UserController@buscadorPerfil')->name('usuarioBuscador.perfil');
+Route::get('/usuario/{perfil}/{solicitudAmistad?}/{idFollower?}/{idNotificacion}', 'UserController@buscadorPerfil')->name('usuarioBuscador.perfil');
 
 Route::get('/search', 'UserController@search')->name('search');
 
 // FOLLOWERS
 Route::get('/agregarContacto', 'FollowersController@agregarContacto')->name('agregarContacto');
-
-
-
-// Route::get('/tes/{titulo?}', function ($titulo = 'no hay pelicula selecionada') {
-// echo $titulo;
-// });
-
-
 
 // NOTIFICACIONES
 Route::get('markAsRead', function () {
