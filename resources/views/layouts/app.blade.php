@@ -91,6 +91,7 @@
                                 {{-- @foreach (auth()->user()->notifications as $notification) --}}
                                     <a
                                         href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 1, 'idFollower' => $notification->data['idFollower'], 'idNotificacion' => $notification->id]) }}">
+                                        
                                         <li class="notification-item">
                                             <img src=" {{ route('foto.perfil', ['filename' => $notification->data['fotoPerfil']]) }} "
                                                 width="60"
@@ -98,7 +99,7 @@
                                                 alt="">
                                             <div>
                                                 <h4>{{ $notification->data['alias'] }}</h4>
-                                                <p>{{ $notification->data['mensaje'] }}</p>
+                                                <p>{{ $notification->data['mensaje'] }}</p>                                            
                                             </div>
                                         </li>
                                     </a>

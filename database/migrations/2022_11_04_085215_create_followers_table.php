@@ -17,6 +17,7 @@ class CreateFollowersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');  
             $table->integer('user_id')->unsigned();
+            $table->string('notification_id')->nullable();
             $table->integer('seguido');
             $table->boolean('aprobada')->nullable();
             $table->foreign('user_id')->references('id')->on('users');

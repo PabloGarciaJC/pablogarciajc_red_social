@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Auth;
+use App\Models\User;
+use App\Models\Follower;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 // use Storage;
 
 class UserController extends Controller
@@ -101,12 +103,26 @@ class UserController extends Controller
         $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get()->except(Auth::id());
         // $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get();
 
+
+        // $querys = DB::table('users as u')
+        //     ->select('u.id', 'u.alias', 'u.nombre', 'u.fotoPerfil', 'f.aprobada')
+        //     ->where('u.nombre', 'LIKE', '%' . $term . '%')
+        //     ->join('followers as f', 'f.user_id', '=', 'u.id')
+        //     ->get()
+        //     ->except(Auth::id());
+
+        // $querys = User::where('nombre', 'LIKE', '%' . $term . '%')
+        // ->join("followers", "followers.user_id", "=", "users.id")
+        // ->select("*")
+        // ->get()
+        // ->except(Auth::id());
+
         $data = [];
 
         foreach ($querys as $query) {
             $termArray = [];
             $termArray['value'] = $query->alias;
-
+            // $termArray['id'] = $query->id;
             if ($query->fotoPerfil != '') {
                 $termArray['label'] = '<img src="http://127.0.0.1:8000/fotoPerfil/' . $query->fotoPerfil . '" width="60" class="pointer">&nbsp' .  $query->alias;
             } else {
@@ -120,7 +136,7 @@ class UserController extends Controller
 
     public function buscadorPerfil($alias, $solicitudAmistad, $idFollower, $idNotificacion)
     {
-        
+
         $usuario = User::where('alias', '=', $alias)->get();
 
         return view('user.buscadorPerfil', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);

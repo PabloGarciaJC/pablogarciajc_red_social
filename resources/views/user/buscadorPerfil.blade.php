@@ -29,8 +29,11 @@
                                     </form> --}}
 
                                     <div class="col-md-auto">
-                                        <button type="button" id="btnAgregarContacto"
-                                            class="btn btn-success">{{ $idFollower == 0 ? 'Agregar Contacto' : 'Confirmar' }}
+                                        <button type="button" id="btnAgregarContacto" style="display:none">
+                                            Agregar Contacto
+                                        </button>
+                                        <button type="button" id="btnCancelarSolicitud" style="display:none">
+                                            Cancelar Solicitud
                                         </button>
                                     </div>
 
@@ -43,8 +46,6 @@
                 <div class="col-xl-8">
                     <div class="card">
                         <div class="card-body pt-3">
-
-                            <div id="mensajeAgregarAmigo" role="alert"></div>
 
                             {{-- Menu de Navegacion --}}
                             <ul class="nav nav-tabs nav-tabs-bordered">
@@ -60,6 +61,11 @@
 
                             <div class="tab-content pt-2">
 
+                                <div id="tes" role="alert"></div>
+
+                                {{-- Mensaje de Notificacion --}}
+                                <div id="mensajeNotification" role="alert"></div>
+
                                 {{-- Perfil --}}
                                 <div class="tab-pane fade show {{ session('message') || $errors->any() ? '' : 'active' }} profile-overview"
                                     id="perfil">
@@ -70,7 +76,7 @@
 
                                     <input type="hidden" id="idNotificacion" value="{{ $idNotificacion }}">
 
-                                    <input type="hidden" id="idFollower" value="{{ $idFollower }}">
+                                    <input type="hidden" id="idRegistroFollower" value="{{ $idFollower }}">
 
                                     <input type="hidden" id="solicitudAmistad" value="{{ $solicitudAmistad }}">
 
@@ -148,48 +154,152 @@
 
     @push('scripts')
         <script>
+            /* Tes */
+            let btnAddContacto = document.getElementById('btnAddContacto');
+
             let btnAgregarContacto = document.getElementById('btnAgregarContacto');
+            let btnCancelarSolicitud = document.getElementById('btnCancelarSolicitud');
+
             let usuarioLogin = document.getElementById('usuarioLogin');
             let usuarioSeguido = document.getElementById('usuarioSeguido');
-            let solicitudAmistad = document.getElementById('solicitudAmistad');
-            let idFollower = document.getElementById('idFollower');
+            // let solicitudAmistad = document.getElementById('solicitudAmistad');
+
+            let idRegistroFollower = document.getElementById('idRegistroFollower');
             let idNotificacion = document.getElementById('idNotificacion');
 
-            if (btnAgregarContacto) {
+            let idNotificacionEnviado = document.getElementById('idNotificacionEnviado');
 
-                btnAgregarContacto.addEventListener('click', (event) => {
 
-                    $.ajax({
-                            type: "GET",
-                            url: "{{ route('agregarContacto') }}",
-                            data: {
-                                usuarioLogin: usuarioLogin.value,
-                                usuarioSeguido: usuarioSeguido.value,
-                                solicitudAmistad: solicitudAmistad.value,
-                                idFollower: idFollower.value,
-                                idNotificacion: idNotificacion.value,
-                            },
-                        })
-                        .done(function(respuestaPeticion) {
+            $.ajax({
+                    type: "GET",
+                    url: "{{ route('btnValidarAmistad') }}",
+                    data: {
+                        usuarioLogin: usuarioLogin.value,
+                        usuarioSeguido: usuarioSeguido.value,
+                        solicitudAmistad: solicitudAmistad.value
+                    },
+                })
 
-                            $('#mensajeAgregarAmigo').html(respuestaPeticion);
+                .done(function(respuestaPeticion) {
 
-                            // $('#mensajeAgregarAmigo').addClass('alert alert-success text-center');
+                    // $('#tes').html(respuestaPeticion);
 
-                            // if (respuestaPeticion == 1) {
-                            //     mensajeAgregarAmigo.innerText = 'La solicitud se ha enviado correctamente';
-                            // } else {
-                            //     mensajeAgregarAmigo.innerText = 'Ya se ha enviado la solicitud';
-                            // }
+                    if (respuestaPeticion == 1) {
 
-                        })
-                        .fail(function() {
-                            console.log('error');
-                        })
-                        .always(function() {
-                            console.log('completo');
-                        });
+                        show(btnCancelarSolicitud);
+                        $('#btnCancelarSolicitud').addClass("btn btn-primary");
+
+                    } else {
+
+                        show(btnAgregarContacto);
+                        $('#btnAgregarContacto').addClass("btn btn-success");
+                    }
+
+                    // if (respuestaPeticion == 0) {
+
+                    //     show(btnAgregarContacto);
+                    //     // show(btnAgregarContacto);
+                    //     // $('#btnAgregarContacto').addClass("btn btn-success");
+                    //     $('#btnAgregarContacto').addClass("btn btn-primary");
+                    // }
+
+                })
+                .fail(function() {
+                    console.log('error');
+                })
+                .always(function() {
+                    console.log('completo');
                 });
+
+
+            btnAgregarContacto?.addEventListener('click', (event) => {
+
+                $.ajax({
+                        type: "GET",
+                        url: "{{ route('agregarContacto') }}",
+                        data: {
+                            usuarioLogin: usuarioLogin.value,
+                            usuarioSeguido: usuarioSeguido.value,
+                            solicitudAmistad: solicitudAmistad.value,
+                            idRegistroFollower: idRegistroFollower.value,
+                            idNotificacion: idNotificacion.value
+                        },
+                    })
+                    .done(function(respuestaPeticion) {
+
+                        hide(btnAgregarContacto);
+                        show(btnCancelarSolicitud);
+
+                        $('#mensajeNotification').html(respuestaPeticion);
+
+                        if (respuestaPeticion == 'solicitudEnviada') {
+                            $('#mensajeNotification').addClass('alert alert-success text-center');
+                            mensajeNotification.innerText = 'Solicitud de Amistad Enviada';
+                        }
+
+                        if (respuestaPeticion == 'solicitudAceptada') {
+                            $('#mensajeNotification').addClass('alert alert-success text-center');
+                            mensajeNotification.innerText = 'Solicitud de Amistad Confirmada';
+                        }
+
+                        $('#btnCancelarSolicitud').addClass("btn btn-primary");
+
+                    })
+                    .fail(function() {
+                        console.log('error');
+                    })
+                    .always(function() {
+                        console.log('completo');
+                    });
+
+            });
+
+            btnCancelarSolicitud?.addEventListener('click', (event) => {
+
+                $.ajax({
+                        type: "GET",
+                        url: "{{ route('cancelarContacto') }}",
+                        data: {
+                            usuarioLogin: usuarioLogin.value,
+                            usuarioSeguido: usuarioSeguido.value,
+                            idNotificacion: idNotificacion.value,
+                            solicitudAmistad: solicitudAmistad.value
+                            // idFollower: idFollower.value,
+                        },
+                    })
+                    .done(function(respuestaPeticion) {
+
+                        $('#mensajeNotification').html(respuestaPeticion);
+
+                        if (respuestaPeticion == 1) {
+
+                            hide(btnCancelarSolicitud);
+                            show(btnAgregarContacto);
+
+                            $('#mensajeNotification').removeClass("alert alert-success text-center").addClass(
+                                "alert alert-primary text-center");
+
+                            mensajeNotification.innerText = 'Solicitud de Amistad Cancelada';
+
+                            $('#btnAgregarContacto').addClass("btn btn-success");
+                        }
+
+                    })
+                    .fail(function() {
+                        console.log('error');
+                    })
+                    .always(function() {
+                        console.log('completo');
+                    });
+
+            });
+
+            function hide(element) {
+                element.style.display = "none";
+            }
+
+            function show(element) {
+                element.style.display = "block";
             }
         </script>
     @endpush
