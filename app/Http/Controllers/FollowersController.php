@@ -112,18 +112,27 @@ class FollowersController extends Controller
                 $registroFollower = Follower::find($idRegistroFollower);
                 $registroFollower->aprobada = 1;
                 $registroFollower->save();
-                $objetoUserLogin->unreadNotifications->where('id', $idNotificacion)->markAsRead();
+                DB::table('notifications')->whereId($idNotificacion)->delete();
+                // $objetoUserLogin->unreadNotifications->where('id', $idNotificacion)->markAsRead();
                 // Envio la Notificacion que se ha aceptado la Solicitud                
                 $objetoFollower->notify(new SolicitudAceptadaNotification($objetoUserLogin, $registroFollower));
-            } else {
-                // Guardar uno Nuevo
-                $follower->aprobada = 1;
-                $follower->save();
-                echo 'solicitudEnviada';
-                // $regitroFollowerNuevo = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $follower->seguido)->get();
-                // $objetoUserLogin->notify(new SolicitudAceptadaNotification($objetoFollower, $regitroFollowerNuevo));
-            }
 
+            } else {
+                // El que Guarda despues de recibir
+                $follower->aprobada = 1;
+                $guardado = $follower->save();
+
+                if ($guardado) {
+
+                    $regitroFollower = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido)->where('aprobada', '=', 1)->get();
+
+                    foreach ($regitroFollower as $camposFollower) {
+                        $objetoFollower->notify(new SolicitudAceptadaNotification($objetoUserLogin, $camposFollower));
+                    }
+
+                    echo 'solicitudEnviada';
+                }
+            }
         } else {
 
             // El que Envia
@@ -169,7 +178,7 @@ class FollowersController extends Controller
         $idNotificacion = $request->get('idNotificacion');
         $solicitudAmistad = $request->get('solicitudAmistad');
 
-        $follower = new Follower();
+         $follower = new Follower();
 
         $follower->user_id = $usuarioLogin;
         $follower->seguido = $usuarioSeguido;
@@ -187,32 +196,23 @@ class FollowersController extends Controller
                 $borrarDeleteFollower->delete();
             }
 
-            // Borro la Notificacion que se creo, Solicitud de Amistad creada
             foreach ($objetoFollower->unReadNotifications as $notification) {
                 DB::table('notifications')->whereId($notification->id)->delete();
             }
 
-            // El que Envia
-
+            // El que Cancela despues de recibir
             $obtenerFollowerEnviar = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido)->get();
-
             foreach ($obtenerFollowerEnviar as $camposFollower) {
                 $borrarDeleteFollower = $follower->find($camposFollower->id);
                 $borrarDeleteFollower->delete();
             }
 
-            // // Borro la Notificacion que se creo, Solicitud de Amistad creada
-            // foreach ($objetoUserLogin->unReadNotifications as $notification) {
-            //     DB::table('notifications')->whereId($notification->id)->delete();
-            // }
-
-            // die();
-
-
-            // echo $obtenerFollower;
-
-
+            foreach ($objetoUserLogin->unReadNotifications as $notification) {
+                DB::table('notifications')->whereId($notification->id)->delete();
+            }
+            
             echo 1;
+
         } else {
 
             // El que Envia
