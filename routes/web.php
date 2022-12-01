@@ -22,19 +22,20 @@ Route::get('/', 'HomeController@index')->name('home');
 // USUARIO
 Route::get('/perfil', 'UserController@perfil')->name('perfil');
 Route::post('/actualizar', 'UserController@actualizar')->name('actualizar');
-
 Route::get('/fotoPerfil/{filename}', 'UserController@getImage')->name('foto.perfil');
-
 Route::get('/usuario/{perfil}/{solicitudAmistad?}/{idFollower?}/{idNotificacion?}', 'UserController@buscadorPerfil')->name('usuarioBuscador.perfil');
-
 Route::get('/search', 'UserController@search')->name('search');
 
 // FOLLOWERS
 Route::get('/agregarContacto', 'FollowersController@agregarContacto')->name('agregarContacto');
-
 Route::get('/cancelarContacto', 'FollowersController@cancelarContacto')->name('cancelarContacto');
-
 Route::get('/btnValidarAmistad', 'FollowersController@btnValidarAmistad')->name('btnValidarAmistad');
+
+
+
+// Route::get('/prueba', 'UserController@prueba')->name('prueba');
+
+
 
 
 // NOTIFICACIONES

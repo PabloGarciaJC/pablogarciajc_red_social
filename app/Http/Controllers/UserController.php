@@ -141,4 +141,14 @@ class UserController extends Controller
 
         return view('user.buscadorPerfil', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
     }
+
+    // public function prueba()
+    // {
+
+    //     $data = User::select('users.*', 'followers.*')
+    //             ->join('followers', 'followers.user_id', '=', 'users.id')
+    //             ->get();
+
+    //     return $data;
+    // }
 }

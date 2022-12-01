@@ -11,6 +11,7 @@
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <br>
+                                    <input id="userLogin" type="hidden" value="{{ Auth::user()->id }}"></input>
                                     <div class="d-flex align-items-center">
                                         <input type="text" class="form-control" style="text-align: center;"
                                             id="floatingName" placeholder="¿ Qué estás pensando, Pablo Garcia ?">
@@ -134,14 +135,21 @@
                 </div>
 
                 @push('scripts')
-                    {{-- <script>
+                    <script>
+                        let userLogin = document.getElementById('userLogin').value;
+
                         /* Obtener Usuarios Seguidos - Conectados */
-                        window.axios.get('/api/users')
+
+
+                        // window.axios.get('/api/followers/' + userLogin)
+                        window.axios.get(`/api/followers/${userLogin}`)
                             .then((response) => {
+
                                 const divContactos = document.getElementById("divContactos");
                                 let users = response.data;
 
                                 users.forEach((user, index) => {
+
                                     let divUsuarios = document.createElement("div");
                                     divUsuarios.className = "post-item clearfix";
                                     divContactos.appendChild(divUsuarios);
@@ -159,9 +167,6 @@
                                     let a = document.createElement('a');
                                     a.innerHTML = "<h4>" + user.alias + "</h4>"
 
-                                    var url = "{{ route('obtenerUsuario', ['obtenerUsuario' => 'temp']) }}";
-                                    url = url.replace('temp', user.alias);
-                                    a.href = url;
 
                                     divUsuarios.appendChild(a);
 
@@ -170,6 +175,9 @@
 
                                     parrafo.setAttribute('id', 'usuarioStatus' + user.id);
 
+
+        
+                                    
                                     if (user.conectado == 1) {
                                         parrafo.innerText = 'Conectado';
                                         parrafo.style.color = 'green';
@@ -177,11 +185,58 @@
                                         parrafo.innerText = 'Desconectado';
                                         parrafo.style.color = 'red';
                                     }
+                                    
                                     divUsuarios.appendChild(parrafo);
-                                });
+
+                                }); /* Fin forearch */
+
                             });
-                    </script> --}}
+                    </script>
                 @endpush
+
+                {{-- 
+
+                // const divContactos = document.getElementById("divContactos");
+                // let users = response.data;
+
+                // users.forEach((user, index) => {
+                //     let divUsuarios = document.createElement("div");
+                //     divUsuarios.className = "post-item clearfix";
+                //     divContactos.appendChild(divUsuarios);
+
+                //     let mostrarImagen = document.createElement('img');
+
+                //     if (user.fotoPerfil != null) {
+                //         mostrarImagen.src = 'fotoPerfil/' + user.fotoPerfil
+                //     } else {
+                //         mostrarImagen.src = 'assets/img/profile-img.jpg'
+                //     }
+
+                //     divUsuarios.appendChild(mostrarImagen);
+
+                //     let a = document.createElement('a');
+                //     a.innerHTML = "<h4>" + user.alias + "</h4>"
+
+                //     var url = "{{ route('obtenerUsuario', ['obtenerUsuario' => 'temp']) }}";
+                //     url = url.replace('temp', user.alias);
+                //     a.href = url;
+
+                //     divUsuarios.appendChild(a);
+
+                //     let parrafo = document.createElement("p");
+                //     parrafo.innerHTML = "<h4>" + user.conectado + "</h4>"
+
+                //     parrafo.setAttribute('id', 'usuarioStatus' + user.id);
+
+                //     if (user.conectado == 1) {
+                //         parrafo.innerText = 'Conectado';
+                //         parrafo.style.color = 'green';
+                //     } else {
+                //         parrafo.innerText = 'Desconectado';
+                //         parrafo.style.color = 'red';
+                //     }
+                //     divUsuarios.appendChild(parrafo);
+                // }); --}}
 
             </div>
         </section>

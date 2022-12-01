@@ -18,4 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('users', 'Api\UserController');
+// User Generica
+// Route::apiResource('users', 'Api\UserController');
+
+Route::get('users', 'Api\UserController@index');
+
+// Probar: http://127.0.0.1:8000/api/followers
+Route::get('followers/', 'Api\FollowersController@index');
+
+Route::get('followers/{id}', 'Api\FollowersController@show');
