@@ -54,7 +54,6 @@ class FollowersController extends Controller
             ->Where('user_id', '=', $request)
             ->get();
 
-
         foreach ($todosFollower as $registrosFollower) {
             $user = User::find($registrosFollower->seguido);
             array_push($arrayListados, $user);
