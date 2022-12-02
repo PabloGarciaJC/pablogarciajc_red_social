@@ -39,12 +39,21 @@ class FollowersController extends Controller
      */
     public function show($request)
     {
+
+        // $todosFollower = Follower::select('followers.*')
+        //     ->where('aprobada', '=', 1)
+        //     ->Where('user_id', '=', $request)
+        //     ->count();
+
+        // if ($todosFollower > 0) {
+
+        $arrayListados = array();
+
         $todosFollower = Follower::select('followers.*')
             ->where('aprobada', '=', 1)
             ->Where('user_id', '=', $request)
             ->get();
 
-        $arrayListados = array();
 
         foreach ($todosFollower as $registrosFollower) {
             $user = User::find($registrosFollower->seguido);
@@ -52,6 +61,27 @@ class FollowersController extends Controller
         }
 
         return response()->json($arrayListados, 200, []);
+
+        // } else {
+
+        // echo 'no entiendo';
+        // $arrayListados = array();
+
+        // $todosFollower = Follower::select('followers.*')
+        //     ->where('aprobada', '=', 1)
+        //     ->Where('seguido', '=', $request)
+        //     ->get();
+
+        // echo $todosFollower;
+        // die();
+
+        // foreach ($todosFollower as $registrosFollower) {
+        //     $user = User::find($registrosFollower->user_id);
+        //     array_push($arrayListados, $user);
+        // }
+
+        // return response()->json($arrayListados, 200, []);
+        // }
     }
 
     /**

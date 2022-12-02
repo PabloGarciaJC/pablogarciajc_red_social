@@ -138,8 +138,8 @@
                     <script>
                         let userLogin = document.getElementById('userLogin').value;
 
+                        console.log(userLogin);
                         /* Obtener Usuarios Seguidos - Conectados */
-
 
                         // window.axios.get('/api/followers/' + userLogin)
                         window.axios.get(`/api/followers/${userLogin}`)

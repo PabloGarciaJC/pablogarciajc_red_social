@@ -30,26 +30,55 @@ class userLoginNotification
 
     public function handle(login $event)
     {
+        // Conectado Usuario
         $usuario = User::find($event->user->id);
         $usuario->conectado = 1;
         $usuario->save();
-        $usuarios = User::all();
+
+        // $usuarios = User::all();
+
+        $todosFollower = Follower::select('followers.*')
+            ->where('aprobada', '=', 1)
+            ->Where('user_id', '=', $event->user->id)
+            ->count();
+
+        if ($todosFollower > 0) {
+
+            $arrayListados = array();
+
+            $todosFollower = Follower::select('followers.*')
+                ->where('aprobada', '=', 1)
+                ->Where('user_id', '=', $event->user->id)
+                ->get();
+
+            foreach ($todosFollower as $registrosFollower) {
+                $user = User::find($registrosFollower->seguido);
+                array_push($arrayListados, $user);
+            }
+
+            $usuarios = response()->json($arrayListados, 200, []);
+
+            echo $usuarios;
+
+        } else {
+
+            $arrayListados = array();
+
+            $todosFollower = Follower::select('followers.*')
+                ->where('aprobada', '=', 1)
+                ->Where('seguido', '=', $event->user->id)
+                ->get();
 
 
-        // $todosFollower = Follower::select('followers.*')
-        //     ->where('aprobada', '=', 1)
-        //     ->Where('user_id', '=', $request)
-        //     ->get();
+            foreach ($todosFollower as $registrosFollower) {
+                $user = User::find($registrosFollower->user_id);
+                array_push($arrayListados, $user);
+            }
 
-        // $arrayListados = array();
+            $usuarios = response()->json($arrayListados, 200, []);
 
-        // foreach ($todosFollower as $registrosFollower) {
-        //     $user = User::find($registrosFollower->seguido);
-        //     array_push($arrayListados, $user);
-        // }
-
-        // return response()->json($arrayListados, 200, []);
-
+            echo $usuarios;
+        }
 
         broadcast(new UserSessionChanged($usuarios));
     }

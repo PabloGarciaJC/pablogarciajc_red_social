@@ -33,7 +33,11 @@ class userLogoutNotification
         $usuario = User::find($event->user->id);
         $usuario->conectado = 0;
         $usuario->save();
-        $usuarios = User::all();
+        
+        // $usuarios = User::all();
+
+        $usuarios = 'cerro sesion';
+
         broadcast(new UserSessionChanged($usuarios));
     }
 }

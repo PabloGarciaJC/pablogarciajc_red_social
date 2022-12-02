@@ -195,14 +195,6 @@
                         $('#btnAgregarContacto').addClass("btn btn-success");
                     }
 
-                    // if (respuestaPeticion == 0) {
-
-                    //     show(btnAgregarContacto);
-                    //     // show(btnAgregarContacto);
-                    //     // $('#btnAgregarContacto').addClass("btn btn-success");
-                    //     $('#btnAgregarContacto').addClass("btn btn-primary");
-                    // }
-
                 })
                 .fail(function() {
                     console.log('error');
