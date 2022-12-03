@@ -163,14 +163,8 @@
 
                                     divUsuarios.appendChild(mostrarImagen);
 
-
-
-
                                     let a = document.createElement('a');
                                     a.innerHTML = "<h4>" + user.alias + "</h4>"
-
-
-
 
                                     divUsuarios.appendChild(a);
 
@@ -178,9 +172,6 @@
                                     parrafo.innerHTML = "<h4>" + user.conectado + "</h4>"
 
                                     parrafo.setAttribute('id', 'usuarioStatus' + user.id);
-
-
-
 
                                     if (user.conectado == 1) {
                                         parrafo.innerText = 'Conectado';

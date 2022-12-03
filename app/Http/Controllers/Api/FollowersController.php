@@ -39,7 +39,6 @@ class FollowersController extends Controller
      */
     public function show($request)
     {
-
         $arrayListados = array();
 
         // Seguidor
@@ -65,7 +64,6 @@ class FollowersController extends Controller
         }
 
         return response()->json($arrayListados, 200, []);
-
     }
 
     /**
