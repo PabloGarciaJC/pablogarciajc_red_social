@@ -40,47 +40,32 @@ class FollowersController extends Controller
     public function show($request)
     {
 
-        // $todosFollower = Follower::select('followers.*')
-        //     ->where('aprobada', '=', 1)
-        //     ->Where('user_id', '=', $request)
-        //     ->count();
-
-        // if ($todosFollower > 0) {
-
         $arrayListados = array();
 
-        $todosFollower = Follower::select('followers.*')
+        // Seguidor
+        $allFollower = Follower::select('followers.*')
             ->where('aprobada', '=', 1)
             ->Where('user_id', '=', $request)
             ->get();
 
-        foreach ($todosFollower as $registrosFollower) {
-            $user = User::find($registrosFollower->seguido);
+        foreach ($allFollower as $Followers) {
+            $user = User::find($Followers->seguido);
+            array_push($arrayListados, $user);
+        }
+
+        // Seguidos
+        $allSeguidos = Follower::select('followers.*')
+            ->where('aprobada', '=', 1)
+            ->Where('seguido', '=', $request)
+            ->get();
+
+        foreach ($allSeguidos as $seguidos) {
+            $user = User::find($seguidos->user_id);
             array_push($arrayListados, $user);
         }
 
         return response()->json($arrayListados, 200, []);
 
-        // } else {
-
-        // echo 'no entiendo';
-        // $arrayListados = array();
-
-        // $todosFollower = Follower::select('followers.*')
-        //     ->where('aprobada', '=', 1)
-        //     ->Where('seguido', '=', $request)
-        //     ->get();
-
-        // echo $todosFollower;
-        // die();
-
-        // foreach ($todosFollower as $registrosFollower) {
-        //     $user = User::find($registrosFollower->user_id);
-        //     array_push($arrayListados, $user);
-        // }
-
-        // return response()->json($arrayListados, 200, []);
-        // }
     }
 
     /**

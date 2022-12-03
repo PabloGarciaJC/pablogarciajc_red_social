@@ -138,7 +138,6 @@
                     <script>
                         let userLogin = document.getElementById('userLogin').value;
 
-                        console.log(userLogin);
                         /* Obtener Usuarios Seguidos - Conectados */
 
                         // window.axios.get('/api/followers/' + userLogin)
@@ -164,8 +163,13 @@
 
                                     divUsuarios.appendChild(mostrarImagen);
 
+
+
+
                                     let a = document.createElement('a');
                                     a.innerHTML = "<h4>" + user.alias + "</h4>"
+
+
 
 
                                     divUsuarios.appendChild(a);
@@ -176,8 +180,8 @@
                                     parrafo.setAttribute('id', 'usuarioStatus' + user.id);
 
 
-        
-                                    
+
+
                                     if (user.conectado == 1) {
                                         parrafo.innerText = 'Conectado';
                                         parrafo.style.color = 'green';
@@ -185,7 +189,7 @@
                                         parrafo.innerText = 'Desconectado';
                                         parrafo.style.color = 'red';
                                     }
-                                    
+
                                     divUsuarios.appendChild(parrafo);
 
                                 }); /* Fin forearch */

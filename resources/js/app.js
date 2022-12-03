@@ -3,7 +3,7 @@ require('./bootstrap');
 Echo.channel('notificationss')
   .listen('UserSessionChanged', (e) => {
 
-    console.log(e);
+    // console.log(e);
 
   });
 
