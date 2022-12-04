@@ -87,8 +87,8 @@
                                     {{-- Tú tienes {{ count(auth()->user()->notifications) }} solicitud de amistad --}}
                                 </li>
 
-                                @foreach (auth()->user()->unReadNotifications as $notification)
-                                {{-- @foreach (auth()->user()->notifications as $notification) --}}
+                                {{-- @foreach (auth()->user()->unReadNotifications as $notification) --}}
+                                @foreach (auth()->user()->notifications as $notification)
                                     <a
                                         href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 1, 'idFollower' => $notification->data['idFollower'], 'idNotificacion' => $notification->id]) }}">
                                         

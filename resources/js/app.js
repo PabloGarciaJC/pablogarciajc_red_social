@@ -1,14 +1,5 @@
 require('./bootstrap');
 
-Echo.channel('notificationss')
-  .listen('UserSessionChanged', (e) => {
-
-    // console.log(e);
-
-  });
-
-
-
 // Echo.channel('notificationss')
 // .listen('UserSessionChanged', (e) => {
 //   e.usuarios.forEach((user, index) => {
@@ -22,8 +13,6 @@ Echo.channel('notificationss')
 //     }
 //   });
 // });
-
-
 
 // Echo.channel('agregarAmigos')
 //   .listen('AgregarAmigosNotificacion', (e) => {

@@ -21,13 +21,7 @@
 
                             <div class="container">
                                 <div class="row justify-content-md-center">
-                                    {{-- 
-                                    <form action="" method="POST">
-                                 
-                                    {{ csrf_field() }}
-
-                                    </form> --}}
-
+                          
                                     <div class="col-md-auto">
                                         <button type="button" id="btnAgregarContacto" style="display:none">
                                             Agregar Contacto
@@ -60,8 +54,6 @@
                             {{-- //Menu de Navegacion --}}
 
                             <div class="tab-content pt-2">
-
-                                <div id="tes" role="alert"></div>
 
                                 {{-- Mensaje de Notificacion --}}
                                 <div id="mensajeNotification" role="alert"></div>
@@ -154,7 +146,7 @@
 
     @push('scripts')
         <script>
-            /* Tes */
+
             let btnAddContacto = document.getElementById('btnAddContacto');
 
             let btnAgregarContacto = document.getElementById('btnAgregarContacto');
@@ -162,13 +154,11 @@
 
             let usuarioLogin = document.getElementById('usuarioLogin');
             let usuarioSeguido = document.getElementById('usuarioSeguido');
-            // let solicitudAmistad = document.getElementById('solicitudAmistad');
 
             let idRegistroFollower = document.getElementById('idRegistroFollower');
             let idNotificacion = document.getElementById('idNotificacion');
 
             let idNotificacionEnviado = document.getElementById('idNotificacionEnviado');
-
 
             $.ajax({
                     type: "GET",
@@ -181,8 +171,6 @@
                 })
 
                 .done(function(respuestaPeticion) {
-
-                    // $('#tes').html(respuestaPeticion);
 
                     if (respuestaPeticion == 1) {
 
@@ -256,7 +244,6 @@
                             usuarioSeguido: usuarioSeguido.value,
                             idNotificacion: idNotificacion.value,
                             solicitudAmistad: solicitudAmistad.value
-                            // idFollower: idFollower.value,
                         },
                     })
                     .done(function(respuestaPeticion) {

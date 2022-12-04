@@ -2,10 +2,7 @@
 $("#search").autocomplete({
   source: baseUrl + "search",
   minLength: 1,
-  select: function (event, ui) {
-
-    //Muestro lo que me llega 
-    
+  select: function (event, ui) {    
     // var url = "{{ route('usuarioBuscador.perfil', ['perfil' => 'temp']) }}";
     var url = baseUrl + "usuario/" + 'temp/' + 0 + '/0' + '/0';
     url = url.replace('temp', ui.item.value);

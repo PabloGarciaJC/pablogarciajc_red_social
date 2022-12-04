@@ -16,7 +16,7 @@
                             @else
                                 <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                             @endif
-                            <h1>{{ Auth::user()->alias }}</h1>                         
+                            <h1>{{ Auth::user()->alias }}</h1>
                             <h3>{{ Auth::user()->cargo }}</h3>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                                             <label for="nombre" class="col-md-4 col-lg-3 col-form-label">Alias</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="alias" type="text" class="form-control" id="alias"
-                                                    value="{{ Auth::user()->alias }}" disabled>                                               
+                                                    value="{{ Auth::user()->alias }}" disabled>
                                             </div>
                                         </div>
 
@@ -156,10 +156,11 @@
                                         </div>
 
                                         <div class="row mb-3">
-                                            <label for="apellido" class="col-md-4 col-lg-3 col-form-label">Apellido</label>
+                                            <label for="apellido"
+                                                class="col-md-4 col-lg-3 col-form-label">Apellido</label>
                                             <div class="col-md-8 col-lg-9">
-                                                <input name="apellido" type="text" class="form-control" id="apellido"
-                                                    value="{{ Auth::user()->apellido }}">
+                                                <input name="apellido" type="text" class="form-control"
+                                                    id="apellido" value="{{ Auth::user()->apellido }}">
                                                 @if ($errors->has('apellido'))
                                                     <strong style="color: red">{{ $errors->first('apellido') }}</strong>
                                                 @endif
@@ -226,7 +227,7 @@
                                             <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="email" type="text" class="form-control" id="email"
-                                                    value="{{ Auth::user()->email }}" disabled>                                               
+                                                    value="{{ Auth::user()->email }}" disabled>
                                             </div>
                                         </div>
 
