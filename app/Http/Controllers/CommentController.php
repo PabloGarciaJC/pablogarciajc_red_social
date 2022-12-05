@@ -26,8 +26,8 @@ class CommentController extends Controller
   
     $comments->save();
 
+    // Estar Pendiente 
     // Problema de Guardado
      
-
     }
 }
