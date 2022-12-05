@@ -6,28 +6,77 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
+
                         <!-- post -->
                         <div class="col-12">
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <br>
+
                                     <input id="userLogin" type="hidden" value="{{ Auth::user()->id }}"></input>
+
                                     <div class="d-flex align-items-center">
                                         <input type="text" class="form-control" style="text-align: center;"
-                                            id="floatingName" placeholder="¿ Qué estás pensando, Pablo Garcia ?">
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            placeholder="¿ Qué estás Pensando ?">
                                     </div>
                                     <hr>
-                                    <div class="row justify-content-md-right">
-                                        <div class="col col-lg-2">
-                                            <img src="assets/img/imagesSocial.png" alt=""> Imagen
-                                        </div>
-                                        <div class="col col-lg-2">
-                                            <img src="assets/img/videoSocial.png" alt="">Video
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">¿ Qué estás Pensando ?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form action="{{ action('CommentController@guardar') }}" method="POST"
+                                            enctype="multipart/form-data">
+
+                                            {{ csrf_field() }}
+
+                                            <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">Escribe tu Comentario</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="comentarioPublicacion"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleFormControlFile1">Subir Imagen</label><br>
+                                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                                    name="imagenPublicacion">
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                            </div>
+
+                                        </form>
+
+                                        {{-- <div class="row justify-content-md-right">
+                                            <div class="col col-lg-2">
+                                                <img src="assets/img/imagesSocial.png" alt=""> Imagen
+                                            </div>
+                                            <div class="col col-lg-2">
+                                                <img src="assets/img/videoSocial.png" alt="">Video
+                                            </div>
+                                        </div> --}}
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- //post -->
                         <!-- comentarios -->
                         <div class="col-12">
@@ -70,6 +119,7 @@
 
                                                 <h4><a href="#">Pablo Garcia</a></h4>
                                                 <p>28 - 01 - 2022</p>
+
                                             </div>
                                         </div>
                                     </div>

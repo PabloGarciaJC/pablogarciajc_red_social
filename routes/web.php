@@ -31,6 +31,10 @@ Route::get('/agregarContacto', 'FollowersController@agregarContacto')->name('agr
 Route::get('/cancelarContacto', 'FollowersController@cancelarContacto')->name('cancelarContacto');
 Route::get('/btnValidarAmistad', 'FollowersController@btnValidarAmistad')->name('btnValidarAmistad');
 
+// COMMENTS
+
+Route::post('/guardarComentario', 'CommentController@guardar')->name('guardarComentario');
+
 
 
 // Route::get('/prueba', 'UserController@prueba')->name('prueba');
