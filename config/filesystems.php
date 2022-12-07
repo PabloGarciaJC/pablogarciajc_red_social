@@ -67,6 +67,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'comments' => [
+            'driver' => 'local',
+            'root' => storage_path('app/comments'),
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

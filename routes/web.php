@@ -35,6 +35,8 @@ Route::get('/btnValidarAmistad', 'FollowersController@btnValidarAmistad')->name(
 
 Route::post('/guardarComentario', 'CommentController@guardar')->name('guardarComentario');
 
+Route::get('/imagenPublicacion/{filename}', 'CommentController@getImage')->name('imagenPublicacion');
+
 
 
 // Route::get('/prueba', 'UserController@prueba')->name('prueba');
