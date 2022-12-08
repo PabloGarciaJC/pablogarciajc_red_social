@@ -24,7 +24,6 @@
                         </div>
                         <!-- //Pre-Publicacion -->
 
-
                         <!-- Publicacion -->
                         @foreach ($publications as $mostrarPublication)
                             <div class="col-12">
@@ -40,8 +39,8 @@
                                         <li><a class="dropdown-item" href="#">This Year</a></li>
                                     </ul>
                                 </div>
-                                <div class="card info-card sales-card">
 
+                                <div class="card info-card sales-card">
                                     {{-- Filtro --}}
                                     <div class="filter">
                                         <a class="icon" href="#" data-bs-toggle="dropdown"><i
@@ -64,6 +63,7 @@
                                                         alt="">
                                                     <h4><a href="#">{{ $mostrarPublication->user->alias }}</a></h4>
                                                     <p>{{ $mostrarPublication->created_at }}</p>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -71,45 +71,67 @@
                                         <img src="{{ route('publicationImagen', ['filename' => $mostrarPublication->imagen]) }}"
                                             alt="" width="700" height="700" class="img-fluid"
                                             style="margin:auto; display:block; padding-top: 20px; border-radius: 10px 10px 10px 10px;">
-
                                         <p style="padding-top: 10px;">{{ $mostrarPublication->contenido }}</p>
-
                                         <hr>
 
                                         <div class="row justify-content-md-right">
+
                                             <div class="col col-lg-2">
                                                 Me Gusta
                                             </div>
+
                                             <div class="col col-lg-2">
-                                                <button type="submit" onclick="mostrarOcultar()"
-                                                    class="btn btn-primary">Comentarios</button>
+                                                <button type="button"
+                                                    onclick="mostrarOcultar({{ $mostrarPublication->id }})"
+                                                    class="btn btn-success">Comentarios</button>
                                             </div>
+
                                         </div>
-                                        
                                         <br>
 
                                         <!-- Comentarios -->
-                                        <div style="display: none" id="formularioComentario">
+                                        <div style="display: none" id="{{ $mostrarPublication->id }}"
+                                            class="classCajaCometarios">
 
-                                            <form>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Escribe tu Comentario">
-                                                </div><br>
-                                                <button type="submit" class="btn btn-primary">Aceptar</button><br>
+                                            <form action="{{ route('comentarioSave') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                {{ csrf_field() }}
+                                                <div class="input-group">
+                                                    <div class="input-group">
+                                                        <button class="btn btn-primary" type="submit"
+                                                            id="inputGroupFileAddon04">Enviar</button>
+
+                                                        <input type="text"
+                                                            class="form-control"placeholder="Escribe tu Comentario"
+                                                            name="comentario">
+
+                                                        <div class="file-select" id="src-file1">
+                                                            <input type="file" name="src-file1" aria-label="Archivo">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
                                             </form>
 
-                                            <div class="news"><br>
+                                            <div class="news">
+                                                <br>
                                                 <img src="assets/img/news-1.jpg" alt="">
                                                 <h4><a href="#">Pablo Garcia</a></h4>
                                                 <p>Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en
                                                     demostraciones de
-                                                    tipografías o de borradores de diseño para probar el diseño visual antes
+                                                    tipografías o de borradores de diseño para probar el diseño visual
+                                                    antes
                                                     de
                                                     insertar el
                                                     texto
                                                     final</p>
                                             </div>
+
+                                            <div class="text-letf" style="margin-left: 94px;">
+                                                <img src="assets/img/news-1.jpg" class="rounded" alt="..."
+                                                    width="100" height="100">
+                                            </div>
+
                                         </div>
 
                                     </div>
@@ -247,4 +269,44 @@
             </div>
         </div>
     </div>
+
+
+    <style>
+        .file-select {
+            position: relative;
+            display: inline-block;
+        }
+
+        .file-select::before {
+            background-color: #17a2b8;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 3px;
+            content: 'Seleccionar';
+            /* testo por defecto */
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .file-select input[type="file"] {
+            opacity: 0;
+            width: 120px;
+            height: 32px;
+            display: inline-block;
+        }
+
+        #src-file1::before {
+            content: 'Subir Imagen';
+
+        }
+
+        /* #src-file2::before {
+                                content: 'Seleccionar Archivo 2';
+                            } */
+    </style>
 @endsection

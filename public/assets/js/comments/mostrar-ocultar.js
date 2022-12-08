@@ -1,18 +1,25 @@
-function mostrarOcultar() {
-  var caja = document.getElementById('formularioComentario');
-  if (caja.style.display == 'none') {
-    mostrarComentarios();
+
+
+function mostrarOcultar(idPublicacion) {
+
+  var idCaja = document.getElementById(idPublicacion);
+
+  if (idCaja.style.display == 'none') {
+
+    mostrarComentarios(idCaja);
+
   } else {
-    ocultarComentarios();
+
+    ocultarComentarios(idCaja);
+
   }
+
 }
 
-function mostrarComentarios() {
-  document.getElementById('formularioComentario').style.display = 'block';
-  console.log('block');
+function mostrarComentarios(idCaja) {
+  idCaja.style.display = 'block';
 }
 
-function ocultarComentarios() {
-  document.getElementById('formularioComentario').style.display = 'none';
-  console.log('none');
+function ocultarComentarios(idCaja) {
+  idCaja.style.display = 'none';
 }

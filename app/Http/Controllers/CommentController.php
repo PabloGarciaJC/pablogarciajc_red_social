@@ -11,40 +11,43 @@ use Illuminate\Support\Facades\file;
 
 class CommentController extends Controller
 {
-  // public function guardar(Request $request)
-  // {
-  //   $comentarioPublicacion = $request->input('comentarioPublicacion');
-  //   $imagenPublicacion = $request->file('imagenPublicacion');
 
-  //   // Instacio Objeto User
-  //   $comments = new Comment();
+  public function save(Request $request)
+  {
 
-  //   // Seteo Objeto
-  //   $comments->user_id = Auth::user()->id;
-  //   $comments->contenido = $comentarioPublicacion;
+    return $request;
 
-  //   // Guardo Imagen en los Archivos, Seteo Objeto
-  //   if ($imagenPublicacion) {
+    // $comentarioPublicacion = $request->input('comentarioPublicacion');
+    // $imagenPublicacion = $request->file('imagenPublicacion');
 
-  //     // Nombre de la Imagen Original del Usuario y el Tiempo en que lo Sube
-  //     $imagenPathName = time() . $imagenPublicacion->getClientOriginalName();
+    // // Instacio Objeto User
+    // $comments = new Comment();
 
-  //     //Guardo la Imagen en la carpeta del Proyecto
-  //     Storage::disk('comments')->put($imagenPathName, File::get($imagenPublicacion));
+    // // Seteo Objeto
+    // $comments->user_id = Auth::user()->id;
+    // $comments->contenido = $comentarioPublicacion;
 
-  //     // Seteo el Objeto con el Nombre Original del Usuario
-  //     $comments->imagen = $imagenPathName;
-  //   }
+    // // Guardo Imagen en los Archivos, Seteo Objeto
+    // if ($imagenPublicacion) {
 
-  //   $comments->save();
+    //   // Nombre de la Imagen Original del Usuario y el Tiempo en que lo Sube
+    //   $imagenPathName = time() . $imagenPublicacion->getClientOriginalName();
 
-  //   return redirect()->route('home');
-  // }
+    //   //Guardo la Imagen en la carpeta del Proyecto
+    //   Storage::disk('comments')->put($imagenPathName, File::get($imagenPublicacion));
 
-  // public function getImage($filename)
-  // {
-  //   $file = Storage::disk('comments')->get($filename);
-  //   return new Response($file, 200);
-  // }
+    //   // Seteo el Objeto con el Nombre Original del Usuario
+    //   $comments->imagen = $imagenPathName;
+    // }
 
+    // $comments->save();
+
+    // return redirect()->route('home');
+  }
+
+  public function getImage($filename)
+  {
+    $file = Storage::disk('comments')->get($filename);
+    return new Response($file, 200);
+  }
 }

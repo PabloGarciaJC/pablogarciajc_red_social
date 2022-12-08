@@ -32,7 +32,7 @@ Route::get('/cancelarContacto', 'FollowersController@cancelarContacto')->name('c
 Route::get('/btnValidarAmistad', 'FollowersController@btnValidarAmistad')->name('btnValidarAmistad');
 
 // COMMENTS
-// Route::post('/guardarComentario', 'CommentController@guardar')->name('guardarComentario');
+Route::post('/comentarioSave', 'CommentController@save')->name('comentarioSave');
 // Route::get('/imagenPublicacion/{filename}', 'CommentController@getImage')->name('imagenPublicacion');
 
 
