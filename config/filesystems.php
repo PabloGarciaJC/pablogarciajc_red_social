@@ -67,9 +67,16 @@ return [
             'visibility' => 'public',
         ],
 
-        'comments' => [
+        // 'comments' => [
+        //     'driver' => 'local',
+        //     'root' => storage_path('app/comments'),
+        //     'url' => env('APP_URL') . '/storage',
+        //     'visibility' => 'public',
+        // ],
+
+        'publication' => [
             'driver' => 'local',
-            'root' => storage_path('app/comments'),
+            'root' => storage_path('app/publication'),
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],

@@ -24,6 +24,7 @@ class User extends Authenticatable
         'alias',
         'nombre',
         'email',
+        'fotoPerfil',
         'password',
     ];
 

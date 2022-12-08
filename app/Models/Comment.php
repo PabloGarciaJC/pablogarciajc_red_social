@@ -20,4 +20,10 @@ class Comment extends Model
     {
         return $this->belongsTo('App\Models\Image', 'image_id');
     }
+
+    // Relación de Muchos a Uno
+    public function publication()
+    {
+        return $this->belongsTo('App\Models\Publication', 'publication_id');
+    }
 }

@@ -26,7 +26,7 @@
 
 
                         <!-- Publicacion -->
-                        @foreach ($comentarios as $mostrarComentarios)
+                        @foreach ($publications as $mostrarPublication)
                             <div class="col-12">
                                 <div class="filter">
                                     <a class="icon" href="#" data-bs-toggle="dropdown"><i
@@ -60,27 +60,19 @@
                                         <div class="d-flex align-items-center" style="padding-top: 20px;">
                                             <div class="news">
                                                 <div class="post-item clearfix">
-
-
-                                                    @if (Auth::user()->fotoPerfil)
-                                                        <img src="{{ url('fotoPerfil/' . Auth::user()->fotoPerfil) }}"
-                                                            alt="">
-                                                    @else
-                                                        <img src="assets/img/news-1.jpg" alt="">
-                                                    @endif
-
-                                                    <h4><a href="#">{{ $mostrarComentarios->user->alias }}</a></h4>
-                                                    <p>{{ $mostrarComentarios->created_at }}</p>
-
+                                                    <img src="{{ url('fotoPerfil/' . Auth::user()->fotoPerfil) }}"
+                                                        alt="">
+                                                    <h4><a href="#">{{ $mostrarPublication->user->alias }}</a></h4>
+                                                    <p>{{ $mostrarPublication->created_at }}</p>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <img src="{{ route('imagenPublicacion', ['filename' => $mostrarComentarios->imagen]) }}"
+                                        <img src="{{ route('publicationImagen', ['filename' => $mostrarPublication->imagen]) }}"
                                             alt="" width="700" height="700" class="img-fluid"
                                             style="margin:auto; display:block; padding-top: 20px; border-radius: 10px 10px 10px 10px;">
 
-                                        <p style="padding-top: 10px;">{{ $mostrarComentarios->contenido }}</p>
+                                        <p style="padding-top: 10px;">{{ $mostrarPublication->contenido }}</p>
 
                                         <hr>
 
@@ -93,6 +85,7 @@
                                                     class="btn btn-primary">Comentarios</button>
                                             </div>
                                         </div>
+                                        
                                         <br>
 
                                         <!-- Comentarios -->
@@ -219,7 +212,7 @@
 
                 <div class="modal-body">
 
-                    <form action="{{ action('CommentController@guardar') }}" method="POST"
+                    <form action="{{ action('PublicationController@save') }}" method="POST"
                         enctype="multipart/form-data">
 
                         {{ csrf_field() }}

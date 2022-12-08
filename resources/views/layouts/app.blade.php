@@ -91,7 +91,7 @@
                                 @foreach (auth()->user()->notifications as $notification)
                                     <a
                                         href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 1, 'idFollower' => $notification->data['idFollower'], 'idNotificacion' => $notification->id]) }}">
-                                        
+
                                         <li class="notification-item">
                                             <img src=" {{ route('foto.perfil', ['filename' => $notification->data['fotoPerfil']]) }} "
                                                 width="60"
@@ -99,7 +99,7 @@
                                                 alt="">
                                             <div>
                                                 <h4>{{ $notification->data['alias'] }}</h4>
-                                                <p>{{ $notification->data['mensaje'] }}</p>                                            
+                                                <p>{{ $notification->data['mensaje'] }}</p>
                                             </div>
                                         </li>
                                     </a>
@@ -122,13 +122,8 @@
                             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                                 data-bs-toggle="dropdown">
 
-                                @if (Auth::user()->fotoPerfil)
-                                    <img src="{{ route('foto.perfil', ['filename' => Auth::user()->fotoPerfil]) }}"
-                                        alt="Profile" class="rounded-circle">
-                                @else
-                                    <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile"
-                                        class="rounded-circle">
-                                @endif
+                                <img src="{{ route('foto.perfil', ['filename' => Auth::user()->fotoPerfil]) }}"
+                                    alt="Profile" class="rounded-circle">
 
                                 <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->alias }}</span>
                             </a>
@@ -233,14 +228,23 @@
 
     {{-- Autocompletado CSS --}}
     <style>
-        .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
-            padding: 0px;
-            border-radius: 10px;
-            border-color: #ffffff;
-            background: #3c249c !important;
-            font-weight: bold !important;
-            color: #ffffff !important;
+
+       .ui-menu-item {
+            height: 80px;
+            border: 1px solid #ffffff;
         }
+
+        .label {
+            background: #ffffff;
+            color: #0b0b0b;
+            text-align: left;
+        }
+
+        .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+            border-color: #ffffff;
+            background: #ffffff !important; 
+        }
+
     </style>
 </body>
 

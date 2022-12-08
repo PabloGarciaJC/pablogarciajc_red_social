@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Publication;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,9 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $comentarios = Comment::all();
-    
-        return view('home', ['comentarios' => $comentarios]);
+        $publications = Publication::all()->sortByDesc("id");
+        return view('home', ['publications' => $publications]);
     }
 
 }

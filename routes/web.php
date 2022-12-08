@@ -32,11 +32,13 @@ Route::get('/cancelarContacto', 'FollowersController@cancelarContacto')->name('c
 Route::get('/btnValidarAmistad', 'FollowersController@btnValidarAmistad')->name('btnValidarAmistad');
 
 // COMMENTS
+// Route::post('/guardarComentario', 'CommentController@guardar')->name('guardarComentario');
+// Route::get('/imagenPublicacion/{filename}', 'CommentController@getImage')->name('imagenPublicacion');
 
-Route::post('/guardarComentario', 'CommentController@guardar')->name('guardarComentario');
 
-Route::get('/imagenPublicacion/{filename}', 'CommentController@getImage')->name('imagenPublicacion');
-
+// PUBLICACIONES
+Route::post('/publicationSave', 'PublicationController@save')->name('publicationSave');
+Route::get('/publicationImagen/{filename}', 'PublicationController@getImage')->name('publicationImagen');
 
 
 // Route::get('/prueba', 'UserController@prueba')->name('prueba');
