@@ -6,7 +6,24 @@ function deletePublication(mostrarPublicationId) {
     url: baseUrl + 'publicationDelete/' + mostrarPublicationId,
 
     success: function (response) {
-      console.log(response);
+
+
+        let responsePublication = document.getElementById('responsePublication');
+
+
+        if(response == 0){
+
+          responsePublication.className = "alert alert-primary";
+
+        }else{
+          
+          responsePublication.className = 'alert alert-success';
+
+        }
+    
+
+     
+
     }
 
   });

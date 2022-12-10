@@ -47,9 +47,17 @@ class PublicationController extends Controller
         return new Response($file, 200);
     }
 
-    public function delete($tes)
+    public function delete($idPublicacion)
     {
-        echo $tes;
+
+        $publication = Publication::where('user_id', '=', Auth::user()->id)
+            ->where('id', '=', $idPublicacion)->count();
+
+        if ($publication == 0) {
+            echo $publication;
+        } else {
+            echo $publication;
+        }
+        
     }
-    
 }

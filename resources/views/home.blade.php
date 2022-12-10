@@ -24,6 +24,14 @@
                         </div>
                         <!-- //Pre-Publicacion -->
 
+
+
+
+                   
+
+                        
+
+
                         <!-- Publicacion -->
                         @foreach ($publications as $mostrarPublication)
                             <div class="col-12">
@@ -57,7 +65,12 @@
                                     </div>
 
                                     {{-- Cuerpo --}}
+                                    
                                     <div class="card-body">
+                                        
+                                        {{-- Respuesta Peticion de Publicacion --}}
+                                        <div id="responsePublication" style="margin-top: 15px; margin-bottom: 0px;" ></div>
+
                                         <div class="d-flex align-items-center" style="padding-top: 20px;">
                                             <div class="news">
                                                 <div class="post-item clearfix">
@@ -306,7 +319,7 @@
         }
 
         /* #src-file2::before {
-                                    content: 'Seleccionar Archivo 2';
-                                } */
+                                            content: 'Seleccionar Archivo 2';
+                                        } */
     </style>
 @endsection
