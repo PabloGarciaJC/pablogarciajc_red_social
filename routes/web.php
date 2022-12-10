@@ -39,7 +39,7 @@ Route::post('/comentarioSave', 'CommentController@save')->name('comentarioSave')
 // PUBLICACIONES
 Route::post('/publicationSave', 'PublicationController@save')->name('publicationSave');
 Route::get('/publicationImagen/{filename}', 'PublicationController@getImage')->name('publicationImagen');
-
+Route::get('/publicationDelete/{publicationId}', 'PublicationController@delete')->name('publicationDelete');
 
 // Route::get('/prueba', 'UserController@prueba')->name('prueba');
 

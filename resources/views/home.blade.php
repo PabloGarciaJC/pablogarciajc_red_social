@@ -49,8 +49,10 @@
                                             <li class="dropdown-header text-start">
                                                 <h6>Opciones</h6>
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Editar</a></li>
-                                            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                            {{-- <li><a class="dropdown-item" href="#">Editar</a></li> --}}
+                                            <li><a class="dropdown-item" id="eliminarPublication"
+                                                    onclick="deletePublication({{ $mostrarPublication->id }})"
+                                                    href="javascript:void(0);">Eliminar</a></li>
                                         </ul>
                                     </div>
 
@@ -162,9 +164,7 @@
                 @push('scripts')
                     <script>
                         let userLogin = document.getElementById('userLogin').value;
-
                         /* Obtener Usuarios Seguidos - Conectados */
-
                         // window.axios.get('/api/followers/' + userLogin)
                         window.axios.get(`/api/followers/${userLogin}`)
                             .then((response) => {
@@ -306,7 +306,7 @@
         }
 
         /* #src-file2::before {
-                                content: 'Seleccionar Archivo 2';
-                            } */
+                                    content: 'Seleccionar Archivo 2';
+                                } */
     </style>
 @endsection

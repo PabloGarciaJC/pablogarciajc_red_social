@@ -46,4 +46,10 @@ class PublicationController extends Controller
         $file = Storage::disk('publication')->get($filename);
         return new Response($file, 200);
     }
+
+    public function delete($tes)
+    {
+        echo $tes;
+    }
+    
 }
