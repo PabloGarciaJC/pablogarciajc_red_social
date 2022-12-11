@@ -1,41 +1,28 @@
 
 function deletePublication(mostrarPublicationId) {
-
-  $.ajax({
-    type: "GET",
-    url: baseUrl + 'publicationDelete/' + mostrarPublicationId,
-
-    success: function (response) {
-
-
-        let responsePublication = document.getElementById('responsePublication');
-
-
-        if(response == 0){
-
-          responsePublication.className = "alert alert-primary";
-
-        }else{
-          
-          responsePublication.className = 'alert alert-success';
-
-        }
-    
-
-     
-
-    }
-
-  });
-
+  urlAjax = baseUrl + 'publicationDelete/' + mostrarPublicationId;
+  ajaxPeticion(urlAjax);
 }
 
-
-
-// let eliminarPublication = document.getElementById('eliminarPublication');
-
-// eliminarPublication.addEventListener('click', (event) => {
-
-
-
-// });
+function ajaxPeticion(urlAjax) {
+  $.ajax({
+    type: "GET",
+    url: urlAjax,
+    success: function (response) {
+      if (response == '') {
+        Swal.fire({
+          icon: 'success',
+          text: 'Se ha borrado correctamente',
+        }).then(function(){
+          location.reload();
+      });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No puedes borrar esta publicacion',
+        })
+      }
+    }
+  })
+}

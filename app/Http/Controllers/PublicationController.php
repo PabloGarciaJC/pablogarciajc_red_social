@@ -49,15 +49,18 @@ class PublicationController extends Controller
 
     public function delete($idPublicacion)
     {
-
         $publication = Publication::where('user_id', '=', Auth::user()->id)
-            ->where('id', '=', $idPublicacion)->count();
+            ->where('id', '=', $idPublicacion);
 
-        if ($publication == 0) {
-            echo $publication;
+        $conteoPublication = $publication->count();
+
+        $getPublicacion = $publication->first();
+
+        if ($conteoPublication > 0) {
+            $borraPublicacion = Publication::find($getPublicacion->id);
+            $borraPublicacion->delete();
         } else {
-            echo $publication;
+            echo '<div class="alert alert-primary">No se puede eliminar el Comentario, porque no realizado la Publicacion</div>';
         }
-        
     }
 }
