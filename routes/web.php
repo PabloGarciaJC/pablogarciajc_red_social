@@ -41,6 +41,10 @@ Route::post('/publicationSave', 'PublicationController@save')->name('publication
 Route::get('/publicationImagen/{filename}', 'PublicationController@getImage')->name('publicationImagen');
 Route::get('/publicationDelete/{publicationId}', 'PublicationController@delete')->name('publicationDelete');
 
+// LIKE
+Route::get('/like/{publicationId}', 'LikeController@save')->name('likeSave');
+
+
 // Route::get('/prueba', 'UserController@prueba')->name('prueba');
 
 

@@ -17,11 +17,11 @@ class PublicationController extends Controller
         $imagenPublicacion = $request->file('imagenPublicacion');
 
         // Instacio Objeto User
-        $comments = new Publication();
+        $publication = new Publication();
 
         // Seteo Objeto
-        $comments->user_id = Auth::user()->id;
-        $comments->contenido = $comentarioPublicacion;
+        $publication->user_id = Auth::user()->id;
+        $publication->contenido = $comentarioPublicacion;
 
         // Guardo Imagen en los Archivos, Seteo Objeto
         if ($imagenPublicacion) {
@@ -33,10 +33,10 @@ class PublicationController extends Controller
             Storage::disk('publication')->put($imagenPathName, File::get($imagenPublicacion));
 
             // Seteo el Objeto con el Nombre Original del Usuario
-            $comments->imagen = $imagenPathName;
+            $publication->imagen = $imagenPathName;
         }
 
-        $comments->save();
+        $publication->save();
 
         return redirect()->route('home');
     }
@@ -59,8 +59,8 @@ class PublicationController extends Controller
         if ($conteoPublication > 0) {
             $borraPublicacion = Publication::find($getPublicacion->id);
             $borraPublicacion->delete();
-        } else {
-            echo '<div class="alert alert-primary">No se puede eliminar el Comentario, porque no realizado la Publicacion</div>';
+        }else{
+            echo $conteoPublication;
         }
     }
 }

@@ -16,8 +16,9 @@ class Like extends Model
     }
 
     // Relación de Muchos a Uno
-    public function image()
+    public function publication()
     {
-        return $this->belongsTo('App\Models\Image', 'image_id');
+        return $this->belongsTo('App\Models\Publication', 'publication_id');
+        // App\Models\Publication => Es la Entidad Padre / publication_id => es la clave Foranea para relacion
     }
 }

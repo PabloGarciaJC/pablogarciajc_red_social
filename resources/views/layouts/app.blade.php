@@ -225,30 +225,11 @@
     <script src="{{ asset('assets/js/user/cambiar-imagen-configuracion.js') }}"></script>
     <script src="{{ asset('assets/js/comments/mostrar-ocultar.js') }}"></script>
     <script src="{{ asset('assets/js/publications/eliminar.js') }}"></script>
+    <script src="{{ asset('assets/js/likes/like.js') }}"></script>
+    <script src="{{ asset('assets/js/likes/dislike.js') }}"></script>
 
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
-
-    {{-- Autocompletado CSS --}}
-    <style>
-
-       .ui-menu-item {
-            height: 80px;
-            border: 1px solid #ffffff;
-        }
-
-        .label {
-            background: #ffffff;
-            color: #0b0b0b;
-            text-align: left;
-        }
-
-        .ui-menu-item .ui-menu-item-wrapper.ui-state-active {
-            border-color: #ffffff;
-            background: #ffffff !important; 
-        }
-
-    </style>
 </body>
 
 </html>

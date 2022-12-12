@@ -907,7 +907,7 @@ h6 {
   width: 50px;
   float: left;
   border-radius: 5px;
-  margin-left: 20px; 
+  margin-left: 20px;
 }
 
 .dashboard .news h4 {
@@ -1259,3 +1259,73 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
+
+/* like */
+.like {
+
+  color: green;
+
+}
+
+.dislike {
+
+  color: red;
+
+}
+
+/* Autocompletado */
+.ui-menu-item {
+  height: 70px;
+  border: 1px solid #ffffff;
+}
+
+.label {
+  background: #ffffff;
+  color: #0b0b0b;
+  text-align: left;
+}
+
+.ui-menu-item .ui-menu-item-wrapper.ui-state-active {
+  border-color: #ffffff;
+  background: #ffffff !important;
+}
+
+/* File Comentario */
+
+.file-select {
+  position: relative;
+  display: inline-block;
+}
+
+.file-select::before {
+  background-color: #17a2b8;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  content: 'Seleccionar';
+  /* testo por defecto */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 120px;
+  height: 32px;
+  display: inline-block;
+}
+
+#src-file1::before {
+  content: 'Subir Imagen';
+
+}
+
+/* #src-file2::before {content: 'Seleccionar Archivo 2';  } */
+                                                                      
+                                                                

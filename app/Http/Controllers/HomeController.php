@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $publications = Publication::all()->sortByDesc("id");
-        return view('home', ['publications' => $publications]);
+        $likes = Like::all()->sortByDesc("id");;
+        return view('home', ['publications' => $publications, 'likes' => $likes]);
     }
 
 }

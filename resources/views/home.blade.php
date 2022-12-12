@@ -71,17 +71,42 @@
                                             </div>
                                         </div>
 
-                                        <img src="{{ route('publicationImagen', ['filename' => $mostrarPublication->imagen]) }}"
-                                            alt="" width="700" height="700" class="img-fluid"
-                                            style="margin:auto; display:block; padding-top: 20px; border-radius: 10px 10px 10px 10px;">
-                                        <p style="padding-top: 10px;">{{ $mostrarPublication->contenido }}</p>
+                                        @if ($mostrarPublication->imagen == '')
+                                            <p style="padding-top: 10px;">{{ $mostrarPublication->contenido }}</p>
+                                        @else
+                                            <img src="{{ route('publicationImagen', ['filename' => $mostrarPublication->imagen]) }}"
+                                                alt="" width="700" height="700" class="img-fluid"
+                                                style="margin:auto; display:block; padding-top: 20px; border-radius: 10px 10px 10px 10px;">
+                                            <p style="padding-top: 10px;">{{ $mostrarPublication->contenido }}</p>
+                                        @endif
                                         <hr>
 
                                         <div class="row justify-content-md-right">
 
-                                            <div class="col col-lg-2">
-                                                Me Gusta
+
+
+
+                                            
+
+                                            @foreach ($likes as $todoLikes)
+                                                @if ($todoLikes->publication->user_id == Auth::user()->id)
+                                                    <p>hay un like</p>
+                                                @else
+                                                    <p>no hay un like</p>
+                                                @endif
+                                            @endforeach
+
+
+
+
+                                            <div class="col col-lg-2 like" id="btn-like{{ $mostrarPublication->id }}"
+                                                onclick="like({{ $mostrarPublication->id }})">
+                                                Like
                                             </div>
+
+                                            {{-- <div class="col col-lg-2 dislike">
+                                                Dislike
+                                            </div> --}}
 
                                             <div class="col col-lg-2">
                                                 <button type="button"
@@ -244,7 +269,9 @@
                             <label for="exampleFormControlTextarea1">Escribe tu Comentario</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="comentarioPublicacion"></textarea>
                         </div>
+
                         <br>
+
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Subir Imagen</label><br>
                             <input type="file" class="form-control-file" id="exampleFormControlFile1"
@@ -270,44 +297,4 @@
             </div>
         </div>
     </div>
-
-
-    <style>
-        .file-select {
-            position: relative;
-            display: inline-block;
-        }
-
-        .file-select::before {
-            background-color: #17a2b8;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 3px;
-            content: 'Seleccionar';
-            /* testo por defecto */
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-        }
-
-        .file-select input[type="file"] {
-            opacity: 0;
-            width: 120px;
-            height: 32px;
-            display: inline-block;
-        }
-
-        #src-file1::before {
-            content: 'Subir Imagen';
-
-        }
-
-        /* #src-file2::before {
-                                                content: 'Seleccionar Archivo 2';
-                                            } */
-    </style>
 @endsection

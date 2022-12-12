@@ -17,10 +17,10 @@ class CreateLikesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('imagen_id')->unsigned();
+            $table->integer('publication_id')->unsigned();   
             $table->timestamps();
+            $table->foreign('publication_id')->references('id')->on('publications');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('imagen_id')->references('id')->on('images');
         });
     }
 
