@@ -15,4 +15,10 @@ class Publication extends Model
         return $this->belongsTo('App\Models\User', 'user_id');
     }
 
+    // Relación One To Many 
+    public function like()
+    {
+        return $this->hasMany('App\Models\like');
+    }
+
 }

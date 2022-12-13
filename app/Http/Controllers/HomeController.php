@@ -26,8 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $publications = Publication::all()->sortByDesc("id");
-        $likes = Like::all()->sortByDesc("id");;
-        return view('home', ['publications' => $publications, 'likes' => $likes]);
+
+        return view('home', ['publications' => $publications]);
     }
 
 }

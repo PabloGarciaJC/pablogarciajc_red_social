@@ -83,30 +83,25 @@
 
                                         <div class="row justify-content-md-right">
 
+                                            <?php $userLike = false; ?>
 
-
-
-                                            
-
-                                            @foreach ($likes as $todoLikes)
-                                                @if ($todoLikes->publication->user_id == Auth::user()->id)
-                                                    <p>hay un like</p>
-                                                @else
-                                                    <p>no hay un like</p>
+                                            @foreach ($mostrarPublication->like as $likes)
+                                                @if ($likes->user_id == Auth::user()->id)
+                                                    <?php $userLike = true; ?>
                                                 @endif
                                             @endforeach
 
-
-
-
-                                            <div class="col col-lg-2 like" id="btn-like{{ $mostrarPublication->id }}"
-                                                onclick="like({{ $mostrarPublication->id }})">
-                                                Like
-                                            </div>
-
-                                            {{-- <div class="col col-lg-2 dislike">
-                                                Dislike
-                                            </div> --}}
+                                            @if ($userLike)
+                                                <div class="col col-lg-2 dislike" id="btn-dislike{{ $mostrarPublication->id }}"
+                                                    onclick="dislike({{ $mostrarPublication->id }})">
+                                                    Dislike
+                                                </div>
+                                            @else
+                                                <div class="col col-lg-2 like" id="btn-like{{ $mostrarPublication->id }}"
+                                                    onclick="like({{ $mostrarPublication->id }})">
+                                                    Like
+                                                </div>
+                                            @endif
 
                                             <div class="col col-lg-2">
                                                 <button type="button"

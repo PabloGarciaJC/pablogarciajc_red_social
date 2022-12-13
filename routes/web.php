@@ -42,7 +42,8 @@ Route::get('/publicationImagen/{filename}', 'PublicationController@getImage')->n
 Route::get('/publicationDelete/{publicationId}', 'PublicationController@delete')->name('publicationDelete');
 
 // LIKE
-Route::get('/like/{publicationId}', 'LikeController@save')->name('likeSave');
+Route::get('/like/{publicationId}', 'LikeController@like')->name('likeSave');
+Route::get('/dislike/{publicationId}', 'LikeController@dislike')->name('likeSave');
 
 
 // Route::get('/prueba', 'UserController@prueba')->name('prueba');
