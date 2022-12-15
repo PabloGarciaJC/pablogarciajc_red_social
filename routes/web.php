@@ -33,7 +33,7 @@ Route::get('/btnValidarAmistad', 'FollowersController@btnValidarAmistad')->name(
 
 // COMMENTS
 Route::post('/comentarioSave', 'CommentController@save')->name('comentarioSave');
-// Route::get('/imagenPublicacion/{filename}', 'CommentController@getImage')->name('imagenPublicacion');
+Route::get('/comentarioImagen/{filename}', 'CommentController@getImage')->name('comentarioImagen');
 
 
 // PUBLICACIONES

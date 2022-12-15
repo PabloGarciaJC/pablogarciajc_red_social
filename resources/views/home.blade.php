@@ -79,6 +79,7 @@
                                                 style="margin:auto; display:block; padding-top: 20px; border-radius: 10px 10px 10px 10px;">
                                             <p style="padding-top: 10px;">{{ $mostrarPublication->contenido }}</p>
                                         @endif
+
                                         <hr>
 
                                         <div class="row justify-content-md-right">
@@ -92,7 +93,8 @@
                                             @endforeach
 
                                             @if ($userLike)
-                                                <div class="col col-lg-2 dislike" id="btn-dislike{{ $mostrarPublication->id }}"
+                                                <div class="col col-lg-2 dislike"
+                                                    id="btn-dislike{{ $mostrarPublication->id }}"
                                                     onclick="dislike({{ $mostrarPublication->id }})">
                                                     Dislike
                                                 </div>
@@ -116,44 +118,54 @@
                                         <div style="display: none" id="{{ $mostrarPublication->id }}"
                                             class="classCajaCometarios">
 
-                                            <form action="{{ route('comentarioSave') }}" method="POST"
-                                                enctype="multipart/form-data">
+                                            <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
+                                                id="formComments">
                                                 {{ csrf_field() }}
+
                                                 <div class="input-group">
-                                                    <div class="input-group">
-                                                        <button class="btn btn-primary" type="submit"
-                                                            id="inputGroupFileAddon04">Enviar</button>
 
-                                                        <input type="text"
-                                                            class="form-control"placeholder="Escribe tu Comentario"
-                                                            name="comentario">
+                                                    <input type="hidden" name="idPublicacionForm"
+                                                        value="{{ $mostrarPublication->id }}">
 
-                                                        <div class="file-select" id="src-file1">
-                                                            <input type="file" name="src-file1" aria-label="Archivo">
-                                                        </div>
+                                                    <div class="file-select">
+                                                        <input type="file" name="imagenPublicacion" id="imagenPublicacion{{ $mostrarPublication->id }}" aria-label="Archivo">
                                                     </div>
+
+                                                    <input type="text"
+                                                        class="form-control"placeholder="Escribe tu Comentario" id="comentarioPublicacion{{ $mostrarPublication->id }}"
+                                                        name="comentarioPublicacion">
+
+                                                    <button class="btn btn-primary" type="submit"
+                                                        onclick="formComments({{ $mostrarPublication->id }})">Enviar</button>
                                                 </div>
+
                                                 <br>
                                             </form>
 
-                                            <div class="news">
-                                                <br>
-                                                <img src="assets/img/news-1.jpg" alt="">
-                                                <h4><a href="#">Pablo Garcia</a></h4>
-                                                <p>Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en
-                                                    demostraciones de
-                                                    tipografías o de borradores de diseño para probar el diseño visual
-                                                    antes
-                                                    de
-                                                    insertar el
-                                                    texto
-                                                    final</p>
-                                            </div>
-
-                                            <div class="text-letf" style="margin-left: 94px;">
-                                                <img src="assets/img/news-1.jpg" class="rounded" alt="..."
-                                                    width="100" height="100">
-                                            </div>
+                                            @foreach ($mostrarPublication->comment as $coments)
+                                                @if ($coments->imagen == '')
+                                                    <div class="news">
+                                                        <br>
+                                                        <img
+                                                            src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
+                                                        <h4><a href="#">{{ $coments->user->alias }}</a></h4>
+                                                        <p> {{ $coments->contenido }}</p>
+                                                    </div>
+                                                @else
+                                                    <div class="news">
+                                                        <br>
+                                                        <img
+                                                            src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
+                                                        <h4><a href="#">{{ $coments->user->alias }}</a></h4>
+                                                        <p> {{ $coments->contenido }}</p>
+                                                    </div>
+                                                    <div class="text-letf" style="margin-left: 94px;">
+                                                        <img src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"
+                                                            class="rounded" alt="..." width="100"
+                                                            height="100">
+                                                    </div>
+                                                @endif
+                                            @endforeach
 
                                         </div>
 

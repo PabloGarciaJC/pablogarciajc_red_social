@@ -18,7 +18,14 @@ class Publication extends Model
     // Relación One To Many 
     public function like()
     {
-        return $this->hasMany('App\Models\like');
+        return $this->hasMany('App\Models\Like');
     }
+
+      // Relación One To Many 
+      public function comment()
+      {
+          return $this->hasMany('App\Models\Comment')->orderBy('id', 'desc');
+      }
+
 
 }

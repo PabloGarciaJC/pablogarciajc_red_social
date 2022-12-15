@@ -224,9 +224,12 @@
     <script src="{{ asset('assets/js/user/autocompletado.js') }}"></script>
     <script src="{{ asset('assets/js/user/cambiar-imagen-configuracion.js') }}"></script>
     <script src="{{ asset('assets/js/comments/mostrar-ocultar.js') }}"></script>
+    <script src="{{ asset('assets/js/comments/formComments.js') }}"></script>
+
     <script src="{{ asset('assets/js/publications/eliminar.js') }}"></script>
     <script src="{{ asset('assets/js/likes/like.js') }}"></script>
     <script src="{{ asset('assets/js/likes/dislike.js') }}"></script>
+
 
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
