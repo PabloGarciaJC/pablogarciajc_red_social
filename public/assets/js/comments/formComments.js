@@ -1,26 +1,39 @@
 
-function formComments(idPublicationForm){
+function formComments(idPublicationForm) {
 
-  let imagenPublicacion = document.getElementById('imagenPublicacion' + idPublicationForm);
-  let comentarioPublicacion = document.getElementById('comentarioPublicacion' + idPublicationForm);
+  let imagenPublication = document.getElementById('imagenPublicacion' + idPublicationForm);
+  let comentarioPublication = document.getElementById('comentarioPublicacion' + idPublicationForm);
 
-  console.log(imagenPublicacion);
-  console.log(comentarioPublicacion );
+  let urlAjaxCommentsForm = baseUrl + 'comentarioSave';
 
-  let urlAjaxCommentsForm = baseUrl + 'comentarioSave/';
+  ajaxCommenForm(urlAjaxCommentsForm, imagenPublication, comentarioPublication,idPublicationForm);
 
 
+  
 }
 
-function ajaxCommenForm(urlAjaxCommentsForm ){
+function ajaxCommenForm(urlAjaxCommentsForm, imagenPublication, comentarioPublication,idPublicationForm) {
 
   $.ajax({
     type: "POST",
-    url: urlAjaxCommentsForm,
-    data: {imagenPublicacion: imagenPublicacion},
-    
-    success: function (response) {
-      
-    }
-  });
+    url: 'http://127.0.0.1:8000/comentarioSave',
+    data: {
+      "_token": $("meta[name='csrf-token']").attr("content"),
+      comentPublication: comentarioPublication,      
+      idPublication: idPublicationForm,
+    },
+  })
+    .done(function (respuestaPeticion) {
+
+      console.log(respuestaPeticion);
+
+    })
+    .fail(function () {
+      console.log('error');
+    })
+    .always(function () {
+      console.log('completo');
+    });
+
+
 }

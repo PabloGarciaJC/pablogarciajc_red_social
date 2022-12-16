@@ -120,7 +120,10 @@
 
                                             <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
                                                 id="formComments">
-                                                {{ csrf_field() }}
+
+                                                {{-- {{ csrf_field() }} --}}
+
+                                                <meta name="csrf-token" content="{{ csrf_token() }}">
 
                                                 <div class="input-group">
 
