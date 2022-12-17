@@ -27,7 +27,15 @@ function formComments(idPublicationForm) {
   })
     .done(function (respuestaPeticion) {
 
-      console.log(respuestaPeticion);
+
+      
+
+      // if(respuestaPeticion){
+      //   console.log('Guardado');
+      //   location.reload();
+      // }else{
+      //   console.log('Error Guardado');
+      // }
 
     })
     .fail(function () {

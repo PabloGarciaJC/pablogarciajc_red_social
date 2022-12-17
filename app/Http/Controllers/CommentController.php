@@ -41,7 +41,11 @@ class CommentController extends Controller
 
     $comments->save();
 
-    return redirect()->route('home');
+    return response()->json([
+      'like' => 'save'
+    ]);
+
+    // return redirect()->route('home');
   }
 
   public function getImage($filename)

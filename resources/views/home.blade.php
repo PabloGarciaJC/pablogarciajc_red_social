@@ -146,17 +146,16 @@
                                             </form>
 
                                             @foreach ($mostrarPublication->comment as $coments)
+
                                                 @if ($coments->imagen == '')
-                                                    <div class="news">
-                                                        <br>
+                                                    <div class="news" id="commentPublication" style="margin-top: 10px;">
                                                         <img
                                                             src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
                                                         <h4><a href="#">{{ $coments->user->alias }}</a></h4>
                                                         <p> {{ $coments->contenido }}</p>
                                                     </div>
                                                 @else
-                                                    <div class="news">
-                                                        <br>
+                                                    <div class="news" style="margin-top: 10px;">
                                                         <img
                                                             src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
                                                         <h4><a href="#">{{ $coments->user->alias }}</a></h4>
@@ -168,6 +167,7 @@
                                                             height="100">
                                                     </div>
                                                 @endif
+                                                
                                             @endforeach
 
                                         </div>
