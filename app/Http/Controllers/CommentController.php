@@ -14,18 +14,10 @@ class CommentController extends Controller
 
   public function save(Request $request)
   {
-
-    
     $comentarioPublicacion = $request->input('comentPublication');
-
     $idPublicacionForm = $request->input('idPublication');
+    $imagenPublicacion = $request->file('imagenPublication');
 
-    // $imagenPublication = $request->file('imagenPublication');
-    
-    echo $comentarioPublicacion;
-    echo $idPublicacionForm;
- 
-    die();
     // Instacio Objeto User
     $comments = new Comment();
 

@@ -1,27 +1,29 @@
 
 function formComments(idPublicationForm) {
 
-  let imagenPublication = document.getElementById('imagenPublicacion' + idPublicationForm);
-  let comentarioPublication = document.getElementById('comentarioPublicacion' + idPublicationForm);
 
   let urlAjaxCommentsForm = baseUrl + 'comentarioSave';
 
-  ajaxCommenForm(urlAjaxCommentsForm, imagenPublication, comentarioPublication,idPublicationForm);
+  // Ajax Vista Previa 
+  let datosFormulario = new FormData();
 
+  let imagenPublication = $('#imagenPublicacion' + idPublicationForm)[0].files[0];
+  let comentarioPublication = document.getElementById('comentarioPublicacion' + idPublicationForm);
 
-  
-}
+  //Setear el Objet
+  datosFormulario.append('_token', $("meta[name='csrf-token']").attr("content"));
+  datosFormulario.append('comentPublication', comentarioPublication.value);
+  datosFormulario.append('idPublication', idPublicationForm);
+  datosFormulario.append('imagenPublication', imagenPublication);
 
-function ajaxCommenForm(urlAjaxCommentsForm, imagenPublication, comentarioPublication,idPublicationForm) {
 
   $.ajax({
     type: "POST",
-    url: 'http://127.0.0.1:8000/comentarioSave',
-    data: {
-      "_token": $("meta[name='csrf-token']").attr("content"),
-      comentPublication: comentarioPublication,      
-      idPublication: idPublicationForm,
-    },
+    url: urlAjaxCommentsForm,
+    data: datosFormulario,
+    contentType: false,
+    processData: false,
+
   })
     .done(function (respuestaPeticion) {
 
