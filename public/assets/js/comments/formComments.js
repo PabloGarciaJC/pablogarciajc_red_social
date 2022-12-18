@@ -27,7 +27,7 @@ function formComments(idPublicationForm) {
   })
     .done(function (respuesta) {
 
-console.log(respuesta);
+      console.log(respuesta);
 
       // if(respuestaPeticion){
       //   console.log('Guardado');
