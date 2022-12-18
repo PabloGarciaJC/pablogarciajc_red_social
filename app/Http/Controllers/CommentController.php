@@ -39,11 +39,20 @@ class CommentController extends Controller
       $comments->imagen = $imagenPathName;
     }
 
-    $comments->save();
+    $save = $comments->save();
 
-    return response()->json([
-      'like' => 'save'
-    ]);
+
+    if ($save) {
+
+      $getComment = Comment::where('publication_id', '=', $idPublicacionForm)->get();
+
+      return response()->json([
+        'comments' => $getComment
+      ]);
+      
+    }
+
+
 
     // return redirect()->route('home');
   }
