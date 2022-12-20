@@ -60,9 +60,6 @@ class CommentController extends Controller
       return response()->json($arrayListados, 200, []);
 
     }
-
-
-    // return redirect()->route('home');
   }
 
   public function getImage($filename)
