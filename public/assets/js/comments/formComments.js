@@ -18,16 +18,21 @@ function formComments(idPublicationForm) {
 
 
   $.ajax({
-    type: "POST",
-    url: urlAjaxCommentsForm,
     data: datosFormulario,
+    type: "POST",
+    dataType: "json",
+    url: urlAjaxCommentsForm,
     contentType: false,
     processData: false,
 
   })
     .done(function (respuesta) {
 
-      console.log(respuesta);
+      respuesta.forEach((comment, index) => {
+
+        console.log(comment.contenido)
+
+      });
 
       // if(respuestaPeticion){
       //   console.log('Guardado');
