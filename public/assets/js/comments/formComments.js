@@ -4,11 +4,13 @@ function formComments(idPublicationForm) {
 
   let urlAjaxCommentsForm = baseUrl + 'comentarioSave';
 
-  // Ajax Vista Previa 
+  // Instacio 
   let datosFormulario = new FormData();
 
   let imagenPublication = $('#imagenPublicacion' + idPublicationForm)[0].files[0];
   let comentarioPublication = document.getElementById('comentarioPublicacion' + idPublicationForm);
+  let respuestaAjaxFormComments = document.getElementById('respuestaAjaxFormComments' + idPublicationForm);
+
 
   //Setear el Objet
   datosFormulario.append('_token', $("meta[name='csrf-token']").attr("content"));
@@ -30,7 +32,37 @@ function formComments(idPublicationForm) {
 
       respuesta.forEach((comment, index) => {
 
-        console.log(comment.contenido)
+
+      $('#respuestaAjaxFormComments' + idPublicationForm).html(comment.contenido);
+
+
+        // if (comment.imagen == null) {
+
+        // } else {
+
+        // }
+
+        
+
+        // <p>`+ comment.contenido +  `</p>
+        // respuestaAjaxFormComments.classList.add('news');
+
+        // var parrafo = document.createElement("p");
+        // parrafo.innerText = comment.contenido;
+        // respuestaAjaxFormComments.appendChild(parrafo);
+
+
+        // let divCommentImagen = document.createElement("div");
+        // divCommentImagen.className = "text-letf";
+        // divCommentImagen.style.cssText = 'margin-left: 94px;';
+        // respuestaAjaxFormComments.appendChild(divCommentImagen);
+
+        // let imagen = document.createElement('img');
+        // imagen.src = 'assets/img/profile-img.jpg;'
+        // divCommentImagen.appendChild(imagen);
+
+        // imagen.src = 'assets/img/profile-img.jpg';
+        // respuestaAjaxFormComments.appendChild(imagen);
 
       });
 

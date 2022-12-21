@@ -131,11 +131,14 @@
                                                         value="{{ $mostrarPublication->id }}">
 
                                                     <div class="file-select">
-                                                        <input type="file" name="imagenPublicacion" id="imagenPublicacion{{ $mostrarPublication->id }}" aria-label="Archivo">
+                                                        <input type="file" name="imagenPublicacion"
+                                                            id="imagenPublicacion{{ $mostrarPublication->id }}"
+                                                            aria-label="Archivo">
                                                     </div>
 
                                                     <input type="text"
-                                                        class="form-control"placeholder="Escribe tu Comentario" id="comentarioPublicacion{{ $mostrarPublication->id }}"
+                                                        class="form-control"placeholder="Escribe tu Comentario"
+                                                        id="comentarioPublicacion{{ $mostrarPublication->id }}"
                                                         name="comentarioPublicacion">
 
                                                     <button class="btn btn-primary" type="submit"
@@ -145,29 +148,45 @@
                                                 <br>
                                             </form>
 
-                                            @foreach ($mostrarPublication->comment as $coments)
+                                            <style>
+                                                .margenImagenComment {
+                                                    width: 100px;
+                                                    height: 100px;
+                                                    border-radius: 10%;
+                                                    margin-bottom: 20px;
+                                                }
 
-                                                @if ($coments->imagen == '')
-                                                    <div class="news" id="commentPublication" style="margin-top: 10px;">
-                                                        <img
-                                                            src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
-                                                        <h4><a href="#">{{ $coments->user->alias }}</a></h4>
-                                                        <p> {{ $coments->contenido }}</p>
+                                            </style>
+
+                                            <div id="respuestaAjaxFormComments{{ $mostrarPublication->id }}">
+
+                                                {{-- Aqui Adentro se Cree los DIV --}}
+
+                                            </div>
+
+
+                                            @foreach ($mostrarPublication->comment as $coments)
+                                               
+                                                    <div class="row row-cols-auto">
+
+                                                        <div class="col news">
+                                                            <img
+                                                                src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
+                                                        </div>
+
+                                                        <div class="col">
+
+                                                            <h4><a href="#">{{ $coments->user->alias }}</a></h4>
+                                                            <p>{{ $coments->contenido }}</p>
+
+                                                            @if ($coments->imagen != '')
+                                                                <img
+                                                                    src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
+                                                            @endif
+                                                            
+                                                        </div>
                                                     </div>
-                                                @else
-                                                    <div class="news" style="margin-top: 10px;">
-                                                        <img
-                                                            src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
-                                                        <h4><a href="#">{{ $coments->user->alias }}</a></h4>
-                                                        <p> {{ $coments->contenido }}</p>
-                                                    </div>
-                                                    <div class="text-letf" style="margin-left: 94px;">
-                                                        <img src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"
-                                                            class="rounded" alt="..." width="100"
-                                                            height="100">
-                                                    </div>
-                                                @endif
-                                                
+                                              
                                             @endforeach
 
                                         </div>
