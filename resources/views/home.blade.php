@@ -155,7 +155,6 @@
                                                     border-radius: 10%;
                                                     margin-bottom: 20px;
                                                 }
-
                                             </style>
 
                                             <div id="respuestaAjaxFormComments{{ $mostrarPublication->id }}">
@@ -183,7 +182,7 @@
                                                                 <img
                                                                     src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
                                                             @endif
-                                                            
+
                                                         </div>
                                                     </div>
                                               
