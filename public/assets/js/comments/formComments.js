@@ -33,8 +33,22 @@ function formComments(idPublicationForm) {
       respuesta.forEach((comment, index) => {
 
 
-      $('#respuestaAjaxFormComments' + idPublicationForm).html(comment.contenido);
+        $('#respuestaAjaxFormComments' + idPublicationForm).html(comment.contenido);
 
+        // Div divComments
+        let divComments = document.createElement("div");
+        divComments.className = "row row-cols-auto";
+
+        let divAvatarUser = document.createElement("div");
+        divAvatarUser.className = "col news";
+
+        // Avatar User
+        let imgAvatarUser = document.createElement('img');
+        imgAvatarUser.src = 'assets/img/profile-img.jpg';
+        divAvatarUser.appendChild(imgAvatarUser);
+
+        // Fin divComments
+        divComments.appendChild(divAvatarUser);
 
         // if (comment.imagen == null) {
 
@@ -42,7 +56,7 @@ function formComments(idPublicationForm) {
 
         // }
 
-        
+
 
         // <p>`+ comment.contenido +  `</p>
         // respuestaAjaxFormComments.classList.add('news');
