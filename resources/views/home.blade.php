@@ -105,17 +105,25 @@
                                                 </div>
                                             @endif
 
+
                                             <div class="col col-lg-2">
-                                                <button type="button"
+
+                                                 <!-- Comentarios Mostrar y Ocultar-->
+                                                {{-- <button type="button"
                                                     onclick="mostrarOcultar({{ $mostrarPublication->id }})"
-                                                    class="btn btn-success">Comentarios</button>
+                                                    class="btn btn-success">Comentarios
+                                                    {{ count($mostrarPublication->comment) }}</button> --}}
+                                                
+                                                <a href="{{route('publicationDetail', ['publicationId' => $mostrarPublication->id ])}}" class="btn btn-success">Comentarios ({{ count($mostrarPublication->comment) }})</a>
+
                                             </div>
 
                                         </div>
+
                                         <br>
 
-                                        <!-- Comentarios -->
-                                        <div style="display: none" id="{{ $mostrarPublication->id }}"
+                                        <!-- Comentarios Mostrar y Ocultar-->
+                                        <div style="display: none" id="{{ $mostrarPublication->id }} "
                                             class="classCajaCometarios">
 
                                             <form action="javascript:void(0);" method="POST" enctype="multipart/form-data"
@@ -127,8 +135,6 @@
 
                                                 <div class="input-group">
 
-                                                    <input type="hidden" name="idPublicacionForm"
-                                                        value="{{ $mostrarPublication->id }}">
 
                                                     <div class="file-select">
                                                         <input type="file" name="imagenPublicacion"
@@ -136,10 +142,9 @@
                                                             aria-label="Archivo">
                                                     </div>
 
-                                                    <input type="text"
-                                                        class="form-control"placeholder="Escribe tu Comentario"
-                                                        id="comentarioPublicacion{{ $mostrarPublication->id }}"
-                                                        name="comentarioPublicacion">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Escribe tu Comentario"
+                                                        id="comentarioPublicacion{{ $mostrarPublication->id }}">
 
                                                     <button class="btn btn-primary" type="submit"
                                                         onclick="formComments({{ $mostrarPublication->id }})">Enviar</button>
@@ -157,39 +162,32 @@
                                                 }
                                             </style>
 
-                                            <div id="respuestaAjaxFormComments{{ $mostrarPublication->id }}">
 
-                                                {{-- Aqui Adentro se Cree los DIV --}}
-
-                                            </div>
-
+                                            {{-- <div id="requestAJaxComments{{ count($mostrarPublication->comment) }}"> --}}
 
                                             @foreach ($mostrarPublication->comment as $coments)
-                                               
-                                                    <div class="row row-cols-auto">
-
-                                                        <div class="col news">
-                                                            <img
-                                                                src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
-                                                        </div>
-
-                                                        <div class="col">
-
-                                                            <h4><a href="#">{{ $coments->user->alias }}</a></h4>
-                                                            <p>{{ $coments->contenido }}</p>
-
-                                                            @if ($coments->imagen != '')
-                                                                <img
-                                                                    src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
-                                                            @endif
-
-                                                        </div>
+                                                <div class="row row-cols-auto">
+                                                    <div class="col news">
+                                                        <img
+                                                            src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
                                                     </div>
-                                              
+
+                                                    <div class="col">
+
+                                                        <h4><a href="#">{{ $coments->user->alias }}</a></h4>
+                                                        <p>{{ $coments->contenido }}</p>
+
+                                                        @if ($coments->imagen != '')
+                                                            <img
+                                                                src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
+                                                        @endif
+
+                                                    </div>
+                                                </div>
                                             @endforeach
 
                                         </div>
-
+                                      
                                     </div>
                                 </div>
                             </div>

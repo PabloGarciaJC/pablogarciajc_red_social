@@ -63,4 +63,9 @@ class PublicationController extends Controller
             echo $conteoPublication;
         }
     }
+
+    public function detail($idPublication)
+    {
+    return view('publication.detail');
+    }
 }

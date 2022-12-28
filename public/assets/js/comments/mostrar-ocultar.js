@@ -2,11 +2,13 @@
 
 function mostrarOcultar(idPublicacion) {
 
+
   var idCaja = document.getElementById(idPublicacion);
 
   if (idCaja.style.display == 'none') {
 
     mostrarComentarios(idCaja);
+
 
   } else {
 

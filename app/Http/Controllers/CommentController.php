@@ -58,7 +58,6 @@ class CommentController extends Controller
       }
 
       return response()->json($arrayListados, 200, []);
-
     }
   }
 

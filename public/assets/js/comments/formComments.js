@@ -1,54 +1,109 @@
 
 function formComments(idPublicationForm) {
 
-
   let urlAjaxCommentsForm = baseUrl + 'comentarioSave';
 
   // Instacio 
   let datosFormulario = new FormData();
-
   let imagenPublication = $('#imagenPublicacion' + idPublicationForm)[0].files[0];
+
   let comentarioPublication = document.getElementById('comentarioPublicacion' + idPublicationForm);
-  let respuestaAjaxFormComments = document.getElementById('respuestaAjaxFormComments' + idPublicationForm);
+
+  // //Setear el Objet
+  // datosFormulario.append('_token', $("meta[name='csrf-token']").attr("content"));
+  // datosFormulario.append('comentPublication', comentarioPublication.value);
+  // datosFormulario.append('idPublication', idPublicationForm);
+  // datosFormulario.append('imagenPublication', imagenPublication);
+
+  // $.ajax({
+  //   data: datosFormulario,
+  //   type: "POST",
+  //   dataType: "json",
+  //   url: urlAjaxCommentsForm,
+  //   contentType: false,
+  //   processData: false,
+
+  // })
+  //   .done(function (respuesta) {
+
+  //     respuesta.forEach((comment, index) => {
+
+  //       // $('#requestAJaxComments' + countComments).html(comment.contenido);
+
+  //       let divComments = document.createElement('div');
+  //       divComments.setAttribute('id', 'idComentarioCreado' + comment.id);
+  //       // divComments.style.backgroundColor = "red";
+  //       requestAJaxComments.appendChild(divComments);
+   
+  //       // console.log(countComments);
+  //       // console.log(divComments);
+
+  //     });
 
 
-  //Setear el Objet
-  datosFormulario.append('_token', $("meta[name='csrf-token']").attr("content"));
-  datosFormulario.append('comentPublication', comentarioPublication.value);
-  datosFormulario.append('idPublication', idPublicationForm);
-  datosFormulario.append('imagenPublication', imagenPublication);
+  //   })
+  //   .fail(function () {
+  //     console.log('error');
+  //   })
+  //   .always(function () {
+  //     console.log('completo');
+  //   });
 
 
-  $.ajax({
-    data: datosFormulario,
-    type: "POST",
-    dataType: "json",
-    url: urlAjaxCommentsForm,
-    contentType: false,
-    processData: false,
+}
 
-  })
-    .done(function (respuesta) {
+    // $(".classRepuestaAjaxFormComments").html(comment.contenido);
+  
 
-      respuesta.forEach((comment, index) => {
+        // console.log(respuestaAjaxFormComments);
+
+        // console.log(comment);
+
+        // let divComments = document.createElement('div');
+
+        // divComments.setAttribute('id', 'idComentarioCreado' + comment.id);
+
+        // comentarios = document.getElementById('idComentarioCreado' + idPublicationForm);
+        // comentarios.style.backgroundColor = "red";
+
+        // console.log(divComments);
+
+        // divComments.className = "row row-cols-auto";
 
 
-        $('#respuestaAjaxFormComments' + idPublicationForm).html(comment.contenido);
+        // respuestaAjaxFormComments.appendChild(divComments);
 
-        // Div divComments
-        let divComments = document.createElement("div");
-        divComments.className = "row row-cols-auto";
+        // respuestaAjaxFormComments.removeAttribute('id', 'respuestaAjaxFormComments');
 
-        let divAvatarUser = document.createElement("div");
-        divAvatarUser.className = "col news";
+        // console.log(respuestaAjaxFormComments);
 
-        // Avatar User
-        let imgAvatarUser = document.createElement('img');
-        imgAvatarUser.src = 'assets/img/profile-img.jpg';
-        divAvatarUser.appendChild(imgAvatarUser);
 
-        // Fin divComments
-        divComments.appendChild(divAvatarUser);
+        // respuestaAjaxFormComments.setAttribute('id', 'respuestaAjaxFormComments' + idPublicationForm);
+
+        // let respuestaAjaxFormComments = document.getElementById('respuestaAjaxFormComments' + idPublicationForm);
+
+        // classRepuestaAjaxComments.className = "row row-cols-auto";
+        // respuestaAjaxFormComments.className = "row row-cols-auto";
+
+        // var divComments = document.createElement("div");
+        // divComments.setAttribute('id', 'idComentarioCreado' + comment.id);
+        // var newContent = document.createTextNode("Hola!¿Qué tal?");
+
+
+        // console.log(respuestaAjaxFormComments);
+        // respuestaAjaxFormComments.appendChild(divComments); //añade texto al div creado.
+
+
+        // let divAvatarUser = document.createElement("div");
+        // divAvatarUser.className = "col news";
+
+        // // Avatar User
+        // let imgAvatarUser = document.createElement('img');
+        // imgAvatarUser.src = 'assets/img/profile-img.jpg';
+        // divAvatarUser.appendChild(imgAvatarUser);
+
+        // // Fin divComments
+        // divComments.appendChild(divAvatarUser);
 
         // if (comment.imagen == null) {
 
@@ -77,23 +132,3 @@ function formComments(idPublicationForm) {
 
         // imagen.src = 'assets/img/profile-img.jpg';
         // respuestaAjaxFormComments.appendChild(imagen);
-
-      });
-
-      // if(respuestaPeticion){
-      //   console.log('Guardado');
-      //   location.reload();
-      // }else{
-      //   console.log('Error Guardado');
-      // }
-
-    })
-    .fail(function () {
-      console.log('error');
-    })
-    .always(function () {
-      console.log('completo');
-    });
-
-
-}
