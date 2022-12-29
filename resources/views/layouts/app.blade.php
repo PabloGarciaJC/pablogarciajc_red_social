@@ -42,7 +42,8 @@
         @yield('content')
     @else
         <main class="py-4">
-            {{-- Menu NAV --}}
+
+            {{-- Nav --}}
             <header id="header" class="header fixed-top d-flex align-items-center">
 
                 <div class="d-flex align-items-center justify-content-between">
@@ -163,7 +164,6 @@
                     </ul>
                 </nav>
             </header>
-            {{-- //Menu NAV --}}
 
             {{-- Sidebar --}}
             <aside id="sidebar" class="sidebar">
@@ -183,11 +183,10 @@
                     </li>
                 </ul>
             </aside>
-            {{-- //Sidebar --}}
 
             {{-- Contenido Dinamico --}}
             @yield('dynamic-content')
-            {{-- /Contenido Dinamico --}}
+
         </main>
 
         {{-- Foter --}}
@@ -196,7 +195,7 @@
                 Desarrollado por <strong><span>Pablo Garcia JC</span></strong>
             </div>
         </footer>
-        {{-- /Footer --}}
+
     @endguest
 
     <!-- Vendor JS Files -->

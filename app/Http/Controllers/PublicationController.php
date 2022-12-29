@@ -59,13 +59,16 @@ class PublicationController extends Controller
         if ($conteoPublication > 0) {
             $borraPublicacion = Publication::find($getPublicacion->id);
             $borraPublicacion->delete();
-        }else{
+        } else {
             echo $conteoPublication;
         }
     }
 
     public function detail($idPublication)
     {
-    return view('publication.detail');
+
+        $getPublication = Publication::find($idPublication);
+
+        return view('publication.detail', ['getPublication' => $getPublication]);
     }
 }
