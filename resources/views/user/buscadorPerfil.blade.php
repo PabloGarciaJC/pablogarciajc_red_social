@@ -7,7 +7,6 @@
                 <div class="col-xl-4">
                     <div class="card">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
                             @foreach ($usuario as $user)
                                 @if ($user->fotoPerfil != '')
                                     <img src="{{ route('foto.perfil', ['filename' => $user->fotoPerfil]) }}" alt="Profile"
@@ -18,10 +17,8 @@
                                 <h1>{{ $user->alias }}</h1>
                                 <h3>{{ $user->cargo }}</h3>
                             @endforeach
-
                             <div class="container">
                                 <div class="row justify-content-md-center">
-                          
                                     <div class="col-md-auto">
                                         <button type="button" id="btnAgregarContacto" style="display:none">
                                             Agregar Contacto
@@ -30,34 +27,25 @@
                                             Cancelar Solicitud
                                         </button>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-xl-8">
                     <div class="card">
                         <div class="card-body pt-3">
-
                             {{-- Menu de Navegacion --}}
                             <ul class="nav nav-tabs nav-tabs-bordered">
-
                                 <li class="nav-item">
                                     <button class="nav-link {{ session('message') || $errors->any() ? '' : 'active' }}"
                                         data-bs-toggle="tab" data-bs-target="#perfil">
                                         Perfil</button>
                                 </li>
-
                             </ul>
-                            {{-- //Menu de Navegacion --}}
-
                             <div class="tab-content pt-2">
-
                                 {{-- Mensaje de Notificacion --}}
                                 <div id="mensajeNotification" role="alert"></div>
-
                                 {{-- Perfil --}}
                                 <div class="tab-pane fade show {{ session('message') || $errors->any() ? '' : 'active' }} profile-overview"
                                     id="perfil">
@@ -77,65 +65,55 @@
                                     @foreach ($usuario as $user)
                                         <input type="hidden" id="usuarioSeguido" value="{{ $user->id }}">
                                     @endforeach
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Nombre</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->nombre }}</div>
                                         @endforeach
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Apellido</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->apellido }}</div>
                                         @endforeach
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Empresa</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->empresa }}</div>
                                         @endforeach
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Cargo</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->cargo }}</div>
                                         @endforeach
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Pais</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->pais }}</div>
                                         @endforeach
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Dirección</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->direccion }}</div>
                                         @endforeach
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Móvil</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->movil }}</div>
                                         @endforeach
                                     </div>
-
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label">Email</div>
                                         @foreach ($usuario as $user)
                                             <div class="col-lg-9 col-md-8">{{ $user->email }}</div>
                                         @endforeach
                                     </div>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

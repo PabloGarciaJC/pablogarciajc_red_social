@@ -45,20 +45,23 @@ class CommentController extends Controller
     // Obtengo el Ultimo Id Guardado
     // $comments->id;
 
-    if ($save) {
+    // if ($save) {
 
-      $getComment = Comment::where('publication_id', '=', $idPublicacionForm)
-        ->where('id', '=', $comments->id)
-        ->get();
+    //   $getComment = Comment::where('publication_id', '=', $idPublicacionForm)
+    //     ->where('id', '=', $comments->id)
+    //     ->get();
 
-      $arrayListados = array();
+    //   $arrayListados = array();
 
-      foreach ($getComment as $allComments) {
-        array_push($arrayListados, $allComments);
-      }
+    //   foreach ($getComment as $allComments) {
+    //     array_push($arrayListados, $allComments);
+    //   }
 
-      return response()->json($arrayListados, 200, []);
-    }
+    //   return response()->json($arrayListados, 200, []);
+    // }
+
+    return redirect()->route('publicationDetail', ['publicationId' => $idPublicacionForm]);
+
   }
 
   public function getImage($filename)

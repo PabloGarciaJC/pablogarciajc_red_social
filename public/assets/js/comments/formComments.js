@@ -10,6 +10,7 @@ function formComments(idPublicationForm) {
   let comentarioPublication = document.getElementById('comentarioPublicacion' + idPublicationForm);
 
   // //Setear el Objet
+  
   // datosFormulario.append('_token', $("meta[name='csrf-token']").attr("content"));
   // datosFormulario.append('comentPublication', comentarioPublication.value);
   // datosFormulario.append('idPublication', idPublicationForm);

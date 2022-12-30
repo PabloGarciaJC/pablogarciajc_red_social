@@ -4,14 +4,9 @@
     <main id="main" class="main">
         <section class="section dashboard">
             <div class="row">
-
                 <div class="col-lg-8">
                     <div class="row">
-                        
-                        <!-- Crear Publicacion -->
                         @include('includes.createPublication')
-
-                        {{-- Publicacion --}}
                         <div class="col-12">
                             <div class="filter">
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i
@@ -92,21 +87,63 @@
                                                           class="btn btn-success">Comentarios
                                                           {{ count($mostrarPublication->comment) }}</button> --}}
                                             <a href="{{ route('publicationDetail', ['publicationId' => $getPublication->id]) }}"
-                                                class="btn btn-success">Comentarios
+                                                class="btn btn-primary">Comentarios
                                                 ({{ count($getPublication->comment) }})</a>
                                         </div>
                                     </div>
                                     <br>
+
+                                    <div id="" class="classCajaCometarios">
+
+                                        <form action="{{ route('comentarioSave') }}" method="POST"
+                                            enctype="multipart/form-data" id="formComments">
+
+                                            {{ csrf_field() }}
+
+                                            <input type="hidden" value="{{ $getPublication->id }}" name="idPublication">
+
+                                            <div class="input-group">
+
+                                                <div class="file-select">
+                                                    <input type="file" aria-label="Archivo" name="imagenPublication" >
+                                                </div>
+
+                                                <input type="text" class="form-control"
+                                                    placeholder="Escribe tu Comentario" name="comentPublication">
+
+                                                <button class="btn btn-primary" type="submit">Enviar</button>
+                                                   
+                                            </div>
+                                            <br>
+                                        </form>
+
+                                        @foreach ($getPublication->comment as $coments)
+                                            <div class="row row-cols-auto">
+                                                <div class="col news">
+                                                    <img
+                                                        src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
+                                                </div>
+
+                                                <div class="col">
+
+                                                    <h4><a href="#">{{ $coments->user->alias }}</a></h4>
+                                                    <p>{{ $coments->contenido }}</p>
+
+                                                    @if ($coments->imagen != '')
+                                                        <img
+                                                            src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
+                                                    @endif
+
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-                {{-- Contactos --}}
                 @include('includes.contacts')
-
             </div>
         </section>
     </main>
