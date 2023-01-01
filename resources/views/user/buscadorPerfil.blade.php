@@ -126,16 +126,12 @@
         <script>
 
             let btnAddContacto = document.getElementById('btnAddContacto');
-
             let btnAgregarContacto = document.getElementById('btnAgregarContacto');
             let btnCancelarSolicitud = document.getElementById('btnCancelarSolicitud');
-
             let usuarioLogin = document.getElementById('usuarioLogin');
             let usuarioSeguido = document.getElementById('usuarioSeguido');
-
             let idRegistroFollower = document.getElementById('idRegistroFollower');
             let idNotificacion = document.getElementById('idNotificacion');
-
             let idNotificacionEnviado = document.getElementById('idNotificacionEnviado');
 
             $.ajax({

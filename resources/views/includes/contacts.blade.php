@@ -68,7 +68,7 @@
 
                     divUsuarios.appendChild(parrafo);
 
-                }); /* Fin forearch */
+                });
 
             });
     </script>

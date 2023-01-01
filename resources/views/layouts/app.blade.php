@@ -41,7 +41,6 @@
         @yield('content')
     @else
         <main class="py-4">
-
             {{-- Nav --}}
             <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -163,7 +162,6 @@
                     </ul>
                 </nav>
             </header>
-
             {{-- Sidebar --}}
             <aside id="sidebar" class="sidebar">
                 <ul class="sidebar-nav" id="sidebar-nav">
@@ -182,10 +180,8 @@
                     </li>
                 </ul>
             </aside>
-
             {{-- Contenido Dinamico --}}
             @yield('dynamic-content')
-
         </main>
 
         {{-- Foter --}}
@@ -196,18 +192,6 @@
         </footer>
 
     @endguest
-
-    <!-- Vendor JS Files -->
-    {{-- <script src="assets/vendor/apexcharts/apexcharts.min.js"></script> --}}
-    {{-- <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
-    {{-- <script src="assets/vendor/chart.js/chart.min.js"></script> --}}
-    {{-- <script src="assets/vendor/echarts/echarts.min.js"></script> --}}
-    {{-- <script src="assets/vendor/quill/quill.min.js"></script> --}}
-    {{-- <script src="assets/vendor/simple-datatables/simple-datatables.js"></script> --}}
-    {{-- <script src="assets/vendor/tinymce/tinymce.min.js"></script> --}}
-    {{-- <script src="assets/vendor/php-email-form/validate.js"></script> --}}
-    {{-- <script src="assets/vendor/jquery/jquery-3.6.1.min.js"></script> --}}
-    {{-- <script src="assets/vendor/jquery-ui/jquery-ui.min.js"></script> --}}
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
@@ -222,13 +206,9 @@
     <script src="{{ asset('assets/js/user/autocompletado.js') }}"></script>
     <script src="{{ asset('assets/js/user/cambiar-imagen-configuracion.js') }}"></script>
     <script src="{{ asset('assets/js/comments/mostrar-ocultar.js') }}"></script>
-    <script src="{{ asset('assets/js/comments/formComments.js') }}"></script>
-
     <script src="{{ asset('assets/js/publications/eliminar.js') }}"></script>
     <script src="{{ asset('assets/js/likes/like.js') }}"></script>
     <script src="{{ asset('assets/js/likes/dislike.js') }}"></script>
-
-
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
 </body>

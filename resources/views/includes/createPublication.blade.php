@@ -24,39 +24,23 @@
             </div>
 
             <div class="modal-body">
-
                 <form action="{{ action('PublicationController@save') }}" method="POST" enctype="multipart/form-data">
-
                     {{ csrf_field() }}
-
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Escribe tu Comentario</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" name="comentarioPublicacion"></textarea>
                     </div>
-
                     <br>
-
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Subir Imagen</label><br>
                         <input type="file" class="form-control-file" id="exampleFormControlFile1"
                             name="imagenPublicacion">
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Aceptar</button>
                     </div>
-
                 </form>
-
-                {{-- <div class="row justify-content-md-right">
-                   <div class="col col-lg-2">
-                       <img src="assets/img/imagesSocial.png" alt=""> Imagen
-                   </div>
-                   <div class="col col-lg-2">
-                       <img src="assets/img/videoSocial.png" alt="">Video
-                   </div>
-               </div> --}}
             </div>
         </div>
     </div>

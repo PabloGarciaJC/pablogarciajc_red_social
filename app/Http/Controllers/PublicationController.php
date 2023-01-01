@@ -66,9 +66,7 @@ class PublicationController extends Controller
 
     public function detail($idPublication)
     {
-
         $getPublication = Publication::find($idPublication);
-
         return view('publication.detail', ['getPublication' => $getPublication]);
     }
 }

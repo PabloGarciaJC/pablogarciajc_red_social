@@ -35,8 +35,7 @@ Route::get('/btnValidarAmistad', 'FollowersController@btnValidarAmistad')->name(
 Route::post('/comentarioSave', 'CommentController@save')->name('comentarioSave');
 Route::get('/comentarioImagen/{filename}', 'CommentController@getImage')->name('comentarioImagen');
 
-
-// PUBLICACIONES
+// PUBLICATION
 Route::post('/publicationSave', 'PublicationController@save')->name('publicationSave');
 Route::get('/publicationImagen/{filename}', 'PublicationController@getImage')->name('publicationImagen');
 Route::get('/publicationDelete/{publicationId}', 'PublicationController@delete')->name('publicationDelete');
@@ -45,11 +44,6 @@ Route::get('/detalle/{publicationId}', 'PublicationController@detail')->name('pu
 // LIKE
 Route::get('/like/{publicationId}', 'LikeController@like')->name('likeSave');
 Route::get('/dislike/{publicationId}', 'LikeController@dislike')->name('likeSave');
-
-
-// Route::get('/prueba', 'UserController@prueba')->name('prueba');
-
-
 
 
 // NOTIFICACIONES
@@ -64,15 +58,3 @@ Route::get('borrarNotificacion/{id}', function ($id) {
   return redirect()->back();
 })->name('borrarNotificacion');
 
-
-
-// Route::get('markAsReadDelete', function () {
-//   auth()->user()->notifications()->delete();
-//   return redirect()->back();
-// })->name('markAsReadDelete');
-
-
-// Route::get('test', function () {
-//   event(new App\Events\MyEvent('hello world'));
-// return "El evento ha sido enviado";
-// });

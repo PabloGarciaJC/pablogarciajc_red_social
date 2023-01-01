@@ -61,26 +61,6 @@
                                         @endif
                                         <hr>
                                         <div class="row justify-content-md-right">
-
-                                            {{-- <style>
-                                                .heart_red {
-                                                    width: 35px;
-                                                    height: 30px;
-                                                    padding-right: 0px;
-                                                    padding-bottom: 3px;
-                                                }
-
-                                                .heart_black {
-                                                    width: 35px;
-                                                    height: 30px;
-                                                    padding-right: 0px;
-                                                    padding-bottom: 3px;
-                                                }
-                                            </style> --}}
-
-                                            {{-- <img src="assets/img/heart-red.png" class="heart_red" />
-                                            <img src="assets/img/heart-black.png" class="heart_black" /> --}}
-
                                             <?php $userLike = false; ?>
                                             @foreach ($mostrarPublication->like as $likes)
                                                 @if ($likes->user_id == Auth::user()->id)
@@ -101,11 +81,6 @@
                                                 </div>
                                             @endif
                                             <div class="col col-lg-2">
-                                                <!-- Comentarios Mostrar y Ocultar-->
-                                                {{-- <button type="button"
-                                                  onclick="mostrarOcultar({{ $mostrarPublication->id }})"
-                                                  class="btn btn-success">Comentarios
-                                                  {{ count($mostrarPublication->comment) }}</button> --}}
                                                 <a href="{{ route('publicationDetail', ['publicationId' => $mostrarPublication->id]) }}"
                                                     class="btn btn-primary">Comentarios
                                                     ({{ count($mostrarPublication->comment) }})
@@ -113,8 +88,7 @@
                                             </div>
                                         </div>
                                         <br>
-
-                                        <!-- Comentarios Mostrar y Ocultar-->
+                                        <!-- Comentarios Mostrar y Ocultar - No Desarrollada -->
                                         <div style="display: none" id="{{ $mostrarPublication->id }} "
                                             class="classCajaCometarios">
 
@@ -126,26 +100,19 @@
                                                 <meta name="csrf-token" content="{{ csrf_token() }}">
 
                                                 <div class="input-group">
-
-
                                                     <div class="file-select">
                                                         <input type="file" name="imagenPublicacion"
                                                             id="imagenPublicacion{{ $mostrarPublication->id }}"
                                                             aria-label="Archivo">
                                                     </div>
-
                                                     <input type="text" class="form-control"
                                                         placeholder="Escribe tu Comentario"
                                                         id="comentarioPublicacion{{ $mostrarPublication->id }}">
-
                                                     <button class="btn btn-primary" type="submit"
                                                         onclick="formComments({{ $mostrarPublication->id }})">Enviar</button>
                                                 </div>
-
                                                 <br>
                                             </form>
-
-                                            {{-- <div id="requestAJaxComments{{ count($mostrarPublication->comment) }}"> --}}
 
                                             @foreach ($mostrarPublication->comment as $coments)
                                                 <div class="row row-cols-auto">
@@ -153,9 +120,7 @@
                                                         <img
                                                             src="{{ route('foto.perfil', ['filename' => $coments->user->fotoPerfil]) }}">
                                                     </div>
-
                                                     <div class="col">
-
                                                         <h4><a href="#">{{ $coments->user->alias }}</a></h4>
                                                         <p>{{ $coments->contenido }}</p>
 
@@ -163,12 +128,12 @@
                                                             <img
                                                                 src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
                                                         @endif
-
                                                     </div>
                                                 </div>
                                             @endforeach
 
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

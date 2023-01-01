@@ -25,16 +25,13 @@
                 <div class="col-xl-8">
                     <div class="card">
                         <div class="card-body pt-3">
-
                             {{-- Menu de Navegacion --}}
                             <ul class="nav nav-tabs nav-tabs-bordered">
-
                                 <li class="nav-item">
                                     <button class="nav-link {{ session('message') || $errors->any() ? '' : 'active' }}"
                                         data-bs-toggle="tab" data-bs-target="#perfil">
                                         Perfil</button>
                                 </li>
-
                                 <li class="nav-item">
                                     <button class="nav-link {{ session('message') || $errors->any() ? 'active' : '' }}"
                                         data-bs-toggle="tab" data-bs-target="#perfil-edit">Editar
@@ -42,7 +39,6 @@
                                 </li>
                             </ul>
                             {{-- //Menu de Navegacion --}}
-
                             <div class="tab-content pt-2">
 
                                 {{-- Perfil --}}
@@ -249,7 +245,6 @@
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
 

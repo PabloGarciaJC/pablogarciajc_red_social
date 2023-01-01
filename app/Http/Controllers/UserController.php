@@ -28,17 +28,17 @@ class UserController extends Controller
     public function actualizar(Request $request)
     {
         // Validaciones
-        $validacion = $this->validate($request, [
-            'fotoPerfil' => 'mimes:png,jpg|max:100',
-            'nombre'  => 'required',
-            'apellido' => 'required',
-            'empresa' => 'required',
-            'cargo' => 'required',
-            'pais' => 'required',
-            'direccion' => 'required',
-            'movil' => 'required',
-            'sobreMi' => 'required',
-        ]);
+        // $validacion = $this->validate($request, [
+        //     'fotoPerfil' => 'mimes:png,jpg|max:100',
+        //     'nombre'  => 'required',
+        //     'apellido' => 'required',
+        //     'empresa' => 'required',
+        //     'cargo' => 'required',
+        //     'pais' => 'required',
+        //     'direccion' => 'required',
+        //     'movil' => 'required',
+        //     'sobreMi' => 'required',
+        // ]);
 
         //Instacio Objeto
         $user = Auth::user();
@@ -101,21 +101,6 @@ class UserController extends Controller
         // Estando Aqui puedo Probar Consultas
 
         $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get()->except(Auth::id());
-        // $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get();
-
-
-        // $querys = DB::table('users as u')
-        //     ->select('u.id', 'u.alias', 'u.nombre', 'u.fotoPerfil', 'f.aprobada')
-        //     ->where('u.nombre', 'LIKE', '%' . $term . '%')
-        //     ->join('followers as f', 'f.user_id', '=', 'u.id')
-        //     ->get()
-        //     ->except(Auth::id());
-
-        // $querys = User::where('nombre', 'LIKE', '%' . $term . '%')
-        // ->join("followers", "followers.user_id", "=", "users.id")
-        // ->select("*")
-        // ->get()
-        // ->except(Auth::id());
 
         $data = [];
 
@@ -136,19 +121,8 @@ class UserController extends Controller
 
     public function buscadorPerfil($alias, $solicitudAmistad, $idFollower, $idNotificacion)
     {
-
         $usuario = User::where('alias', '=', $alias)->get();
-
         return view('user.buscadorPerfil', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
     }
-
-    // public function prueba()
-    // {
-
-    //     $data = User::select('users.*', 'followers.*')
-    //             ->join('followers', 'followers.user_id', '=', 'users.id')
-    //             ->get();
-
-    //     return $data;
-    // }
+    
 }

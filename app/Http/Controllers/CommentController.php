@@ -42,24 +42,6 @@ class CommentController extends Controller
     // Guardo
     $save = $comments->save();
 
-    // Obtengo el Ultimo Id Guardado
-    // $comments->id;
-
-    // if ($save) {
-
-    //   $getComment = Comment::where('publication_id', '=', $idPublicacionForm)
-    //     ->where('id', '=', $comments->id)
-    //     ->get();
-
-    //   $arrayListados = array();
-
-    //   foreach ($getComment as $allComments) {
-    //     array_push($arrayListados, $allComments);
-    //   }
-
-    //   return response()->json($arrayListados, 200, []);
-    // }
-
     return redirect()->route('publicationDetail', ['publicationId' => $idPublicacionForm]);
 
   }

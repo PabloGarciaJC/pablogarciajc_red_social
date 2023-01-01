@@ -82,10 +82,6 @@
 
                                         <div class="col col-lg-2">
                                             <!-- Comentarios Mostrar y Ocultar-->
-                                            {{-- <button type="button"
-                                                          onclick="mostrarOcultar({{ $mostrarPublication->id }})"
-                                                          class="btn btn-success">Comentarios
-                                                          {{ count($mostrarPublication->comment) }}</button> --}}
                                             <a href="{{ route('publicationDetail', ['publicationId' => $getPublication->id]) }}"
                                                 class="btn btn-primary">Comentarios
                                                 ({{ count($getPublication->comment) }})</a>
