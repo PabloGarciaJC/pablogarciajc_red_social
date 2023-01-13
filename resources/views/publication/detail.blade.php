@@ -86,11 +86,10 @@
                                                 class="btn btn-primary">Comentarios
                                                 ({{ count($getPublication->comment) }})</a>
                                         </div>
-                                    </div>
-                                    <br>
+                                    </div><br>
 
                                     <div id="" class="classCajaCometarios">
-
+                                        
                                         <form action="{{ route('comentarioSave') }}" method="POST"
                                             enctype="multipart/form-data" id="formComments">
 
@@ -101,14 +100,14 @@
                                             <div class="input-group">
 
                                                 <div class="file-select">
-                                                    <input type="file" aria-label="Archivo" name="imagenPublication" >
+                                                    <input type="file" aria-label="Archivo" name="imagenPublication">
                                                 </div>
 
                                                 <input type="text" class="form-control"
                                                     placeholder="Escribe tu Comentario" name="comentPublication">
 
                                                 <button class="btn btn-primary" type="submit">Enviar</button>
-                                                   
+
                                             </div>
                                             <br>
                                         </form>

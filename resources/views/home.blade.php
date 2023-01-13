@@ -41,15 +41,16 @@
                                     {{-- Cuerpo --}}
                                     <div class="card-body">
                                         <div class="d-flex align-items-center" style="padding-top: 20px;">
+
                                             <div class="news">
                                                 <div class="post-item clearfix">
                                                     <img src="{{ url('fotoPerfil/' . Auth::user()->fotoPerfil) }}"
                                                         alt="">
-                                                    <h4><a href="#">{{ $mostrarPublication->user->alias }}</a></h4>
+                                                    <h4><a href="{{ route('usuarioBuscador.perfil', ['perfil' => $mostrarPublication->user->alias, 'solicitudAmistad' => 0, 'idFollower' => $mostrarPublication->user->id, 'idNotificacion' => 0]) }}">{{ $mostrarPublication->user->alias }}</a></h4>
                                                     <p>{{ $mostrarPublication->created_at }}</p>
-
                                                 </div>
                                             </div>
+
                                         </div>
                                         @if ($mostrarPublication->imagen == '')
                                             <p style="padding-top: 10px;">{{ $mostrarPublication->contenido }}</p>
@@ -74,8 +75,7 @@
                                                     Dislike
                                                 </div>
                                             @else
-                                                <div class="col col-lg-2 like"
-                                                    id="btn-like{{ $mostrarPublication->id }}"
+                                                <div class="col col-lg-2 like" id="btn-like{{ $mostrarPublication->id }}"
                                                     onclick="like({{ $mostrarPublication->id }})">
                                                     Like
                                                 </div>

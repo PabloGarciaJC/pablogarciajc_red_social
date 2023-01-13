@@ -25,6 +25,7 @@
                 <div class="col-xl-8">
                     <div class="card">
                         <div class="card-body pt-3">
+
                             {{-- Menu de Navegacion --}}
                             <ul class="nav nav-tabs nav-tabs-bordered">
                                 <li class="nav-item">
@@ -38,7 +39,7 @@
                                         Perfil</button>
                                 </li>
                             </ul>
-                            {{-- //Menu de Navegacion --}}
+
                             <div class="tab-content pt-2">
 
                                 {{-- Perfil --}}

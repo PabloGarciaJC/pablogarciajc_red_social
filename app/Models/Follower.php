@@ -9,7 +9,7 @@ class Follower extends Model
 {
     protected $table = 'followers';
 
-    // Relación de Muchos a Uno
+    // Relación de Many to One
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'user_id');

@@ -20,12 +20,16 @@
                             <div class="container">
                                 <div class="row justify-content-md-center">
                                     <div class="col-md-auto">
-                                        <button type="button" id="btnAgregarContacto" style="display:none">
-                                            Agregar Contacto
-                                        </button>
-                                        <button type="button" id="btnCancelarSolicitud" style="display:none">
-                                            Cancelar Solicitud
-                                        </button>
+
+                                        @if (Auth::user()->id != $idFollower)
+                                            <button type="button" id="btnAgregarContacto" style="display:none">
+                                                Agregar Contacto
+                                            </button>
+                                            <button type="button" id="btnCancelarSolicitud" style="display:none">
+                                                Cancelar Solicitud
+                                            </button>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -42,10 +46,17 @@
                                         data-bs-toggle="tab" data-bs-target="#perfil">
                                         Perfil</button>
                                 </li>
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#chat">
+                                        Chat</button>
+                                </li>
                             </ul>
+
                             <div class="tab-content pt-2">
+
                                 {{-- Mensaje de Notificacion --}}
                                 <div id="mensajeNotification" role="alert"></div>
+
                                 {{-- Perfil --}}
                                 <div class="tab-pane fade show {{ session('message') || $errors->any() ? '' : 'active' }} profile-overview"
                                     id="perfil">
@@ -114,6 +125,68 @@
                                         @endforeach
                                     </div>
                                 </div>
+
+
+                                <style>
+                                    /* Component: Chat */
+                                    .chat .chat-wrapper .message-list-wrapper {
+                                        border: 1px solid #ddd;
+                                        height: 452px;
+                                        position: relative;
+                                        overflow-y: auto;
+                                    }
+                                </style>
+
+                                {{-- Chat --}}
+
+                                <div class="tab-pane fade show profile-overview" id="chat">
+                                    {{-- Diseño --}}
+                                    <div class="panel-body chat">
+                                        <div class="row chat-wrapper">
+                                            <div>
+                                                {{-- <div class="message-list-wrapper">
+                                                    <p>ddd</p>
+                                                </div> --}}
+
+                                                <div class="row row-cols-auto">
+
+                                                    <div class="col news">
+                                                        <img
+                                                            src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}">
+                                                    </div>
+    
+                                                    <div class="col">
+    
+                                                        <h4><a href="#">pepito</a></h4>
+                                                        <p>texto contenido</p>
+    
+                                                        {{-- @if ($coments->imagen != '')
+                                                            <img
+                                                                src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
+                                                        @endif --}}
+
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <div class="compose-box">
+                                                    <div class="row">
+                                                        <div class="col-xs-12 mg-btm-10">
+                                                            <textarea id="btn-input" class="form-control input-sm" placeholder="Escribe tu mensaje aquí..."></textarea>
+                                                        </div>
+
+                                                        <div class="col-xs-4">
+                                                            <br>
+                                                            <button type="button" class="btn btn-success">Enviar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- //Diseño  --}}
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -124,7 +197,6 @@
 
     @push('scripts')
         <script>
-
             let btnAddContacto = document.getElementById('btnAddContacto');
             let btnAgregarContacto = document.getElementById('btnAgregarContacto');
             let btnCancelarSolicitud = document.getElementById('btnCancelarSolicitud');

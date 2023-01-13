@@ -64,4 +64,11 @@ class User extends Authenticatable
     //     'updated' => UserUpdated::class,
     //     'deleted' => UserDeleted::class,
     // ];
+
+     // Relación One To Many 
+     public function follower()
+     {
+         return $this->hasMany('App\Models\Follower', 'user_id');
+     }
+
 }
