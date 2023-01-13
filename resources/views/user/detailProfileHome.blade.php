@@ -126,7 +126,6 @@
                                     </div>
                                 </div>
 
-
                                 <style>
                                     /* Component: Chat */
                                     .chat .chat-wrapper .message-list-wrapper {
@@ -162,25 +161,20 @@
                                 </style>
 
                                 {{-- Chat --}}
-
                                 <div class="tab-pane fade show profile-overview" id="chat">
                                     {{-- Diseño --}}
                                     <div class="panel-body chat">
                                         <div class="row chat-wrapper">
                                             <div>
-
                                                 <div class="textCenter">
                                                     <p>30/20/2023</p>
                                                 </div>
-
                                                 {{-- receive-text  --}}
-
                                                 <div class="row row-cols-auto receive-text">
                                                     <div class="col news">
                                                         <img src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}"
                                                             class="imagenText ">
                                                     </div>
-
                                                     <div class="col">
                                                         <h4><a href="#">pepito</a></h4>
                                                         <p>texto contenido</p>
@@ -197,7 +191,6 @@
                                                         <img src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}"
                                                             class="imagenText">
                                                     </div>
-
                                                     <div class="col">
                                                         <h4><a href="#">pepito</a></h4>
                                                         <p>texto contenido</p>
@@ -226,7 +219,6 @@
                                     </div>
                                     {{-- //Diseño  --}}
                                 </div>
-
                             </div>
                         </div>
                     </div>
