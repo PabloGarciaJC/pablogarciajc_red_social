@@ -135,6 +135,30 @@
                                         position: relative;
                                         overflow-y: auto;
                                     }
+
+                                    .receive-text {
+
+                                        background: #eff5f5c9;
+                                        border-radius: 18px;
+                                        padding: 10px
+                                    }
+
+                                    .send-text {
+                                        background: #9ef6ffc9;
+                                        border-radius: 18px;
+                                        padding: 10px
+                                    }
+
+                                    .textCenter {
+                                        text-align: center;
+                                    }
+
+                                    .imagenText {
+                                        width: 50px;
+                                        float: left;
+                                        border-radius: 5px;
+                                        margin-left: 20px;
+                                    }
                                 </style>
 
                                 {{-- Chat --}}
@@ -144,27 +168,43 @@
                                     <div class="panel-body chat">
                                         <div class="row chat-wrapper">
                                             <div>
-                                                {{-- <div class="message-list-wrapper">
-                                                    <p>ddd</p>
-                                                </div> --}}
 
-                                                <div class="row row-cols-auto">
+                                                <div class="textCenter">
+                                                    <p>30/20/2023</p>
+                                                </div>
 
+                                                {{-- receive-text  --}}
+
+                                                <div class="row row-cols-auto receive-text">
                                                     <div class="col news">
-                                                        <img
-                                                            src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}">
+                                                        <img src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}"
+                                                            class="imagenText ">
                                                     </div>
-    
+
                                                     <div class="col">
-    
                                                         <h4><a href="#">pepito</a></h4>
                                                         <p>texto contenido</p>
-    
                                                         {{-- @if ($coments->imagen != '')
                                                             <img
                                                                 src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
                                                         @endif --}}
+                                                    </div>
+                                                </div>
 
+                                                {{-- send-text  --}}
+                                                <div class="row row-cols-auto send-text">
+                                                    <div class="col news">
+                                                        <img src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}"
+                                                            class="imagenText">
+                                                    </div>
+
+                                                    <div class="col">
+                                                        <h4><a href="#">pepito</a></h4>
+                                                        <p>texto contenido</p>
+                                                        {{-- @if ($coments->imagen != '')
+                                                            <img
+                                                                src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
+                                                        @endif --}}
                                                     </div>
                                                 </div>
 
