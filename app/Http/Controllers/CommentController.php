@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\file;
 class CommentController extends Controller
 {
 
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   public function save(Request $request)
   {
     $comentarioPublicacion = $request->input('comentPublication');
@@ -43,7 +53,6 @@ class CommentController extends Controller
     $save = $comments->save();
 
     return redirect()->route('publicationDetail', ['publicationId' => $idPublicacionForm]);
-
   }
 
   public function getImage($filename)

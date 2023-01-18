@@ -123,7 +123,7 @@ class UserController extends Controller
     {
         $solicitudAmistad = Follower::where('user_id', '=', Auth::user()->id)->where('seguido', '=', $idFollower)->count();
         $usuario = User::where('alias', '=', $alias)->get();
-        return view('user.detailProfileHome', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
+        return view('user.detail', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
     }
     
 }

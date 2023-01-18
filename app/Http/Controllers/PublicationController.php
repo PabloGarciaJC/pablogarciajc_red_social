@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\file;
 
 class PublicationController extends Controller
 {
+      /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function save(Request $request)
     {
         $comentarioPublicacion = $request->input('comentarioPublicacion');

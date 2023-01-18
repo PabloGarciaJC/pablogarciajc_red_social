@@ -162,63 +162,51 @@
 
                                 {{-- Chat --}}
                                 <div class="tab-pane fade show profile-overview" id="chat">
+
                                     {{-- Diseño --}}
-                                    <div class="panel-body chat">
-                                        <div class="row chat-wrapper">
-                                            <div>
-                                                <div class="textCenter">
-                                                    <p>30/20/2023</p>
-                                                </div>
-                                                {{-- receive-text  --}}
-                                                <div class="row row-cols-auto receive-text">
-                                                    <div class="col news">
-                                                        <img src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}"
-                                                            class="imagenText ">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h4><a href="#">pepito</a></h4>
-                                                        <p>texto contenido</p>
-                                                        {{-- @if ($coments->imagen != '')
-                                                            <img
-                                                                src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
-                                                        @endif --}}
+
+                                    <div class="card-body">
+                                        <div class="row p-2">
+                                            <div class="col-10">
+                                                <div class="row">
+                                                    <div class="col-12 border rounded-lg p-3">
+                                                        <ul id="messages" class="list-unstyled overflow-auto"
+                                                            style="height: 45vh">
+                                                            {{-- <li>Test 1: Hola</li>
+                                                            <li>Test 2: Hola</li> --}}
+                                                        </ul>
                                                     </div>
                                                 </div>
 
-                                                {{-- send-text  --}}
-                                                <div class="row row-cols-auto send-text">
-                                                    <div class="col news">
-                                                        <img src="{{ route('foto.perfil', ['filename' => '1670466650usuarioMujer-A.jpg']) }}"
-                                                            class="imagenText">
-                                                    </div>
-                                                    <div class="col">
-                                                        <h4><a href="#">pepito</a></h4>
-                                                        <p>texto contenido</p>
-                                                        {{-- @if ($coments->imagen != '')
-                                                            <img
-                                                                src="{{ route('comentarioImagen', ['filename' => $coments->imagen]) }}"class="margenImagenComment">
-                                                        @endif --}}
-                                                    </div>
-                                                </div>
+                                                <form>
+                                                    <div class="row py-3">
 
-                                                <br>
-                                                <div class="compose-box">
-                                                    <div class="row">
-                                                        <div class="col-xs-12 mg-btm-10">
-                                                            <textarea id="btn-input" class="form-control input-sm" placeholder="Escribe tu mensaje aquí..."></textarea>
+                                                        <div class="col-10">
+                                                            <input type="text" id="message" class="form-control">
                                                         </div>
 
-                                                        <div class="col-xs-4">
-                                                            <br>
-                                                            <button type="button" class="btn btn-success">Enviar</button>
+                                                        <div class="col-2">
+                                                            <button id="send" type="submit"
+                                                                class="btn btn-primary btn-block">Enviar</button>
                                                         </div>
+
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
+
+                                            <div class="col-2">
+                                                <p><strong>Online Now</strong></p>
+                                                <ul id="users" class="list-unstyled overflow-auto text-info"
+                                                    style="height: 45vh">
+                                                </ul>
+                                            </div>
+
                                         </div>
                                     </div>
+
                                     {{-- //Diseño  --}}
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -237,6 +225,61 @@
             let idRegistroFollower = document.getElementById('idRegistroFollower');
             let idNotificacion = document.getElementById('idNotificacion');
             let idNotificacionEnviado = document.getElementById('idNotificacionEnviado');
+
+            /* Chat */
+            const usersElement = document.getElementById('users');
+            const sendElement = document.getElementById('send');
+            const messageElement = document.getElementById('message');
+            const messagesElement = document.getElementById('messages');
+
+            Echo.join('chat')
+                .here((users) => {
+
+                    users.forEach((user, index) => {
+
+                        let element = document.createElement('li');
+                        element.setAttribute('id', user.id);
+                        element.innerText = user.name;
+                        usersElement.appendChild(element);
+
+                    });
+
+                })
+                .joining((user) => {
+
+                    let element = document.createElement('li');
+                    element.setAttribute('id', user.id);
+                    element.innerText = user.name;
+                    usersElement.appendChild(element);
+
+                })
+                .leaving((user) => {
+
+                    let element = document.getElementById(user.id);
+                    element.parentNode.removeChild(element);
+
+                })
+                .listen('MessageSent', (e) => {
+
+                    let element = document.createElement('li');
+                        element.setAttribute('id', e.user.id);
+                        element.innerText = e.user.nombre + ': ' + e.message;
+                        messagesElement.appendChild(element);
+
+
+                });
+
+
+            sendElement.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                window.axios.post('/chat/message', {
+                    message: messageElement.value
+                });
+
+                messageElement.value = '';
+            })
+
 
             $.ajax({
                     type: "GET",
