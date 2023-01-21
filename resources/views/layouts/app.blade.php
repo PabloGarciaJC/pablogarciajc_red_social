@@ -82,14 +82,14 @@
                                 id="notificacionesAmistad">
 
                                 <li class="dropdown-header">
-                                    Tú tienes {{ count(auth()->user()->unReadNotifications) }} solicitud de amistad
+                                    Tú tienes {{ count(auth()->user()->unReadNotifications) }} Notificaciones
                                     {{-- Tú tienes {{ count(auth()->user()->notifications) }} solicitud de amistad --}}
                                 </li>
 
                                 {{-- @foreach (auth()->user()->unReadNotifications as $notification) --}}
                                 @foreach (auth()->user()->notifications as $notification)
                                     <a
-                                        href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 1, 'idFollower' => $notification->data['idFollower'], 'idNotificacion' => $notification->id]) }}">
+                                        href="{{ route('usuarioBuscador.perfil', ['perfil' => $notification->data['alias'], 'solicitudAmistad' => 0, 'idFollower' => $notification->data['idUserLoginEnviar'], 'idNotificacion' => $notification->id]) }}">
                                         <li class="notification-item">
                                             <img src=" {{ route('foto.perfil', ['filename' => $notification->data['fotoPerfil']]) }} "
                                                 width="60"

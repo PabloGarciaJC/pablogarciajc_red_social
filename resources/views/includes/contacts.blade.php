@@ -20,6 +20,7 @@
 @push('scripts')
     <script>
         let userLogin = document.getElementById('userLogin').value;
+
         /* Obtener Usuarios Seguidos - Conectados */
         // window.axios.get('/api/followers/' + userLogin)
         window.axios.get(`/api/followers/${userLogin}`)
@@ -47,7 +48,8 @@
                     let a = document.createElement('a');
                     a.innerHTML = "<h4>" + user.alias + "</h4>"
 
-                    var url = baseUrl + "usuario/" + 'temp/' + 1 + '/0' + '/0';
+                    var url = baseUrl + "usuario/" + 'temp/' + 0 + '/' + user.id + '/0';
+
                     url = url.replace('temp', user.alias);
                     a.href = url;
 

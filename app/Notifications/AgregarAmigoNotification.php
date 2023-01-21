@@ -16,16 +16,18 @@ class AgregarAmigoNotification extends Notification
     use Queueable;
 
     // protected $followers;
-    public $followers;
+    public $objetoFollowerRecibir;
+    public $objetoUserLoginEnviar;
     
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Follower $followers)
+    public function __construct($objetoFollowerRecibir, $objetoUserLoginEnviar)
     {
-        $this->followers = $followers;
+        $this->objetoFollowerRecibir = $objetoFollowerRecibir;
+        $this->objetoUserLoginEnviar = $objetoUserLoginEnviar;
     }
 
     /**
@@ -64,13 +66,23 @@ class AgregarAmigoNotification extends Notification
 
     public function toArray($notifiable)
     {
+        // return [
+        //     'idFollower' => $this->followers->id,
+        //     'alias' => $this->followers->user->alias,
+        //     'fotoPerfil' => $this->followers->user->fotoPerfil,
+        //     'created_at' => $this->followers->created_at,
+        //     'mensaje' => 'Te Envio una Solicitud de Amistad',
+        // ];
+
         return [
-            'idFollower' => $this->followers->id,
-            'alias' => $this->followers->user->alias,
-            'fotoPerfil' => $this->followers->user->fotoPerfil,
-            'created_at' => $this->followers->created_at,
+            'idFollowerRecibir' => $this->objetoFollowerRecibir->id,
+            'idUserLoginEnviar' => $this->objetoUserLoginEnviar->id,
+            'alias' => $this->objetoUserLoginEnviar->alias,
+            'fotoPerfil' => $this->objetoUserLoginEnviar->fotoPerfil,
+            'created_at' => $this->objetoUserLoginEnviar->created_at,
             'mensaje' => 'Te Envio una Solicitud de Amistad',
         ];
+
     }
 
     // public function toBroadcast($notifiable)

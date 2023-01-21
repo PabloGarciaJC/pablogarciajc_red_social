@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Events\AgregarAmigosNotificacion;
 use App\Notifications\AgregarAmigoNotification;
 use App\Notifications\SolicitudAceptadaNotification;
+use App\Notifications\SolicitudCanceladaNotification;
 
 class FollowersController extends Controller
 {
@@ -28,178 +29,341 @@ class FollowersController extends Controller
     {
         $usuarioLogin = $request->get('usuarioLogin');
         $usuarioSeguido = $request->get('usuarioSeguido');
+        $followerAprobado = $request->get('followerAprobado');
         $idNotificacion = $request->get('idNotificacion');
-        $solicitudAmistad = $request->get('solicitudAmistad');
-        $idRegistroFollower = $request->get('idRegistroFollower');
+        $objetoUserLoginEnviar = User::find($usuarioLogin);
+        $objetoFollowerRecibir = User::find($usuarioSeguido);
 
         $follower = new Follower();
 
-        $follower->user_id = $usuarioLogin;
-        $follower->seguido = $usuarioSeguido;
+        if ($idNotificacion === '0') {
 
-        $objetoFollower = User::find($usuarioSeguido);
-        $objetoUserLogin = User::find($usuarioLogin);
+            $registerFollowerSend = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id)->where('aprobada', '=', 0);
 
-        if ($solicitudAmistad == 1) {
+            if ($registerFollowerSend->count() == 0) {
 
-            $regitroFollower = $follower->where('user_id', '=', $follower->seguido)->where('seguido', '=', $follower->user_id)->where('aprobada', '=', 0)->count();
+                $follower->user_id = $objetoUserLoginEnviar->id;
+                $follower->seguido = $objetoFollowerRecibir->id;
+                $follower->aprobada = 0;
 
-            if ($regitroFollower > 0) {
-                // El que Recibe
-                $registroFollower = Follower::find($idRegistroFollower);
-                $registroFollower->aprobada = 1;
-                $registroFollower->save();
-                DB::table('notifications')->whereId($idNotificacion)->delete();
-                // $objetoUserLogin->unreadNotifications->where('id', $idNotificacion)->markAsRead();
-                // Envio la Notificacion que se ha aceptado la Solicitud                
-                $objetoFollower->notify(new SolicitudAceptadaNotification($objetoUserLogin, $registroFollower));
+                $objetoFollowerRecibir->notify(new AgregarAmigoNotification($objetoFollowerRecibir, $objetoUserLoginEnviar));
 
+                $follower->save();
+
+                echo 'send';
             } else {
-                // El que Guarda despues de recibir
-                $follower->aprobada = 1;
-                $guardado = $follower->save();
 
-                if ($guardado) {
-
-                    $regitroFollower = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido)->where('aprobada', '=', 1)->get();
-
-                    foreach ($regitroFollower as $camposFollower) {
-                        $objetoFollower->notify(new SolicitudAceptadaNotification($objetoUserLogin, $camposFollower));
-                    }
-
-                    echo 'solicitudEnviada';
-                }
+                echo 'existSend';
             }
         } else {
 
-            // El que Envia
-            $obtenerFollower = $follower->where('user_id', '=', $follower->user_id)->where('seguido', '=', $follower->seguido);
+            $sendAfterReceived = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id);
 
-            $existeFollower = $obtenerFollower->count();
+            if ($sendAfterReceived->count() == 0) {
 
-            if ($existeFollower > 0) {
+                $saveReceivedAfterReceived = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
 
-                false;
+                if ($saveReceivedAfterReceived->count() == 0) {
+
+                    $follower->user_id = $objetoFollowerRecibir->id;;
+                    $follower->seguido = $objetoUserLoginEnviar->id;
+                    $follower->aprobada = 0;
+
+                    $objetoFollowerRecibir->notify(new AgregarAmigoNotification($objetoFollowerRecibir, $objetoUserLoginEnviar));
+
+                    $follower->save();
+
+                    echo 'sendAfterReceived';
+                } else {
+
+                    foreach ($saveReceivedAfterReceived->get() as $registerFollower) {
+                        $follower = $follower->find($registerFollower->id);
+                        $follower->aprobada = 1;
+                        $follower->save();
+                    }
+
+                    $objetoFollowerRecibir->notify(new SolicitudAceptadaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+
+                    echo 'saveReceivedAfterReceived';
+                }
             } else {
 
-                // Seteo Objeto
-                $follower->aprobada = 0;
-
-                // Guardo
-                $follower->save();
-
-                // Envio Notificacion
-                $solicitudFollower = $obtenerFollower->get();
-
-                foreach ($solicitudFollower as $camposFollower) {
-                    $objetoFollower->notify(new AgregarAmigoNotification($camposFollower));
-                }
-
-                // Guardo Notificacion en la Entidad Followers
-                $notifications = $objetoFollower->notifications;
-
-                foreach ($notifications as $notification) {
-                    $follower->notification_id = $notification->id;
+                $objetoFollowerRecibir->notify(new SolicitudAceptadaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+                foreach ($sendAfterReceived->get() as $follower) {
+                    $follower = $follower->find($follower->id);
+                    $follower->aprobada = 1;
                     $follower->save();
                 }
-
-                echo 'solicitudEnviada';
-            };
+                echo 'saveAfterReceivedFriends';
+            }
         }
+
+        die();
+
+
+        // } else {
+
+        //     echo 'saveAfterReceived';
+
+        //     $sendAfterReceived = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id)->where('aprobada', '=', 0);
+
+        //     if ($sendAfterReceived->count() == 1) {
+
+        //         $objetoFollowerRecibir->notify(new SolicitudAceptadaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+
+        //         foreach ($sendAfterReceived->get() as $follower) {
+        //             $borrarRegistroFollower = $follower->find($follower->id);
+        //             $borrarRegistroFollower->aprobada = 1;
+        //             $borrarRegistroFollower->save();
+        //         }
+
+        //         echo 'saveAfterReceived';
+
+        //     } else {
+
+        //         $afterReceived = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id)->where('aprobada', '=', 0);
+
+        //         if ($afterReceived->count() == 1) {
+
+        //             foreach ($afterReceived->get() as $follower) {
+        //                 $borrarRegistroFollower = $follower->find($follower->id);
+        //                 $borrarRegistroFollower->aprobada = 1;
+        //                 $borrarRegistroFollower->save();
+        //             }
+
+        //             echo 'saveAfterReceived';
+
+        //         } else {
+
+        //             $follower->user_id = $objetoFollowerRecibir->id;
+        //             $follower->seguido = $objetoUserLoginEnviar->id;
+        //             $follower->aprobada = 0;
+
+        //             $objetoFollowerRecibir->notify(new AgregarAmigoNotification($objetoFollowerRecibir, $objetoUserLoginEnviar));
+
+        //             $follower->save();
+
+        //             echo 'sendAfterReceived';
+        //         }
+        //     }
+        // }
     }
+
+    // $objetoFollowerRecibir->notify(new AgregarAmigoNotification($objetoFollowerRecibir, $objetoUserLoginEnviar));
+    // $follower->user_id = $objetoUserLoginEnviar->id;
+    // $follower->seguido = $objetoFollowerRecibir->id;
+    // $follower->aprobada = 0;
+    // $follower->save();
+    // echo 'send';
+
+
+
+
+    // else {
+
+    //     $addAfterReceiving = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id)->where('aprobada', '=', 0);
+
+    //     if ($addAfterReceiving->count() == 1) {
+
+    //         $objetoFollowerRecibir->notify(new SolicitudAceptadaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+
+    //         foreach ($addAfterReceiving->get() as $follower) {
+    //             $borrarRegistroFollower = $follower->find($follower->id);
+    //             $borrarRegistroFollower->aprobada = 1;
+    //             $borrarRegistroFollower->save();
+    //         }
+    //     } else {
+
+    //         $follower->user_id = $objetoFollowerRecibir->id;
+    //         $follower->seguido = $objetoUserLoginEnviar->id;
+    //         $follower->aprobada = 1;
+
+    //         $follower->save();
+    //     }
+
+    //     echo 'addAfterReceiving';
+    // }
 
     public function cancelarContacto(Request $request)
     {
         $usuarioLogin = $request->get('usuarioLogin');
         $usuarioSeguido = $request->get('usuarioSeguido');
         $idNotificacion = $request->get('idNotificacion');
-        $solicitudAmistad = $request->get('solicitudAmistad');
 
-         $follower = new Follower();
+        $objetoUserLoginEnviar = User::find($usuarioLogin);
+        $objetoFollowerRecibir = User::find($usuarioSeguido);
 
-        $follower->user_id = $usuarioLogin;
-        $follower->seguido = $usuarioSeguido;
+        $follower = new Follower();
 
-        $objetoFollower = User::find($usuarioSeguido);
-        $objetoUserLogin = User::find($usuarioLogin);
+        if ($idNotificacion === '0') {
 
-        if ($solicitudAmistad == 1) {
+            //  Obtengo las Notificaciones del Usuario
+            $notifications = $objetoFollowerRecibir->notifications;
 
-            // El que Recibe
-            $obtenerFollower = $follower->where('user_id', '=', $usuarioSeguido)->where('seguido', '=', $usuarioLogin)->get();
+            //  Borro las Notificaciones que vienen en Json y Comparo con los informacion que tengo.
+            foreach ($notifications as $clave => $value) {
+                if ($value['data']['alias'] == $objetoUserLoginEnviar->alias && $value['data']['idFollowerRecibir'] == $objetoFollowerRecibir->id) {
+                    DB::table('notifications')->whereId($value['id'])->delete();
+                }
+            }
 
-            foreach ($obtenerFollower as $camposFollower) {
-                $borrarDeleteFollower = $follower->find($camposFollower->id);
+            // Borro Registro de Follower
+            $registerFollowerSend = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
+            foreach ($registerFollowerSend->get() as $follower) {
+                $borrarDeleteFollower = $follower->find($follower->id);
                 $borrarDeleteFollower->delete();
             }
 
-            foreach ($objetoFollower->unReadNotifications as $notification) {
-                DB::table('notifications')->whereId($notification->id)->delete();
-            }
-
-            // El que Cancela despues de recibir
-            $obtenerFollowerEnviar = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido)->get();
-            foreach ($obtenerFollowerEnviar as $camposFollower) {
-                $borrarDeleteFollower = $follower->find($camposFollower->id);
-                $borrarDeleteFollower->delete();
-            }
-
-            foreach ($objetoUserLogin->unReadNotifications as $notification) {
-                DB::table('notifications')->whereId($notification->id)->delete();
-            }
-            
-            echo 1;
-
+            echo 'sendCancelar';
         } else {
 
-            // El que Envia
-            $obtenerFollower = $follower->where('user_id', '=', $follower->user_id)->where('seguido', '=', $follower->seguido);
+            $sendAfterReceived = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id);
 
-            $recorrerCamposFollower = $obtenerFollower->get();
+            if ($sendAfterReceived->count() == 1) {
 
-            foreach ($recorrerCamposFollower as $recorrerCampos) {
-                // $objetoFollower->unreadNotifications->where('id', $recorrerCampos->notification_id)->markAsRead();
-                DB::table('notifications')->whereId($recorrerCampos->notification_id)->delete();
-                $borrarDeleteFollower = $follower->find($recorrerCampos->id);
-                $borrarDeleteFollower->delete();
-                echo 1;
+                foreach ($sendAfterReceived->get() as $follower) {
+                    $borrarDeleteFollower = $follower->find($follower->id);
+                    $borrarDeleteFollower->delete();
+                }
+
+                $objetoFollowerRecibir->notify(new SolicitudCanceladaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+
+                echo 'cancelAfterReceived';
+            } else {
+
+                $showFollower = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
+
+                if ($showFollower->count() == 1) {
+
+                    foreach ($showFollower->get() as $showRegister) {
+
+                        $borrarDeleteFollower = $follower->find($showRegister->id);
+                        $borrarDeleteFollower->delete();
+                    }
+
+                    echo 'deleteReceivedAfterReceived';
+
+                    $objetoFollowerRecibir->notify(new SolicitudCanceladaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+                } else {
+
+                    echo 'existAfterReceived';
+                }
             }
         }
+
+
+
+
+        // else {
+
+        //     $obtenerFollower = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id);
+
+        //     if ($obtenerFollower->count() == 1) {
+        //         DB::table('notifications')->whereId($idNotificacion)->delete();
+
+        //         $objetoFollowerRecibir->notify(new SolicitudCanceladaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+
+        //         foreach ($obtenerFollower->get() as $follower) {
+
+        //             $borrarDeleteFollower = $follower->find($follower->id);
+        //             $borrarDeleteFollower->delete();
+
+        //             echo 'receivedCancelar';
+        //         }
+        //     }
+
+        //     $deleteAfterAdd = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
+
+        //     if ($deleteAfterAdd->count() == 1) {
+        //         DB::table('notifications')->whereId($idNotificacion)->delete();
+
+        //         $objetoFollowerRecibir->notify(new SolicitudCanceladaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+
+        //         foreach ($deleteAfterAdd->get() as $follower) {
+
+        //             $borrarDeleteFollower = $follower->find($follower->id);
+        //             $borrarDeleteFollower->delete();
+
+        //             echo 'receivedCancelar';
+        //         }
+        //     }
+        // }
     }
 
     public function btnValidarAmistad(Request $request)
     {
         $usuarioLogin = $request->get('usuarioLogin');
         $usuarioSeguido = $request->get('usuarioSeguido');
-        $solicitudAmistad = $request->get('solicitudAmistad');
 
         $follower = new Follower();
 
-        if ($solicitudAmistad == 1) {
+        // Send
+        $existeAmistad = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido);
 
-            // El que Recibe
-            $recibeSolicitud = $follower->where('user_id', '=', $usuarioSeguido)->where('seguido', '=', $usuarioLogin)->get();
-            foreach ($recibeSolicitud as $recibeCamposFollower) {
-                echo $recibeCamposFollower->aprobada;
-            }
-
-            // El que Envia al Recibir
-            $envioSolicitud = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido)->get();
-            foreach ($envioSolicitud as $envioCamposFollower) {
-                echo $envioCamposFollower->aprobada;
-            }
+        if ($existeAmistad->count() == 0) {
+            echo 'sendAgregarContacto';
         } else {
-
-            // El que Envia
-            $obtenerFollower = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido);
-            $existeAmistad = $obtenerFollower->count();
-            if ($existeAmistad > 0) {
-                // No Existe Amistad
-                echo 1;
-            } else {
-                // Si Existe Amistad
-                echo 0;
-            }
+            echo 'sendCancelarContacto';
         }
+
+
+        // else {
+
+        // el que recibe
+
+        // $addAfterReceiving = $follower->where('user_id', '=', $usuarioSeguido)->where('seguido', '=', $usuarioLogin)->where('aprobada', '=', 0);
+
+        // if ($addAfterReceiving->count() == 1) {
+        //     echo 'sendAgregarContacto';
+        // } else {
+        //     echo 'sendCancelarContacto';
+        // }
+
+
+        // $addAfterReceiving = $follower->where('user_id', '=', $usuarioSeguido)->where('seguido', '=', $usuarioLogin)->where('aprobada', '=', 1);
+
+        // if ($addAfterReceiving->count() == 1) {
+        //     echo 'sendCancelarContacto';
+        // }else{
+        //     echo 'sendAgregarContacto';
+        // }
+
+        // //received
+        // $addAfterReceiving = $follower->where('user_id', '=', $usuarioSeguido)->where('seguido', '=', $usuarioLogin)->where('aprobada', '=', 0);
+
+        // // echo $addAfterReceiving->count();
+        // if ($addAfterReceiving->count() == 0) {
+
+        //     $tes = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido)->where('aprobada', '=', 1)->count();
+
+        //     if ($tes == 1) {
+
+        //         echo 'sendCancelarContacto';
+
+        //     } else {
+
+        //         echo 'receivedCancelarContacto';
+        //     }
+
+        // } else {
+
+        //     echo 'receivedAgregarContacto';
+        // }
+
+        // $afterReceiving = $follower->where('user_id', '=', $usuarioLogin)->where('seguido', '=', $usuarioSeguido)->where('aprobada', '=', 1);
+
+        // echo $afterReceiving->count();
+
+        // if ($afterReceiving->count() == 1) {
+        //     echo 'receivedAgregarContacto';
+        // }
+
+        // if ($addAfterReceiving->count() == 0) {
+        //     echo 'receivedAgregarContacto';
+        // } else {
+        //     echo 'receivedCancelarContacto';
+        // }
+
+        // }
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SolicitudAceptadaNotification extends Notification
+class SolicitudCanceladaNotification extends Notification
 {
     use Queueable;
     // public $idFollower;
@@ -65,7 +65,7 @@ class SolicitudAceptadaNotification extends Notification
             'idUserLoginEnviar' => $this->idFollower->id,
             'alias' => $this->userLogin->alias,
             'fotoPerfil' => $this->userLogin->fotoPerfil,
-            'mensaje' => 'Solicitud de Amistad Aceptada',
+            'mensaje' => 'Solicitud de Amistad Cancelada',
         ];
     }
 }

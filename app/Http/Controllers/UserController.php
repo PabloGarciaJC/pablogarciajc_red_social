@@ -121,9 +121,9 @@ class UserController extends Controller
 
     public function buscadorPerfil($alias, $solicitudAmistad, $idFollower, $idNotificacion)
     {
-        $solicitudAmistad = Follower::where('user_id', '=', Auth::user()->id)->where('seguido', '=', $idFollower)->count();
+        $followerAprobado = Follower::where('user_id', '=', Auth::user()->id)->where('seguido', '=', $idFollower)->where('aprobada', '=', 1)->get();
         $usuario = User::where('alias', '=', $alias)->get();
-        return view('user.detail', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
+        return view('user.detail', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'followerAprobado' => $followerAprobado, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
     }
     
 }
