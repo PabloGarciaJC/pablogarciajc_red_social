@@ -48,7 +48,7 @@
                     let a = document.createElement('a');
                     a.innerHTML = "<h4>" + user.alias + "</h4>"
 
-                    var url = baseUrl + "usuario/" + 'temp/' + 0 + '/' + user.id + '/0';
+                    var url = baseUrl + "usuario/" + 'temp/' + '0';
 
                     url = url.replace('temp', user.alias);
                     a.href = url;

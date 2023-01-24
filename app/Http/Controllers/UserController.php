@@ -119,11 +119,17 @@ class UserController extends Controller
         echo json_encode($data);
     }
 
-    public function buscadorPerfil($alias, $solicitudAmistad, $idFollower, $idNotificacion)
+    public function buscadorPerfil($alias, $idNotificacion)
     {
-        $followerAprobado = Follower::where('user_id', '=', Auth::user()->id)->where('seguido', '=', $idFollower)->where('aprobada', '=', 1)->get();
-        $usuario = User::where('alias', '=', $alias)->get();
-        return view('user.detail', ['usuario' => $usuario, 'solicitudAmistad' => $solicitudAmistad, 'followerAprobado' => $followerAprobado, 'idFollower' => $idFollower, 'idNotificacion' => $idNotificacion]);
+        $showUser = User::where('alias', '=', $alias)->get();
+
+        foreach ($showUser as $showUserReceived) {
+
+            $friendRequestSend = Follower::where('user_id', '=', Auth::user()->id)->where('seguido', '=', $showUserReceived->id)->where('aprobada', '=', 1)->count();
+            $friendRequestReceived = Follower::where('user_id', '=', $showUserReceived->id)->where('seguido', '=', Auth::user()->id)->where('aprobada', '=', 1)->count();
+
+        }
+
+        return view('user.detail', ['usuario' => $showUser, 'friendRequestSend' => $friendRequestSend, 'friendRequestReceived' => $friendRequestReceived, 'idNotificacion' => $idNotificacion]);
     }
-    
 }

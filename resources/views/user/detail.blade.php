@@ -32,21 +32,6 @@
                                             @endif
                                         @endforeach
 
-                                        {{-- @foreach ($usuario as $user)
-                                            @if (Auth::user()->alias != $user->alias)
-                                                <button type="button" id="btnAgregarContacto" style="display:none">
-                                                    Agregar Contacto
-                                                </button>
-
-                                                <button type="button" id="" style="display:none">
-                                                    Aceptar Contacto
-                                                </button>
-
-                                                <button type="button" id="btnCancelarSolicitud" style="display:none">
-                                                    Cancelar Solicitud
-                                                </button>
-                                            @endif
-                                        @endforeach --}}
                                     </div>
                                 </div>
                             </div>
@@ -64,14 +49,14 @@
                                         Perfil</button>
                                 </li>
 
-                                @foreach ($followerAprobado as $userAprobado)
-                                    @if ($userAprobado->aprobada == 1)
-                                        <li class="nav-item">
-                                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#chat">
-                                                Chat</button>
-                                        </li>
-                                    @endif
-                                @endforeach
+
+                                @if ($friendRequestSend == 1)
+                                    <li class="nav-item">
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#chat">
+                                            Chat</button>
+                                    </li>
+                                @endif
+
 
                             </ul>
 
@@ -86,9 +71,11 @@
                                     <p class="small">{{ Auth::user()->sobreMi }}</p>
                                     <h5 class="card-title">Detalles de mi Perfil</h5>
 
-                                    <input type="hidden" id="idRegistroFollower" value="{{ $idFollower }}">
+                                    <input type="hidden" id="friendRequestSend"
+                                        value="{{ $friendRequestSend == 1 ? 1 : 0 }}">
 
-                                    <input type="text" id="solicitudAmistad" value="{{ $solicitudAmistad }}">
+                                    <input type="hidden" id="friendRequestReceived"
+                                        value="{{ $friendRequestReceived == 1 ? 1 : 0 }}">
 
                                     <input type="hidden" id="idNotificacion" value="{{ $idNotificacion }}">
 
@@ -97,6 +84,7 @@
                                     @foreach ($usuario as $user)
                                         <input type="hidden" id="usuarioSeguido" value="{{ $user->id }}">
                                     @endforeach
+
                                     <div class="row">
                                         <div class="col-lg-3 col-md-4 label ">Nombre</div>
                                         @foreach ($usuario as $user)
@@ -291,57 +279,18 @@
         </script>
 
         <script>
-            let btnAddContacto = document.getElementById('btnAddContacto');
             let btnAgregarContacto = document.getElementById('btnAgregarContacto');
             let btnCancelarSolicitud = document.getElementById('btnCancelarSolicitud');
             let usuarioLogin = document.getElementById('usuarioLogin');
             let usuarioSeguido = document.getElementById('usuarioSeguido');
-            let idRegistroFollower = document.getElementById('idRegistroFollower')
 
-            // Validar Amistad
-            // $.ajax({
-            //         type: "GET",
-            //         url: "{{ route('btnValidarAmistad') }}",
-            //         data: {
-            //             usuarioLogin: usuarioLogin.value,
-            //             usuarioSeguido: usuarioSeguido.value,
-            //         },
-            //     })
+            let friendRequestSend = document.getElementById('friendRequestSend');
+            let friendRequestReceived = document.getElementById('friendRequestReceived');
 
-            //     .done(function(respuestaPeticion) {
+            console.log(friendRequestSend);
+            console.log(friendRequestReceived);
 
-            //         // Send
-            //         if (respuestaPeticion == 'sendAgregarContacto') {
-            //             hide(btnCancelarSolicitud);
-            //             show(btnAgregarContacto);
-            //             $('#btnAgregarContacto').addClass("btn btn-success");
-            //         }
 
-            //         if (respuestaPeticion == 'sendCancelarContacto') {
-            //             hide(btnAgregarContacto);
-            //             show(btnCancelarSolicitud);
-            //             $('#btnCancelarSolicitud').addClass("btn btn-primary")
-            //         }
-
-            //         // if(respuestaPeticion == 'receivedCancelarContacto'){
-            //         // hide(btnAgregarContacto);
-            //         // show(btnCancelarSolicitud);
-            //         // $('#btnCancelarSolicitud').addClass("btn btn-primary")
-            //         // }
-
-            //         // if(respuestaPeticion == 'receivedAgregarContacto'){
-            //         // hide(btnCancelarSolicitud);
-            //         // show(btnAgregarContacto);
-            //         // $('#btnAgregarContacto').addClass("btn btn-success");
-            //         // }
-
-            //     })
-            //     .fail(function() {
-            //         console.log('error');
-            //     })
-            //     .always(function() {
-            //         console.log('completo');
-            //     });
 
             btnAgregarContacto?.addEventListener('click', (event) => {
 
@@ -352,41 +301,49 @@
                             usuarioLogin: usuarioLogin.value,
                             usuarioSeguido: usuarioSeguido.value,
                             idNotificacion: idNotificacion.value,
+                            friendRequestSend: friendRequestSend.value,
+                            friendRequestReceived: friendRequestReceived.value
                         },
                     })
                     .done(function(respuestaPeticion) {
 
-                        // hide(btnAgregarContacto);
-                        // show(btnCancelarSolicitud);
-                        // $('#btnCancelarSolicitud').addClass("btn btn-primary")
-
                         $('#mensajeNotification').html(respuestaPeticion);
-                    
+
                         $('#mensajeNotification').addClass('alert alert-success text-center');
 
                         console.log(respuestaPeticion);
 
                         if (respuestaPeticion == 'send') {
                             mensajeNotification.innerText = 'Solicitud de Amistad Enviada';
-                        } 
+                        }
 
                         if (respuestaPeticion == 'existSend') {
-                            mensajeNotification.innerText = 'Solicitud de Amistad Enviada';
-                        } 
+                            mensajeNotification.innerText = 'Ya Enviaste una Solicitud de Amistad';
+                        }
+
+                        if (respuestaPeticion == 'approvedFriends') {
+                            mensajeNotification.innerText = 'Solicitud de Amistad Aceptada !!!';
+                        }
+
+                        if (respuestaPeticion == 'friendAfterReceived') {
+                            mensajeNotification.innerText = 'Solicitud de Amistad Aceptada !!!';
+                        }
+
+                        if (respuestaPeticion == 'saveFollowerReceived') {
+                            mensajeNotification.innerText = 'Has aceptado Solicitud de Amistad, ver en las Notificaciones !!!';
+                        }
 
                         if (respuestaPeticion == 'sendAfterReceived') {
-                            //Cambio el imput
                             mensajeNotification.innerText = 'Solicitud de Amistad Enviada';
-                        } 
+                        }
 
                         if (respuestaPeticion == 'saveAfterReceivedFriends') {
-                            mensajeNotification.innerText = 'Ya Somos Amigos !!!';
+                            mensajeNotification.innerText = 'Solicitud de Amistad Aceptada !!!';
                         }
 
                         if (respuestaPeticion == 'saveReceivedAfterReceived') {
-                            mensajeNotification.innerText = 'Ya Somos Amigos !!!';
-                        } 
-
+                            mensajeNotification.innerText = 'Solicitud de Amistad Aceptada !!!';
+                        }
 
                     })
                     .fail(function() {
@@ -406,13 +363,11 @@
                             usuarioLogin: usuarioLogin.value,
                             usuarioSeguido: usuarioSeguido.value,
                             idNotificacion: idNotificacion.value,
+                            friendRequestSend: friendRequestSend.value,
+                            friendRequestReceived: friendRequestReceived.value
                         },
                     })
                     .done(function(respuestaPeticion) {
-
-                        // hide(btnCancelarSolicitud);
-                        // show(btnAgregarContacto);
-                        // $('#btnAgregarContacto').addClass("btn btn-success");
 
                         $('#mensajeNotification').html(respuestaPeticion);
 
@@ -430,13 +385,17 @@
                         }
 
                         if (respuestaPeticion == 'existAfterReceived') {
-                            mensajeNotification.innerText = 'Solo puedes cancelar una vez esta Solicitud de Amistad';
+                            mensajeNotification.innerText =
+                                'Solo puedes cancelar una vez esta Solicitud de Amistad';
                         }
 
                         if (respuestaPeticion == 'deleteReceivedAfterReceived') {
                             mensajeNotification.innerText = 'Solicitud de Amistad Cancelada';
                         }
 
+                        if (respuestaPeticion == 'followerReceived') {
+                            mensajeNotification.innerText = 'Has Eliminado la Solicitud de Amistad !!!';
+                        }
 
                     })
                     .fail(function() {
@@ -455,137 +414,5 @@
                 element.style.display = "block";
             }
         </script>
-
-        {{-- $.ajax({
-        type: "GET",
-        url: "{{ route('btnValidarAmistad') }}",
-        data: {
-        usuarioLogin: usuarioLogin.value,
-        usuarioSeguido: usuarioSeguido.value,
-        solicitudAmistad: solicitudAmistad.value
-        },
-        })
-
-        .done(function(respuestaPeticion) {
-
-        console.log(respuestaPeticion);
-
-        if (respuestaPeticion == 'sendAgregarContacto') {
-        hide(btnCancelarSolicitud);
-        show(btnAgregarContacto);
-        $('#btnAgregarContacto').addClass("btn btn-success");
-        }
-
-        if(respuestaPeticion == 'sendCancelarContacto'){
-        hide(btnAgregarContacto);
-        show(btnCancelarSolicitud);
-        $('#btnCancelarSolicitud').addClass("btn btn-primary")
-        }
-
-        // if(respuestaPeticion == 'receivedCancelarContacto'){
-        // hide(btnAgregarContacto);
-        // show(btnCancelarSolicitud);
-        // $('#btnCancelarSolicitud').addClass("btn btn-primary")
-        // }
-
-        // if(respuestaPeticion == 'receivedAgregarContacto'){
-        // hide(btnCancelarSolicitud);
-        // show(btnAgregarContacto);
-        // $('#btnAgregarContacto').addClass("btn btn-success");
-        // }
-
-        })
-        .fail(function() {
-        console.log('error');
-        })
-        .always(function() {
-        console.log('completo');
-        });
-
-        btnAgregarContacto?.addEventListener('click', (event) => {
-
-        $.ajax({
-        type: "GET",
-        url: "{{ route('agregarContacto') }}",
-        data: {
-        usuarioLogin: usuarioLogin.value,
-        usuarioSeguido: usuarioSeguido.value,
-        solicitudAmistad: solicitudAmistad.value,
-        },
-        })
-        .done(function(respuestaPeticion) {
-
-        hide(btnAgregarContacto);
-        show(btnCancelarSolicitud);
-        $('#btnCancelarSolicitud').addClass("btn btn-primary")
-
-        $('#mensajeNotification').html(respuestaPeticion);
-
-        console.log(respuestaPeticion);
-
-        if (respuestaPeticion == 'send') {
-        $('#mensajeNotification').addClass('alert alert-success text-center');
-        mensajeNotification.innerText = 'Solicitud de Amistad Enviada';
-        }
-
-        // if (respuestaPeticion == 'addAfterReceiving') {
-        // $('#mensajeNotification').addClass('alert alert-success text-center');
-        // mensajeNotification.innerText = 'Solicitud de Amistad Aceptada';
-        // }
-
-        })
-        .fail(function() {
-        console.log('error');
-        })
-        .always(function() {
-        console.log('completo');
-        });
-        });
-
-        btnCancelarSolicitud?.addEventListener('click', (event) => {
-
-        $.ajax({
-        type: "GET",
-        url: "{{ route('cancelarContacto') }}",
-        data: {
-        usuarioLogin: usuarioLogin.value,
-        usuarioSeguido: usuarioSeguido.value,
-        solicitudAmistad: solicitudAmistad.value
-        },
-        })
-        .done(function(respuestaPeticion) {
-
-        hide(btnCancelarSolicitud);
-        show(btnAgregarContacto);
-        $('#btnAgregarContacto').addClass("btn btn-success");
-
-        $('#mensajeNotification').html(respuestaPeticion);
-
-        console.log(respuestaPeticion);
-
-        if (respuestaPeticion == 'sendCancelar' || respuestaPeticion == 'receivedCancelar') {
-
-        $('#mensajeNotification').removeClass("alert alert-success text-center").addClass(
-        "alert alert-primary text-center");
-
-        mensajeNotification.innerText = 'Solicitud de Amistad Cancelada';
-        }
-        })
-        .fail(function() {
-        console.log('error');
-        })
-        .always(function() {
-        console.log('completo');
-        });
-        });
-
-
-        function hide(element) {
-        element.style.display = "none";
-        }
-
-        function show(element) {
-        element.style.display = "block";
-        } --}}
     @endpush
 @endsection

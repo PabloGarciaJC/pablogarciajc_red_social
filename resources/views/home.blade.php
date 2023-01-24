@@ -46,7 +46,7 @@
                                                 <div class="post-item clearfix">
                                                     <img src="{{ url('fotoPerfil/' . Auth::user()->fotoPerfil) }}"
                                                         alt="">
-                                                    <h4><a href="{{ route('usuarioBuscador.perfil', ['perfil' => $mostrarPublication->user->alias, 'solicitudAmistad' => 0, 'idFollower' => $mostrarPublication->user->id, 'idNotificacion' => 0]) }}">{{ $mostrarPublication->user->alias }}</a></h4>
+                                                    <h4><a href="{{ route('usuarioBuscador.perfil', ['perfil' => $mostrarPublication->user->alias, 'idNotificacion' => 0]) }}">{{ $mostrarPublication->user->alias }}</a></h4>
                                                     <p>{{ $mostrarPublication->created_at }}</p>
                                                 </div>
                                             </div>
