@@ -144,10 +144,28 @@ class FollowersController extends Controller
 
         $follower = new Follower();
 
+        $registerFollowerSend = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
 
-        if ($idNotificacion === '0') {
+        if ($registerFollowerSend->count() == 0) {
 
-            // if ($friendRequestSend == 0) {
+            $followerSend = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id);
+
+            if ($followerSend->count() == 1) {
+
+                foreach ($followerSend->get() as $followerDelete) {
+
+                    $follower = $follower->find($followerDelete->id);
+                    $follower->delete();
+                    echo 'deleteFollower';
+                }
+
+            } else {
+
+                echo 'noNeedToDelete';
+            }
+        } else {
+
+            if ($idNotificacion === '0') {
 
                 //  Obtengo las Notificaciones del Usuario
                 $notifications = $objetoFollowerRecibir->notifications;
@@ -157,7 +175,7 @@ class FollowersController extends Controller
                 //     if ($value['data']['alias'] == $objetoUserLoginEnviar->alias && $value['data']['idFollowerRecibir'] == $objetoFollowerRecibir->id) {
                 //         DB::table('notifications')->whereId($value['id'])->delete();
                 //     }
-                // }
+
                 // Borro Registro de Follower
                 $registerFollowerSend = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
 
@@ -171,7 +189,9 @@ class FollowersController extends Controller
                         $follower->delete();
                         echo 'followerReceived';
                     }
+
                 } else {
+
                     foreach ($registerFollowerSend->get() as $follower) {
                         $borrarDeleteFollower = $follower->find($follower->id);
                         $borrarDeleteFollower->delete();
@@ -179,42 +199,41 @@ class FollowersController extends Controller
 
                     echo 'sendCancelar';
                 }
-            // } else {
-
-            //     echo 'no hay nada que borrar';
-            // }
-        } else {
-
-            $sendAfterReceived = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id);
-
-            if ($sendAfterReceived->count() == 1) {
-
-                foreach ($sendAfterReceived->get() as $follower) {
-                    $borrarDeleteFollower = $follower->find($follower->id);
-                    $borrarDeleteFollower->delete();
-                }
-
-                $objetoFollowerRecibir->notify(new SolicitudCanceladaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
-
-                echo 'cancelAfterReceived';
             } else {
 
-                $showFollower = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
+                $sendAfterReceived = $follower->where('user_id', '=', $objetoFollowerRecibir->id)->where('seguido', '=', $objetoUserLoginEnviar->id);
 
-                if ($showFollower->count() == 1) {
+                if ($sendAfterReceived->count() == 1) {
 
-                    foreach ($showFollower->get() as $showRegister) {
-
-                        $borrarDeleteFollower = $follower->find($showRegister->id);
+                    foreach ($sendAfterReceived->get() as $follower) {
+                        $borrarDeleteFollower = $follower->find($follower->id);
                         $borrarDeleteFollower->delete();
                     }
 
-                    echo 'deleteReceivedAfterReceived';
-
                     $objetoFollowerRecibir->notify(new SolicitudCanceladaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+
+                    echo 'cancelAfterReceived';
+
                 } else {
 
-                    echo 'existAfterReceived';
+                    $showFollower = $follower->where('user_id', '=', $objetoUserLoginEnviar->id)->where('seguido', '=', $objetoFollowerRecibir->id);
+
+                    if ($showFollower->count() == 1) {
+
+                        foreach ($showFollower->get() as $showRegister) {
+
+                            $borrarDeleteFollower = $follower->find($showRegister->id);
+                            $borrarDeleteFollower->delete();
+                        }
+
+                        echo 'deleteReceivedAfterReceived';
+
+                        $objetoFollowerRecibir->notify(new SolicitudCanceladaNotification($objetoUserLoginEnviar, $objetoFollowerRecibir));
+                        
+                    } else {
+
+                        echo 'existAfterReceived';
+                    }
                 }
             }
         }

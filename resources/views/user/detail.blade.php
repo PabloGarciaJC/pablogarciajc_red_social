@@ -384,6 +384,14 @@
                             mensajeNotification.innerText = 'Solicitud de Amistad Cancelada';
                         }
 
+                        if (respuestaPeticion == 'deleteFollower') {
+                            mensajeNotification.innerText = 'Has Borrado la Solicitud de Amistad';
+                        }
+
+                        if (respuestaPeticion == 'noNeedToDelete') {
+                            mensajeNotification.innerText = 'No hay solicitud que borrar';
+                        }
+
                         if (respuestaPeticion == 'existAfterReceived') {
                             mensajeNotification.innerText =
                                 'Solo puedes cancelar una vez esta Solicitud de Amistad';
