@@ -50,12 +50,12 @@
                                 </li>
 
 
-                                @if ($friendRequestSend == 1)
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#chat">
-                                            Chat</button>
-                                    </li>
-                                @endif
+                                {{-- @if ($friendRequestSend == 1) --}}
+                                <li class="nav-item">
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#chat">
+                                        Chat</button>
+                                </li>
+                                {{-- @endif --}}
 
 
                             </ul>
@@ -191,6 +191,8 @@
                                                             <input type="text" id="message" class="form-control">
                                                         </div>
 
+                                                        <div id="tes"></div>
+
                                                         <div class="col-2">
                                                             <button id="send" type="submit"
                                                                 class="btn btn-primary btn-block">Enviar</button>
@@ -229,53 +231,75 @@
             const messageElement = document.getElementById('message');
             const messagesElement = document.getElementById('messages');
 
-            // Echo.join('chat')
-            //     .here((users) => {
+            Echo.join('chat')
+                .here((users) => {
 
-            //         users.forEach((user, index) => {
+                    users.forEach((user, index) => {
 
-            //             let element = document.createElement('li');
-            //             element.setAttribute('id', user.id);
-            //             element.innerText = user.name;
-            //             usersElement.appendChild(element);
+                        let element = document.createElement('li');
+                        element.setAttribute('id', user.id);
+                        element.innerText = user.name;
+                        usersElement.appendChild(element);
 
-            //         });
+                    });
 
-            //     })
-            //     .joining((user) => {
+                })
+                .joining((user) => {
 
-            //         let element = document.createElement('li');
-            //         element.setAttribute('id', user.id);
-            //         element.innerText = user.name;
-            //         usersElement.appendChild(element);
+                    let element = document.createElement('li');
+                    element.setAttribute('id', user.id);
+                    element.innerText = user.name;
+                    usersElement.appendChild(element);
 
-            //     })
-            //     .leaving((user) => {
+                })
+                .leaving((user) => {
 
-            //         let element = document.getElementById(user.id);
-            //         element.parentNode.removeChild(element);
+                    let element = document.getElementById(user.id);
+                    element.parentNode.removeChild(element);
 
-            //     })
-            //     .listen('MessageSent', (e) => {
+                })
+                .listen('MessageSent', (e) => {
 
-            //         let element = document.createElement('li');
-            //             element.setAttribute('id', e.user.id);
-            //             element.innerText = e.user.nombre + ': ' + e.message;
-            //             messagesElement.appendChild(element);
+                    let element = document.createElement('li');
+                    element.setAttribute('id', e.user.id);
+                    element.innerText = e.user.nombre + ': ' + e.message;
+                    messagesElement.appendChild(element);
+
+                });
+
+            sendElement.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                // window.axios.post('/chat/message', {
+                //     message: messageElement.value
+                // });
+
+                // messageElement.value = '';
+
+                $.ajax({
+                        type: "POST",
+                        url: "{{ route('chat.mesaage') }}",
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content'),
+                            message: messageElement.value,
+                        },
+                    })
+                    .done(function(respuestaPeticion) {
+
+                        // $('#tes').html(respuestaPeticion);
+                        // console.log(respuestaPeticion);
+                        messageElement.value = '';
+
+                    })
+                    .fail(function() {
+                        console.log('error');
+                    })
+                    .always(function() {
+                        console.log('completo');
+                    });
 
 
-            //     });
-
-
-            // sendElement.addEventListener('click', (e) => {
-            //     e.preventDefault();
-
-            //     window.axios.post('/chat/message', {
-            //         message: messageElement.value
-            //     });
-
-            //     messageElement.value = '';
-            // })
+            })
         </script>
 
         <script>
@@ -283,14 +307,8 @@
             let btnCancelarSolicitud = document.getElementById('btnCancelarSolicitud');
             let usuarioLogin = document.getElementById('usuarioLogin');
             let usuarioSeguido = document.getElementById('usuarioSeguido');
-
             let friendRequestSend = document.getElementById('friendRequestSend');
             let friendRequestReceived = document.getElementById('friendRequestReceived');
-
-            console.log(friendRequestSend);
-            console.log(friendRequestReceived);
-
-
 
             btnAgregarContacto?.addEventListener('click', (event) => {
 
@@ -330,7 +348,8 @@
                         }
 
                         if (respuestaPeticion == 'saveFollowerReceived') {
-                            mensajeNotification.innerText = 'Has aceptado Solicitud de Amistad, ver en las Notificaciones !!!';
+                            mensajeNotification.innerText =
+                                'Has aceptado Solicitud de Amistad, ver en las Notificaciones !!!';
                         }
 
                         if (respuestaPeticion == 'sendAfterReceived') {

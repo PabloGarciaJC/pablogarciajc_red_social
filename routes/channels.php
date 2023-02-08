@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -21,10 +23,16 @@
 // });
 
 
-Broadcast::channel('chat', function ($user) {
-
+Broadcast::channel('chat', function (User $user) {
   if ($user != null) {
     return ['id' => $user->id, 'name' => $user->nombre];
   }
   
 });
+
+
+// Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
+//   if ($user->canJoinRoom($roomId)) {
+//       return ['id' => $user->id, 'name' => $user->name];
+//   }
+// });

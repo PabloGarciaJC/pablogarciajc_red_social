@@ -1,64 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Aplicación Web - Red Social
 
-## About Laravel
+**Aplicación Web - Red Social** tiene como objetivo principal fortalecer mis habilidades y destrezas como profesional. Al priorizar la accesibilidad y la facilidad de uso para una amplia gama de usuarios, busco crear una experiencia en línea satisfactoria para ellos. Para lograr esto, me enfocaré en incluir funcionalidades y herramientas que fomenten la interacción y la comunicación entre los usuarios, así como en personalizar la experiencia para cada uno de ellos. Este proyecto será parte integral de mi portafolio y demostrará mi dedicación a la creación de productos intuitivos y accesibles para los usuarios.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+</br>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| ![GestionHogar_1](https://pablogarciajc.com/wp-content/uploads/2022/09/GestionHogar_1.png) | ![GestionHogar_2](https://pablogarciajc.com/wp-content/uploads/2022/09/GestionHogar_2.png)|
+|-----------|-----------|
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Funcionaliades
 
-## Learning Laravel
+La aplicación cuenta con **diez módulos:**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Módulo de Autenticación de Usuarios:**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Permite a los usuarios iniciar sesión en la red social mediante el proceso de autenticación.
 
-## Laravel Sponsors
+**Módulo de Registro de Usuarios:**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* Permite a los usuarios registrarse en la red social y crear una cuenta.
+* También incluye la opción de recuperación de contraseña a través de un servidor externo.
 
-### Premium Partners
+**Módulo de Búsqueda:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+* Permite a los usuarios buscar otros usuarios en la red social mediante un filtrado por alias, nombre y apellido. Además, incluye una miniatura del avatar del usuario y su alias para una mejor identificación.
 
-## Contributing
+**Módulo de Perfiles:**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Permite a los usuarios personalizar sus perfiles con información y una imagen de avatar.
 
-## Code of Conduct
+**Módulo de Conectividad:**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* Permite a los usuarios buscar y conectarse con otros usuarios en la red social, agregándolos como amigos.
 
-## Security Vulnerabilities
+**Módulo de Mensajería:**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* Permite a los usuarios enviar mensajes y chatear en tiempo real con otros usuarios en la red social.
 
-## License
+**Módulo de Publicaciones:**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* Permite a los usuarios publicar comentarios con o sin imagen en la red social. También incluye un sistema de like/dislike y la opción de borrar publicaciones para los usuarios que las han creado.
+
+**Módulo de Comentarios:**
+
+* Permite a los usuarios crear comentarios con o sin imagen en las publicaciones de la red social.
+
+**Módulo de Contactos:**
+
+* Muestra los amigos que han aceptado la solicitud de amistad y proporciona información en tiempo real sobre su conexión/desconexión.
+
+**Módulo de Notificaciones:**
+
+* Avisa a los usuarios sobre solicitudes de amistad enviadas y canceladas en la red social
+
+## Tecnologías
+
+La aplicación web se desarrolla con un enfoque en mejorar la experiencia de usuario en el **front-end** con la utilización de una plantilla, Bootstrap v4.0.0, JavaScript, Jquery y Ajax. En el **back-end**, se utiliza PHP 7.3.5 como lenguaje de programación y MySQL como base de datos, y se aplica la programación orientada a objetos y una arquitectura MVC para una gestión eficiente de los datos y la lógica de negocio. En general, la aplicación busca ofrecer una experiencia fluida y eficiente para los usuarios y una gestión organizada y robusta de la información.
+
+## Instalación
+
+**Requisitos:**
+
+* Descargar un servidor local, recomiendo [Wampserver64](https://www.wampserver.com/en/download-wampserver-64bits/)
+
+**Instrucciones:**
+
+1. Descargar el proyecto de GitHub:
+
+    * Vaya al repositorio del proyecto en GitHub.
+    * Haga clic en el botón "Clone or download".
+    * Seleccione "Download ZIP" para descargar un archivo ZIP con el proyecto.
+
+2. Mover el proyecto a la carpeta de servidor WAMP:
+
+    * Abra la carpeta "www" dentro de la carpeta de instalación de WAMP en su equipo.
+    * Cree una carpeta en el escritorio llamada «portafolios».
+    * Descomprima el archivo ZIP descargado en la carpeta "www/portafolios", que previamente descargó de Github.
+    * Verifique que el nombre de la carpeta del proyecto sea «pablogarciajc_gestionhogar».
+
+3. Iniciar WAMP:
+
+    * Haga clic en el icono de WAMP en la bandeja del sistema (es posible que deba hacer clic con el botón derecho del mouse para ver todas las opciones disponibles).
+    * Seleccione "Start All Services" para iniciar el servidor WAMP.
+
+4. Acceder a phpMyAdmin:
+
+    * Abra un navegador web y escriba "localhost/phpmyadmin" en la barra de direcciones.
+    * Ingrese su nombre de usuario y contraseña de phpMyAdmin.
+
+5. Importar la base de datos en phpMyAdmin:
+
+    * En la pestaña "Importar", haga clic en el botón "Examinar" y seleccione el archivo de la base de datos que desea importar en su equipo, el cual esta en  el archivo del proyecto llamado «database» que ha descargado de Github y tiene como nombre pablogarciajc_gestionhogar.sql
+    * Asegúrese de que el formato de la base de datos sea compatible con phpMyAdmin y seleccione la correcta opción de formato (SQL).
+    * Haga clic en el botón "Ir" para iniciar la importación.
+    * Después de importar la base de datos, en un navegador, vaya a [http://localhost/portafolios/pablogarciajc_gestionhogar/] para acceder a su proyecto.
+
+## Contáctame para más información o preguntas
+
+| Redes Sociales  | Desarrollador de Aplicaciones Web |
+| ------------- | ------------- |
+| ![Facebook](https://pablogarciajc.com/wp-content/uploads/2023/02/facebook.png)   | **[@pablogarciajc](https://www.facebook.com/PabloGarciaJC)** |
+| ![Facebook](https://pablogarciajc.com/wp-content/uploads/2023/02/linkedin.png)  | **[@pablogarciajc](https://www.linkedin.com/in/pablogarciajc/)**  |
+| ![Facebook](https://pablogarciajc.com/wp-content/uploads/2023/02/web-icono.png)   | **[www.pablogarciajc.com](https://pablogarciajc.com/)**  |
+
+"El buen trabajo es la solución de hoy.
+Para construir el futuro del mañana"
+
+
+
+

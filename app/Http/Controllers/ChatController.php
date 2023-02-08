@@ -27,7 +27,7 @@ class ChatController extends Controller
 
         $request->validate($rules);
 
-        broadcast( new MessageSent($request->user(), $request->message));
+        broadcast(new MessageSent($request->user(), $request->message));
 
         return response()->json('message broadcast');
     }
