@@ -57,18 +57,29 @@ La aplicación cuenta con **diez módulos:**
 
 La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](https://laravel.com/docs/8.x)
 
-**front-end:**
+**Front-end:**
 
 * Bootstrap v4.0.0: plantilla que mejora la apariencia y la experiencia del usuario.
 * JavaScript: lenguaje de programación que permite agregar funcionalidades dinámicas a la aplicación web.
 * JQuery: biblioteca de JavaScript que facilita la manipulación del DOM y la realización de solicitudes HTTP.
 * Axios: biblioteca de JavaScript que permite realizar solicitudes HTTP.
 
-**En back-end:**
+**Back-end:**
 
 * Se utiliza PHP 7.3.5 como lenguaje de programación.
 * Query Builder: es una herramienta de construcción de consultas que permite a los desarrolladores crear y ejecutar consultas SQL de manera fluida segura en la base de datos.
-* ORM: eloquent: sistema de mapeo de objetos relacionales que permite interactuar con una base de datos
+* ORM: eloquent: sistema de mapeo de objetos relacionales que permite interactuar con una base de datos.
+
+**API:**
+
+* La documentación se puede encontrar en la URL: "{PUBLIC_URL}/api/followers/"
+
+**API Endpoints:**
+
+| HTTP   | Endpoints        | Acción        |
+| ----------- | -----------------|----------------- |
+| GET         | /api/followers/  | obtiene la lista de todas los seguidores |
+| GET         | /api/followers/{id}  | obtiene la lista de todas los seguidores por id |
 
 **Recursos:**
 
@@ -94,7 +105,7 @@ La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](h
     * Abra la carpeta "www" dentro de la carpeta de instalación de WAMP en su equipo.
     * Cree una carpeta en el escritorio llamada «portafolios».
     * Descomprima el archivo ZIP descargado en la carpeta "www/portafolios", que previamente descargó de Github.
-    * Verifique que el nombre de la carpeta del proyecto sea «pablogarciajc_gestionhogar».
+    * Verifique que el nombre de la carpeta del proyecto sea «pablogarciajc_red_social».
 
 3. Iniciar WAMP:
 
@@ -108,10 +119,10 @@ La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](h
 
 5. Importar la base de datos en phpMyAdmin:
 
-    * En la pestaña "Importar", haga clic en el botón "Examinar" y seleccione el archivo de la base de datos que desea importar en su equipo, el cual esta en  el archivo del proyecto llamado «database» que ha descargado de Github y tiene como nombre pablogarciajc_gestionhogar.sql
+    * En la pestaña "Importar", haga clic en el botón "Examinar" y seleccione el archivo de la base de datos que desea importar en su equipo, el cual esta en  el archivo del proyecto llamado «database» que ha descargado de Github y tiene como nombre pablogarciajc_red_social.sql
     * Asegúrese de que el formato de la base de datos sea compatible con phpMyAdmin y seleccione la correcta opción de formato (SQL).
     * Haga clic en el botón "Ir" para iniciar la importación.
-    * Después de importar la base de datos, en un navegador, vaya a [http://localhost/portafolios/pablogarciajc_gestionhogar/] para acceder a su proyecto.
+    * Después de importar la base de datos, en un navegador, vaya a [http://localhost/portafolios/pablogarciajc_red_social/] para acceder a su proyecto.
 
 ## Contáctame para más información o preguntas
 
