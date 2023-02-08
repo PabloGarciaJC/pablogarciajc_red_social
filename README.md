@@ -55,7 +55,25 @@ La aplicación cuenta con **diez módulos:**
 
 ## Tecnologías
 
-La aplicación web se desarrolla con un enfoque en mejorar la experiencia de usuario en el **front-end** con la utilización de una plantilla, Bootstrap v4.0.0, JavaScript, Jquery y Ajax. En el **back-end**, se utiliza PHP 7.3.5 como lenguaje de programación y MySQL como base de datos, y se aplica la programación orientada a objetos y una arquitectura MVC para una gestión eficiente de los datos y la lógica de negocio. En general, la aplicación busca ofrecer una experiencia fluida y eficiente para los usuarios y una gestión organizada y robusta de la información.
+La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](https://laravel.com/docs/8.x)
+
+**front-end:**
+
+* Bootstrap v4.0.0: plantilla que mejora la apariencia y la experiencia del usuario.
+* JavaScript: lenguaje de programación que permite agregar funcionalidades dinámicas a la aplicación web.
+* JQuery: biblioteca de JavaScript que facilita la manipulación del DOM y la realización de solicitudes HTTP.
+* Axios: biblioteca de JavaScript que permite realizar solicitudes HTTP.
+
+**En back-end:**
+
+* Se utiliza PHP 7.3.5 como lenguaje de programación.
+* Query Builder: es una herramienta de construcción de consultas que permite a los desarrolladores crear y ejecutar consultas SQL de manera fluida segura en la base de datos.
+* ORM: eloquent: sistema de mapeo de objetos relacionales que permite interactuar con una base de datos
+
+**Recursos:**
+
+* Pusher es una plataforma de comunicación en tiempo real que permite a los desarrolladores agregar características en tiempo real a sus aplicaciones, como notificaciones, chat, etc. [ver documentación](https://pusher.com/)
+* Mailtrap es un servicio para probar y depurar correos electrónicos en aplicaciones. [ver documentación](https://mailtrap.io/)
 
 ## Instalación
 
