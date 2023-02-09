@@ -126,10 +126,12 @@ La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](h
 6. Después de importar la base de datos en su proyecto, puede acceder a él mediante el siguiente proceso:
 
     * Abra la terminal en su sistema.
-    * Diríjase a la carpeta raíz de su proyecto utilizando el comando "cd". El proyecto se encuentra en la carpeta "C:\wamp64\www\portafolios\pablogarciajc_red_social".
+    * Diríjase a la carpeta raíz de su proyecto utilizando el comando "cd".
+    * El proyecto se encuentra en la carpeta "C:\wamp64\www\portafolios\pablogarciajc_red_social".
     * Una vez que se encuentre en la carpeta raíz de su proyecto.
-    * Ejecute el siguiente comando para iniciar el servidor de desarrollo de Laravel: php artisan serve
-    * Este comando iniciará el servidor de desarrollo de Laravel en su sistema y le proporcionará una dirección URL para acceder a su proyecto. Por ejemplo, podría ser "http://127.0.0.1:8000".
+    * Ejecute el siguiente comando para iniciar el servidor de desarrollo de Laravel: **php artisan serve**
+    * Este comando iniciará el servidor de desarrollo de Laravel en su sistema y le proporcionará una dirección URL para acceder a su proyecto. 
+    * Por ejemplo, podría ser "http://127.0.0.1:8000".
     * Ahora debería poder acceder a su proyecto y ver la aplicación en funcionamiento.
 
 
