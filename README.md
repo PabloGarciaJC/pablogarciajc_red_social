@@ -122,7 +122,16 @@ La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](h
     * En la pestaña "Importar", haga clic en el botón "Examinar" y seleccione el archivo de la base de datos que desea importar en su equipo, el cual esta en  el archivo del proyecto llamado «database» que ha descargado de Github y tiene como nombre pablogarciajc_red_social.sql
     * Asegúrese de que el formato de la base de datos sea compatible con phpMyAdmin y seleccione la correcta opción de formato (SQL).
     * Haga clic en el botón "Ir" para iniciar la importación.
-    * Después de importar la base de datos, en un navegador, vaya a [http://localhost/portafolios/pablogarciajc_red_social/] para acceder a su proyecto.
+
+6. Después de importar la base de datos en su proyecto, puede acceder a él mediante el siguiente proceso:
+
+    * Abra la terminal en su sistema.
+    * Diríjase a la carpeta raíz de su proyecto utilizando el comando "cd". El proyecto se encuentra en la carpeta "C:\wamp64\www\portafolios\pablogarciajc_red_social".
+    * Una vez que se encuentre en la carpeta raíz de su proyecto.
+    * Ejecute el siguiente comando para iniciar el servidor de desarrollo de Laravel: php artisan serve
+    * Este comando iniciará el servidor de desarrollo de Laravel en su sistema y le proporcionará una dirección URL para acceder a su proyecto. Por ejemplo, podría ser "http://127.0.0.1:8000".
+    * Ahora debería poder acceder a su proyecto y ver la aplicación en funcionamiento.
+
 
 ## Contáctame para más información o preguntas
 
