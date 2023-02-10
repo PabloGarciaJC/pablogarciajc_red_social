@@ -100,14 +100,17 @@ class UserController extends Controller
         // http://127.0.0.1:8000/search?term=prueba2 
         // Estando Aqui puedo Probar Consultas
 
-        $querys = User::where('nombre', 'LIKE', '%' . $term . '%')->get()->except(Auth::id());
+        $querys = User::where('nombre', 'LIKE', '%' . $term . '%')
+            ->orWhere('alias', 'LIKE', "%$term%")
+            ->orWhere('email', 'LIKE', "%$term%")
+            ->get()->except(Auth::id());
 
         $data = [];
 
         foreach ($querys as $query) {
             $termArray = [];
             $termArray['value'] = $query->alias;
-            // $termArray['id'] = $query->id;
+            $termArray['id'] = $query->apellido;
             if ($query->fotoPerfil != '') {
                 $termArray['label'] = '<img src="http://127.0.0.1:8000/fotoPerfil/' . $query->fotoPerfil . '" width="60" class="pointer">&nbsp' .  $query->alias;
             } else {
@@ -127,7 +130,6 @@ class UserController extends Controller
 
             $friendRequestSend = Follower::where('user_id', '=', Auth::user()->id)->where('seguido', '=', $showUserReceived->id)->where('aprobada', '=', 1)->count();
             $friendRequestReceived = Follower::where('user_id', '=', $showUserReceived->id)->where('seguido', '=', Auth::user()->id)->where('aprobada', '=', 1)->count();
-
         }
 
         return view('user.detail', ['usuario' => $showUser, 'friendRequestSend' => $friendRequestSend, 'friendRequestReceived' => $friendRequestReceived, 'idNotificacion' => $idNotificacion]);

@@ -60,16 +60,20 @@ class PublicationController extends Controller
     public function delete($idPublicacion)
     {
         $publication = Publication::where('user_id', '=', Auth::user()->id)
-            ->where('id', '=', $idPublicacion);
+                                    ->where('id', '=', $idPublicacion);
 
         $conteoPublication = $publication->count();
 
-        $getPublicacion = $publication->first();
-
         if ($conteoPublication > 0) {
+            
+            $getPublicacion = $publication->first();
+
             $borraPublicacion = Publication::find($getPublicacion->id);
+
             $borraPublicacion->delete();
+            
         } else {
+
             echo $conteoPublication;
         }
     }

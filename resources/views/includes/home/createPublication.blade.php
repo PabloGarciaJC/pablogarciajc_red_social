@@ -2,7 +2,9 @@
     <div class="card info-card sales-card">
         <div class="card-body">
             <br>
+            
             <input id="userLogin" type="hidden" value="{{ Auth::user()->id }}"></input>
+
             <div class="d-flex align-items-center">
                 <input type="text" class="form-control" data-bs-toggle="modal"
                     style="cursor:pointer; text-align: center;" data-bs-target="#exampleModal"

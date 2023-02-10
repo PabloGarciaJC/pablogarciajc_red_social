@@ -11,7 +11,7 @@ $("#search").autocomplete({
   }
 }).data('ui-autocomplete')._renderItem = function (ul, item) {
 
-  var inner_html = '<div><div class="label">' + item.label + '</div></div>';
+  var inner_html = '<div><div class="label">' + item.label + ' ' + item.id + '</div></div>';
   return $("<li class='ui-autocomplete-row' ></li>")
     .data("item.autocomplete", item)
     .append(inner_html)

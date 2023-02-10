@@ -35,10 +35,24 @@ class userLoginNotification
         $usuario->conectado = 1;
         $usuario->save();
 
-        // $usuarios = User::all();
+        $arrayListados = array();
 
-        $usuarios = 'Inicia Sesion';
+        // Show Users for Auth
+        $allFollowers = Follower::where('user_id', $event->user->id)->where('aprobada', '=', 1)->get();
 
-        broadcast(new UserSessionChanged($usuarios));
+        foreach ($allFollowers as $followers) {
+            $user = $followers->user;
+            array_push($arrayListados, $user);
+        }
+
+        // Show Auth for Users
+        $allUsers = Follower::where('seguido', $event->user->id)->where('aprobada', '=', 1);
+        $user = User::find($event->user->id);
+        array_push($arrayListados, $user);
+
+        $convertObjectArray = (object)$arrayListados;
+        $arrayListadosJson = json_encode($convertObjectArray);
+        broadcast(new UserSessionChanged($arrayListadosJson));
+        return response()->json($arrayListadosJson, 200, []);
     }
 }

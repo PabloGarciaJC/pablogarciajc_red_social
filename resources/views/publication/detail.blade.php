@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
-                        @include('includes.createPublication')
+                        @include('includes.home.createPublication')
                         <div class="col-12">
                             <div class="filter">
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i

@@ -41,25 +41,26 @@ class FollowersController extends Controller
     {
         $arrayListados = array();
 
-        // Seguidor
+        // Show Users for Auth
         $allFollower = Follower::select('followers.*')
+            ->Where('seguido', '=', $request)
             ->where('aprobada', '=', 1)
-            ->Where('user_id', '=', $request)
             ->get();
 
-        foreach ($allFollower as $Followers) {
-            $user = User::find($Followers->seguido);
+        foreach ($allFollower as $followers) {
+            $user = $followers->user;
             array_push($arrayListados, $user);
         }
 
-        // Seguidos
+
+        // Show Users for Followers
         $allSeguidos = Follower::select('followers.*')
+            ->Where('user_id', '=', $request)
             ->where('aprobada', '=', 1)
-            ->Where('seguido', '=', $request)
             ->get();
 
         foreach ($allSeguidos as $seguidos) {
-            $user = User::find($seguidos->user_id);
+            $user = User::find($seguidos->seguido);
             array_push($arrayListados, $user);
         }
 

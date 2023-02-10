@@ -19,6 +19,7 @@
 {{-- Script de Listar Amigos --}}
 @push('scripts')
     <script>
+        // A travez de Windows Axios y la Api Dibujo los Followers
         let userLogin = document.getElementById('userLogin').value;
 
         /* Obtener Usuarios Seguidos - Conectados */
@@ -27,6 +28,7 @@
             .then((response) => {
 
                 const divContactos = document.getElementById("divContactos");
+                
                 let users = response.data;
 
                 users.forEach((user, index) => {
@@ -38,9 +40,9 @@
                     let mostrarImagen = document.createElement('img');
 
                     if (user.fotoPerfil != null) {
-                        mostrarImagen.src = 'fotoPerfil/' + user.fotoPerfil
+                        mostrarImagen.src = baseUrl + 'fotoPerfil/' + user.fotoPerfil
                     } else {
-                        mostrarImagen.src = 'assets/img/profile-img.jpg'
+                        mostrarImagen.src = baseUrl + 'assets/img/profile-img.jpg'
                     }
 
                     divUsuarios.appendChild(mostrarImagen);
@@ -71,7 +73,6 @@
                     divUsuarios.appendChild(parrafo);
 
                 });
-
             });
     </script>
 @endpush

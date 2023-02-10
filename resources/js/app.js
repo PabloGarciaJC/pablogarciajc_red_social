@@ -1,17 +1,62 @@
 require('./bootstrap');
 
+Echo.channel('notificationss')
+  .listen('UserSessionChanged', (e) => {
+
+    const usuariosEvent = JSON.parse(e.usuarios);
+
+    Object.values(usuariosEvent).forEach((userListerner, index) => {
+  
+  
+
+    const devUsuarios = document.getElementById('usuarioStatus' + userListerner.id);
+
+    if (devUsuarios) {
+      if (userListerner.conectado == 1) {
+        devUsuarios.innerText = 'Conectado';
+        devUsuarios.style.color = 'green';
+      } else {
+        devUsuarios.innerText = 'Desconectado';
+        devUsuarios.style.color = 'red';
+      }
+    }
+
+    });
+
+    
+  });
+  
+  
+  // try {
+  //   ee = JSON.parse(e.usuarios);
+  //   ee.arrayListados.forEach((usuario, index) => {
+  //     console.log(`El usuario en la posición ${index} es ${usuario.nombre}`);
+  //   });
+  // } catch (error) {
+  //   console.error('Error al parsear la cadena JSON:', error);
+  // }
+  
 // Echo.channel('notificationss')
 // .listen('UserSessionChanged', (e) => {
-//   e.usuarios.forEach((user, index) => {
-//     const devUsuarios = document.getElementById('usuarioStatus' + user.id);
-//     if (user.conectado == 1) {
-//       devUsuarios.innerText = 'Conectado';
-//       devUsuarios.style.color = 'green';
-//     } else {
-//       devUsuarios.innerText = 'Desconectado';
-//       devUsuarios.style.color = 'red';
-//     }
+
+//   let dataUser = e.data;
+
+//   dataUser.forEach((follo, index) => {
+
+
+//     console.log(follo.id);
+
 //   });
+  // e.usuarios.usuarios.original.forEach((user, index) => {
+    // const devUsuarios = document.getElementById('usuarioStatus' + user.id);
+    // if (user.conectado == 1) {
+    //   devUsuarios.innerText = 'Conectado';
+    //   devUsuarios.style.color = 'green';
+    // } else {
+    //   devUsuarios.innerText = 'Desconectado';
+    //   devUsuarios.style.color = 'red';
+    // }
+  // });
 // });
 
 // Echo.channel('agregarAmigos')

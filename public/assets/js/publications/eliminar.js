@@ -1,6 +1,7 @@
 
 function deletePublication(mostrarPublicationId) {
   urlAjax = baseUrl + 'publicationDelete/' + mostrarPublicationId;
+
   ajaxPeticion(urlAjax);
 }
 
@@ -9,6 +10,7 @@ function ajaxPeticion(urlAjax) {
     type: "GET",
     url: urlAjax,
     success: function (response) {
+
       if (response == '') {
         Swal.fire({
           icon: 'success',
