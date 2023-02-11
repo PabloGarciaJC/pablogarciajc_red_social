@@ -59,7 +59,7 @@ La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](h
 
 **Front-end:**
 
-* Bootstrap v4.0.0: plantilla que mejora la apariencia y la experiencia del usuario.
+* Bootstrap v4.0.0: [plantilla](https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/) que mejora la apariencia y la experiencia del usuario.
 * JavaScript: lenguaje de programación que permite agregar funcionalidades dinámicas a la aplicación web.
 * JQuery: biblioteca de JavaScript que facilita la manipulación del DOM y la realización de solicitudes HTTP.
 * Axios: biblioteca de JavaScript que permite realizar solicitudes HTTP.
