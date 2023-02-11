@@ -39,8 +39,6 @@ class AgregarAmigoNotification extends Notification
     public function via($notifiable)
     {
         return ['database'];
-        // return ['broadcast'];
-        // return ['database', 'broadcast'];
     }
 
     /**
@@ -66,14 +64,6 @@ class AgregarAmigoNotification extends Notification
 
     public function toArray($notifiable)
     {
-        // return [
-        //     'idFollower' => $this->followers->id,
-        //     'alias' => $this->followers->user->alias,
-        //     'fotoPerfil' => $this->followers->user->fotoPerfil,
-        //     'created_at' => $this->followers->created_at,
-        //     'mensaje' => 'Te Envio una Solicitud de Amistad',
-        // ];
-
         return [
             'idFollowerRecibir' => $this->objetoFollowerRecibir->id,
             'idUserLoginEnviar' => $this->objetoUserLoginEnviar->id,
@@ -85,12 +75,4 @@ class AgregarAmigoNotification extends Notification
 
     }
 
-    // public function toBroadcast($notifiable)
-    // {
-    //     return new BroadcastMessage([
-    //         'alias' => $this->followers->user->alias,
-    //         'created_at' => $this->followers->created_at,
-    //         'mensaje' => 'Te Envio una Notificacion'
-    //     ]);
-    // }
 }

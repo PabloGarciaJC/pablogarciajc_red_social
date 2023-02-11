@@ -47,7 +47,6 @@ Route::get('/dislike/{publicationId}', 'LikeController@dislike')->name('likeSave
 // CHAT
 Route::post('chat/message', 'ChatController@messageReceived')->name('chat.mesaage');
 
-
 // NOTIFICACIONES
 Route::get('markAsRead', function () {
   auth()->user()->unreadNotifications->markAsRead();

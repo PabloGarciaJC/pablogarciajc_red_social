@@ -17,21 +17,9 @@ use App\Models\User;
 //     return (int) $user->id === (int) $id;
 // });
 
-/* Para el Canal Privado */
-// Broadcast::channel('notifications', function ($user) {
-//     return $user != null;
-// });
-
-
 Broadcast::channel('chat', function (User $user) {
   if ($user != null) {
     return ['id' => $user->id, 'name' => $user->nombre];
   }
-  
 });
 
-// Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
-//   if ($user->canJoinRoom($roomId)) {
-//       return ['id' => $user->id, 'name' => $user->name];
-//   }
-// });

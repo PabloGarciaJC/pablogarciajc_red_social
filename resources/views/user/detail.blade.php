@@ -48,16 +48,10 @@
                                         data-bs-toggle="tab" data-bs-target="#perfil">
                                         Perfil</button>
                                 </li>
-
-
-                                {{-- @if ($friendRequestSend == 1) --}}
                                 <li class="nav-item">
                                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#chat">
                                         Chat</button>
                                 </li>
-                                {{-- @endif --}}
-
-
                             </ul>
 
                             <div class="tab-content pt-2">
@@ -192,7 +186,7 @@
                                                         </div>
 
                                                         <div id="tes"></div>
-
+                                                        <br>
                                                         <div class="col-2">
                                                             <button id="send" type="submit"
                                                                 class="btn btn-primary btn-block">Enviar</button>
@@ -203,7 +197,7 @@
                                             </div>
 
                                             <div class="col-2">
-                                                <p><strong>Online Now</strong></p>
+                                                <p><strong>En línea ahora</strong></p>
                                                 <ul id="users" class="list-unstyled overflow-auto text-info"
                                                     style="height: 45vh">
                                                 </ul>
@@ -223,6 +217,7 @@
         </section>
     </main>
 
+    {{-- Chat Tiempo Real --}}
     @push('scripts')
         <script>
             /* Chat */
@@ -270,12 +265,6 @@
             sendElement.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                // window.axios.post('/chat/message', {
-                //     message: messageElement.value
-                // });
-
-                // messageElement.value = '';
-
                 $.ajax({
                         type: "POST",
                         url: "{{ route('chat.mesaage') }}",
@@ -297,7 +286,6 @@
                     .always(function() {
                         console.log('completo');
                     });
-
 
             })
         </script>
@@ -350,6 +338,7 @@
                         if (respuestaPeticion == 'saveFollowerReceived') {
                             mensajeNotification.innerText =
                                 'Has aceptado Solicitud de Amistad, ver en las Notificaciones !!!';
+
                         }
 
                         if (respuestaPeticion == 'sendAfterReceived') {

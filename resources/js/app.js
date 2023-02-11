@@ -23,7 +23,6 @@ Echo.channel('notificationss')
 
     });
 
-    
   });
   
   

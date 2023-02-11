@@ -94,7 +94,6 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-        // /*  Es el valor capturado del Input */
         $term = $request->get('term');
         // Pruebo lo que me llega en el controlador
         // http://127.0.0.1:8000/search?term=prueba2 

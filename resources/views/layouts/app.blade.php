@@ -41,7 +41,6 @@
 
         @yield('content')
     @else
-    
         <main class="py-4">
 
             @include('includes.home.nav')
@@ -51,12 +50,12 @@
             @yield('dynamic-content')
 
         </main>
-        
+
         @include('includes.home.footer')
-        
+
     @endguest
 
-    
+
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
@@ -74,6 +73,9 @@
     <script src="{{ asset('assets/js/likes/like.js') }}"></script>
     <script src="{{ asset('assets/js/likes/dislike.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+
+
     @stack('scripts')
 </body>
 

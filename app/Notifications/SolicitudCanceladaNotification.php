@@ -12,7 +12,6 @@ use Illuminate\Notifications\Messages\MailMessage;
 class SolicitudCanceladaNotification extends Notification
 {
     use Queueable;
-    // public $idFollower;
     public $userLogin;
     public $idFollower;
 
@@ -23,7 +22,6 @@ class SolicitudCanceladaNotification extends Notification
      */
     public function __construct($userLogin, $idFollower)
     {
-        // $this->idFollower = $idFollower;
         $this->userLogin = $userLogin;
         $this->idFollower = $idFollower;
     }
