@@ -5,7 +5,9 @@
 
 </br>
 
-| ![RedSocial_1](https://pablogarciajc.com/wp-content/uploads/2024/03/pablogarciajc-aplicacion-web-red-social-img1.webp) | ![RedSocial_2](https://pablogarciajc.com/wp-content/uploads
+| ![RedSocial_1](https://pablogarciajc.com/wp-content/uploads/2024/03/pablogarciajc-aplicacion-web-red-social-img1.webp) | ![RedSocial_2](https://pablogarciajc.com/wp-content/uploads/2024/03/pablogarciajc-aplicacion-web-red-social-img2.webp) |
+|-----------|-----------|
+
 
 
 ## Funcionaliades
