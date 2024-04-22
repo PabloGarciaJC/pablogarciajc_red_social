@@ -141,9 +141,10 @@ La aplicación web se desarrolla con Framework Laravel 8. [ver documentación](h
 
 | Redes Sociales  | Desarrollador de Aplicaciones Web |
 | ------------- | ------------- |
-| ![Facebook](https://pablogarciajc.com/wp-content/uploads/2023/02/facebook.png)   | **[@pablogarciajc](https://www.facebook.com/PabloGarciaJC)** |
-| ![Facebook](https://pablogarciajc.com/wp-content/uploads/2023/02/linkedin.png)  | **[@pablogarciajc](https://www.linkedin.com/in/pablogarciajc/)**  |
-| ![Facebook](https://pablogarciajc.com/wp-content/uploads/2023/02/web-icono.png)   | **[www.pablogarciajc.com](https://pablogarciajc.com/)**  |
+| ![Web Icono](https://pablogarciajc.com/wp-content/uploads/2024/04/web.png) | **[www.pablogarciajc.com](https://pablogarciajc.com/)** |
+| ![Facebook](https://pablogarciajc.com/wp-content/uploads/2024/04/facebook.png) | **[@pablogarciajc](https://www.facebook.com/PabloGarciaJC)** |
+| ![LinkedIn](https://pablogarciajc.com/wp-content/uploads/2024/04/linkedin.png) | **[@pablogarciajc](https://www.linkedin.com/in/pablogarciajc/)** |
+
 
 "El buen trabajo es la solución de hoy.
 Para construir el futuro del mañana"
